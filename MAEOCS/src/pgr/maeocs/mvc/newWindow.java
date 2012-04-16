@@ -2,20 +2,26 @@ package pgr.maeocs.mvc;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 
+import javax.swing.Action;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class newWindow extends JFrame {
 	
-	private JTextField txWidth;
-	private JTextField txHeight;
-	private JTextField txGrilla;
+	private static JTextField txWidth = new JTextField();
+	private static JTextField txHeight = new JTextField();
+	private static JTextField txGrilla = new JTextField();
 	
 	private JLabel lbWidth;
 	private JLabel lbHeight;
 	private JLabel lbGrilla;
+	private static JButton ok_button = new JButton("OK");
 	
 	private JFrame principal;
 	
@@ -27,31 +33,30 @@ public class newWindow extends JFrame {
 		this.setResizable(false);
 		this.generateInterface();
 		this.setVisible(true);
-		principal.setEnabled(false);
+		
+		
+//		principal.setEnabled(false);
 	}
 
 	private void generateInterface() {
 		
-		this.txWidth = new JTextField ();
-		this.txHeight = new JTextField ();
-		this.txGrilla = new JTextField ();
 		this.lbWidth = new JLabel ("Width");
 		this.lbHeight = new JLabel ("Height");
 		this.lbGrilla = new JLabel ("Size for the Grid");
 		
-		this.txWidth.setSize(100, 40);
-		this.txHeight.setSize(100, 40);
-		this.txGrilla.setSize(100, 40);
+		newWindow.txWidth.setSize(100, 40);
+		newWindow.txHeight.setSize(100, 40);
+		newWindow.txGrilla.setSize(100, 40);
 		this.lbWidth.setSize(100, 40);
 		this.lbHeight.setSize(100, 40);
 		this.lbGrilla.setSize(100, 40);
 		
-		this.txWidth.setBackground(Color.BLACK);
-		this.txWidth.setForeground(Color.WHITE);
-		this.txHeight.setBackground(Color.BLACK);
-		this.txHeight.setForeground(Color.WHITE);
-		this.txGrilla.setBackground(Color.BLACK);
-		this.txGrilla.setForeground(Color.WHITE);
+		newWindow.txWidth.setBackground(Color.BLACK);
+		newWindow.txWidth.setForeground(Color.WHITE);
+		newWindow.txHeight.setBackground(Color.BLACK);
+		newWindow.txHeight.setForeground(Color.WHITE);
+		newWindow.txGrilla.setBackground(Color.BLACK);
+		newWindow.txGrilla.setForeground(Color.WHITE);
 		this.lbWidth.setBackground(Color.BLACK);
 		this.lbWidth.setForeground(Color.WHITE);
 		this.lbHeight.setBackground(Color.BLACK);
@@ -65,7 +70,24 @@ public class newWindow extends JFrame {
 		this.getContentPane().add(txHeight);
 		this.getContentPane().add(lbGrilla);
 		this.getContentPane().add(txGrilla);
+		this.getContentPane().add(ok_button);
 		
+	}
+	
+	public void setOkActionListener(ActionListener actionListener){
+		ok_button.addActionListener(actionListener); 
+	}
+	
+	public int getWidhtSize(){
+		return Integer.parseInt(txWidth.getText());
+	}
+	
+	public int getHeightSize() {
+		return Integer.parseInt(txHeight.getText());
+	}
+	
+	public int getGrind(){
+		return Integer.parseInt(txGrilla.getText());
 	}
 	
 }

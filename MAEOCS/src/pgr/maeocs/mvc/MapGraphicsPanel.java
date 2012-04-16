@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -96,7 +98,7 @@ public class MapGraphicsPanel extends JPanel{
     public ImageIcon createImage(String path) {
 	  URL imgURL = getClass().getResource(path);
 	     if (imgURL != null) {
-	         return new ImageIcon(imgURL);
+	         return new ImageIcon(path);
 	     } else {
 	         System.err.println("Couldn't find files: " + path);
 	         return null;
@@ -127,7 +129,7 @@ public class MapGraphicsPanel extends JPanel{
     }
 
 	public void setBackground(String img) {
-		mainBackGroundImg = this.createImage(img).getImage();
+		mainBackGroundImg = createImage(img).getImage();
 		
 	}
 }

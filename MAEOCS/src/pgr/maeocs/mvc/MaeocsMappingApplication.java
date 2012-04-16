@@ -6,8 +6,10 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,7 +29,7 @@ public class MaeocsMappingApplication extends JFrame {
 	
 	private JFrame direc;
 	
-	private DirGraphicsPanel dir;
+	private static DirGraphicsPanel dir;
 	
 	private SectionSelectedState state;
 	
@@ -39,9 +41,17 @@ public class MaeocsMappingApplication extends JFrame {
 	
 	private Boolean pressed = false;
 	
+	private static int width =500; 
+	
+	private static int height = 400;
+	
+	private static int grind = 12;
+	
 	private String path = File.separator+"tmp";
 	private JFileChooser loadFile = new JFileChooser(new File(path));
 	private File imgFile;
+	
+	private static final  Object ob = new  Object();
 	 
 	
 	/*
@@ -62,7 +72,7 @@ public class MaeocsMappingApplication extends JFrame {
 	Dimension sizeButton = new Dimension (210,95);
 	Dimension sizeDirPan = new Dimension (250,250);
 	
-	private MaeocsMappingApplication (){
+	private MaeocsMappingApplication () throws InterruptedException{
 		super("MAEOCS Mapping Application");
 		this.setSize(900, 50);
 		this.setLocation(10, 10);
@@ -70,10 +80,33 @@ public class MaeocsMappingApplication extends JFrame {
 		this.setForeground(white);
 		this.setMaximumSize(size);
 		this.setMinimumSize(size);
-		new newWindow(principal);
-		this.interfaceGenerator();
+		final newWindow sizeWindow =new newWindow(principal);
 		this.setResizable(false);
-//		this.setVisible(true);
+		this.setVisible(true);
+		
+		sizeWindow.setOkActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				MaeocsMappingApplication.width = sizeWindow.getWidhtSize();
+				MaeocsMappingApplication.height = sizeWindow.getHeightSize();
+				MaeocsMappingApplication.grind = sizeWindow.getGrind();
+				sizeWindow.setVisible(false);
+				synchronized (ob) {
+					ob.notifyAll();
+				}
+				
+			}
+		});
+		
+		
+		synchronized (ob) {
+			ob.wait();
+			this.interfaceGenerator();
+		}
+		
+		
 	}
 	
 	public void interfaceGenerator (){
@@ -141,9 +174,8 @@ public class MaeocsMappingApplication extends JFrame {
         dir = new DirGraphicsPanel(state);
         dir.setSize(sizeDirPan);
         
-        grid = MapGraphicsPanel.getInstance(500,300, 40, state, dir);
-//      grid.setBackground("/mnt/eddy/Pictures/anime/unda.gif");
-        grid.repaint();
+        grid = MapGraphicsPanel.getInstance(width,height,grind, state, dir);
+//        	grid.setBackground("/mnt/eddy/Pictures/anime/unda.gif");
         
         tools = new JPanel(new GridLayout(1,4));
         tools.setBackground(black);
@@ -324,7 +356,7 @@ public class MaeocsMappingApplication extends JFrame {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 	  MaeocsMappingApplication app = new MaeocsMappingApplication();
 	  app.setVisible(true);
 	}
