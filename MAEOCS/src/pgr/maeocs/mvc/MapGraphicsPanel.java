@@ -56,7 +56,8 @@ public class MapGraphicsPanel extends JPanel{
     static Color bgColor = new Color (52, 101, 164);
 
     private MapGraphicsPanel(int widthX, int heightY, int TamGrid, 
-    		SectionSelectedState stateI, DirGraphicsPanel dir) {
+    	
+    	SectionSelectedState stateI, DirGraphicsPanel dir) {
     	this.width = widthX;
     	this.height = heightY;
     	this.gridTam = TamGrid;
@@ -111,7 +112,6 @@ public class MapGraphicsPanel extends JPanel{
 	  }
 	  // Y pintamos el resto de cosas que pueda tener el panel
 	  super.paint(g);
-	 
 	 }
     
     private void createGrid(){
@@ -128,5 +128,6 @@ public class MapGraphicsPanel extends JPanel{
 
 	public void setBackground(String img) {
 		mainBackGroundImg = this.createImage(img).getImage();
+		
 	}
 }

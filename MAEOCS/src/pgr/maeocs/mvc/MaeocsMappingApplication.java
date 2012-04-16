@@ -1,18 +1,13 @@
 package pgr.maeocs.mvc;
 
-import java.awt.Button;
+
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,8 +15,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileView;
 import javax.swing.plaf.FileChooserUI;
 
 public class MaeocsMappingApplication extends JFrame {
@@ -109,6 +102,7 @@ public class MaeocsMappingApplication extends JFrame {
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
         
+        
         // Create and add simple menu item to one of the drop down menu
         JMenuItem newAction = new JMenuItem("New");
         newAction.setForeground(white);
@@ -148,7 +142,9 @@ public class MaeocsMappingApplication extends JFrame {
         dir.setSize(sizeDirPan);
         
         grid = MapGraphicsPanel.getInstance(500,300, 40, state, dir);
-//        	grid.setBackground("/mnt/eddy/Pictures/anime/unda.gif");
+//      grid.setBackground("/mnt/eddy/Pictures/anime/unda.gif");
+        grid.repaint();
+        
         tools = new JPanel(new GridLayout(1,4));
         tools.setBackground(black);
         tools.setMaximumSize(sizeSHalf);
