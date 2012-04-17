@@ -202,8 +202,8 @@ public class MaeocsMappingApplication extends JFrame {
 					        mapa.setLocation(10, 60);
 					        mapa.getContentPane().setBackground(black);
 					        mapa.setForeground(white);
-					        mapa.setMaximumSize(sizeFHalf);
-					        mapa.setMinimumSize(sizeFHalf);
+					        mapa.setMaximumSize(new Dimension(sizeWindow.getWidhtSize(),sizeWindow.getWidhtSize()));
+					        mapa.setMinimumSize(new Dimension(sizeWindow.getWidhtSize(),sizeWindow.getWidhtSize()));
 					        mapa.setResizable(false);
 					        mapa.setBackground(black);
 					        mapa.getContentPane().add(grid);
