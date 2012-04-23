@@ -73,4 +73,3 @@ public class State implements Observer {
 	}
 
 }
- 

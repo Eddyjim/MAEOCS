@@ -10,7 +10,8 @@ public enum SectionType {
 	 
 	IN,
 	 
-	OUT;
-	 
+	OUT,
+	
+	INTERSECTION;
+	
 }
- 

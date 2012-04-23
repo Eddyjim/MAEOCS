@@ -26,6 +26,7 @@ public class MapSection {
 	private Boolean pressed = false;
 	
 	public MapSection (State state){
+		
 		this.label = new JLabel("", SwingConstants.CENTER);
 		Border border = LineBorder.createGrayLineBorder();
 		label.setBorder(border);
@@ -35,10 +36,13 @@ public class MapSection {
 		for (int i = 0; i < connections.length; i++) {
 			connections[i]=false;
 		}
+		
 	}
 	
 	public Boolean[] getConections() {
+		
 		return connections;
+		
 	}
 	
 	private void defineActionListener(){
@@ -134,5 +138,5 @@ public class MapSection {
 	public JLabel getLabel() {
 		return label;
 	}
+	
 }
- 

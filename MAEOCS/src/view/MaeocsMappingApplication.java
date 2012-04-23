@@ -13,8 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-
 import model.State;
 
 public class MaeocsMappingApplication extends JFrame {
@@ -187,7 +185,7 @@ public class MaeocsMappingApplication extends JFrame {
 						if(sizeWindow.getWidhtSize()>100&& sizeWindow.getHeightSize()>100&&sizeWindow.getGrind()>10){
 							
 							grid = MapGraphicsPanel.getInstance(sizeWindow.getWidhtSize(),
-									sizeWindow.getHeightSize(), sizeWindow.getGrind(), state);
+							sizeWindow.getHeightSize(), sizeWindow.getGrind(), state);
 							
 							directions.setLocation(660, 60);
 					        directions.getContentPane().setBackground(black);
@@ -227,8 +225,6 @@ public class MaeocsMappingApplication extends JFrame {
 				});
 			}
 		});
-
-        
 	}
 	
 	
@@ -241,4 +237,3 @@ public class MaeocsMappingApplication extends JFrame {
 	}
 	
 }
- 

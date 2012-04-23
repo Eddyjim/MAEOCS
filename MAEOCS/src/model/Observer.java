@@ -10,4 +10,5 @@ public interface Observer {
 	public void update(MapSection M);
 	
 	public void update(DirectionGraphicsPanel M);
+	
 }
