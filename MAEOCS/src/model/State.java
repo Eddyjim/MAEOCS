@@ -7,11 +7,11 @@ import javax.swing.AbstractButton;
 import model.Observer;
 import view.DirectionGraphicsPanel;
 import view.MapGraphicsPanel;
-import view.ToolsGraphicsPanel;
+import view.TypeCreatorGraphicsPanel;
 
 public class State implements Observer {
  	 
-	private ToolsGraphicsPanel toolsGraphicsPanel;
+	private TypeCreatorGraphicsPanel toolsGraphicsPanel;
 	 
 	private MapGraphicsPanel mapGraphicsPanel;
 	 
@@ -37,7 +37,7 @@ public class State implements Observer {
 	}
 
 	@Override
-	public void update(ToolsGraphicsPanel M) {
+	public void update(TypeCreatorGraphicsPanel M) {
 		this.toolsGraphicsPanel = M;		
 	}
 
@@ -55,7 +55,7 @@ public class State implements Observer {
 		return this.directionGraphicsPanel;
 	}
 
-	public ToolsGraphicsPanel getToolsState() {
+	public TypeCreatorGraphicsPanel getToolsState() {
 		return this.toolsGraphicsPanel;
 	}
 	
@@ -63,7 +63,7 @@ public class State implements Observer {
 		this.toolsGraphicsPanel.setStateType(type);
 	}
 
-	public void setTools(ToolsGraphicsPanel toolsGraphicsPanel) {
+	public void setTools(TypeCreatorGraphicsPanel toolsGraphicsPanel) {
 		this.toolsGraphicsPanel = toolsGraphicsPanel;
 		
 	}

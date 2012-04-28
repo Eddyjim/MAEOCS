@@ -27,7 +27,7 @@ public class MaeocsMappingApplication extends JFrame {
 		
 	private MapGraphicsPanel grid;
 	 
-	private ToolsGraphicsPanel tools;
+	private TypeCreatorGraphicsPanel tools;
 	
 	private DirectionGraphicsPanel dir;
 	 
@@ -139,7 +139,7 @@ public class MaeocsMappingApplication extends JFrame {
         //creating the panels
         this.state = new State();
 
-        tools = new ToolsGraphicsPanel(this);
+        tools = new TypeCreatorGraphicsPanel(this);
         tools.setBackground(black);
         tools.setMaximumSize(sizeSHalf);
         tools.setMinimumSize(sizeSHalf);

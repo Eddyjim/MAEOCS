@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import model.SectionType;
 import model.State;
 
-public class ToolsGraphicsPanel extends JPanel {
+public class TypeCreatorGraphicsPanel extends JPanel {
  
 	private State state;
 	 
@@ -20,7 +20,7 @@ public class ToolsGraphicsPanel extends JPanel {
 
 	private SectionType type;
 	
-	public ToolsGraphicsPanel(MaeocsMappingApplication map){
+	public TypeCreatorGraphicsPanel(MaeocsMappingApplication map){
 		super();
 		this.maeocsMappingApplication = map;
 		buttonsSection();

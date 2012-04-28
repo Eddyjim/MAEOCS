@@ -1,11 +1,11 @@
 package model;
 
 import view.DirectionGraphicsPanel;
-import view.ToolsGraphicsPanel;
+import view.TypeCreatorGraphicsPanel;
 
 public interface Observer {
  
-	public void update(ToolsGraphicsPanel M);
+	public void update(TypeCreatorGraphicsPanel M);
 	
 	public void update(MapSection M);
 	
