@@ -9,6 +9,8 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import model.MapSection;
 import model.SectionType;
@@ -77,7 +79,6 @@ public class MapGraphicsPanel extends JPanel{
         createGrid();
         this.setVisible(true);
         
-        System.out.println("me crearon...");
     }
     
     public static MapGraphicsPanel getInstance (int widthX, int heightY, int TamGrid,
