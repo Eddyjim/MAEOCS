@@ -17,8 +17,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import com.sun.medialib.mlib.Image;
-
 import model.SectionType;
 import model.State;
 
