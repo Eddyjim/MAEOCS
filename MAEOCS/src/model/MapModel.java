@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 public class MapModel {
 	
-	private Node[][] map;
+	private Point[][] map;
 	private HashMap<String, Road> roads;
 
 	public MapModel(int width, int depth){
-		map = new Node[width][depth];
+		map = new Point[width][depth];
 	}
 	
 	public void addRoad(String name,Road road){
@@ -19,7 +19,7 @@ public class MapModel {
 		return roads.get(name);
 	}
 	
-	public Node getNode(int x, int y){
+	public Point getNode(int x, int y){
 		return map[x][y];
 	}
 	
