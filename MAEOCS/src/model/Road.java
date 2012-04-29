@@ -8,8 +8,13 @@ public class Road {
 	private String name;
 	private HashMap<String,Point> points;
 	private ArrayList<MapSection> nodes;
+	private HashMap<String, Intersection> intersections;
 	
 	
+	public HashMap<String, Intersection> getIntersections() {
+		return intersections;
+	}
+
 	public Road(String name){
 		this.name = name;
 		points = new HashMap<String, Point>();
