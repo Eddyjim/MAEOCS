@@ -29,7 +29,7 @@ public class MaeocsMappingApplication extends JFrame {
 	 
 	private TypeCreatorGraphicsPanel tools;
 	
-	private DirectionGraphicsPanel dir;
+	private ToolsGraphicsPanel dir;
 	 
 	private JButton processMap;
 	
@@ -146,7 +146,7 @@ public class MaeocsMappingApplication extends JFrame {
         tools.setState(state);
         tools.setLayout(new GridLayout(1,4));
         
-        dir = new DirectionGraphicsPanel(state);
+        dir = new ToolsGraphicsPanel(state);
         dir.setSize(sizeDirPan);        
         
         directions = new JFrame("DIRECTIONS");
@@ -219,6 +219,8 @@ public class MaeocsMappingApplication extends JFrame {
 					        tool.setVisible(true);
 					        mapa.setVisible(true);
 					        directions.setVisible(true);
+					        
+					        sizeWindow.dispose();
 						}
 						
 					}

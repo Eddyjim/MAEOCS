@@ -27,6 +27,7 @@ public class newWindow extends JFrame {
 	
 	public newWindow (JFrame principal){
 		super();
+		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
 		this.setLayout(new GridLayout (4,2));
 		this.principal=principal;
 		this.setSize(400,200);
@@ -51,18 +52,18 @@ public class newWindow extends JFrame {
 		this.lbHeight.setSize(100, 40);
 		this.lbGrilla.setSize(100, 40);
 		
-		newWindow.txWidth.setBackground(Color.BLACK);
-		newWindow.txWidth.setForeground(Color.WHITE);
-		newWindow.txHeight.setBackground(Color.BLACK);
-		newWindow.txHeight.setForeground(Color.WHITE);
-		newWindow.txGrilla.setBackground(Color.BLACK);
-		newWindow.txGrilla.setForeground(Color.WHITE);
-		this.lbWidth.setBackground(Color.BLACK);
-		this.lbWidth.setForeground(Color.WHITE);
-		this.lbHeight.setBackground(Color.BLACK);
-		this.lbHeight.setForeground(Color.WHITE);
-		this.lbGrilla.setBackground(Color.BLACK);
-		this.lbGrilla.setForeground(Color.WHITE);
+		newWindow.txWidth.setBackground(Color.WHITE);
+		newWindow.txWidth.setForeground(Color.BLACK);
+		newWindow.txHeight.setBackground(Color.WHITE);
+		newWindow.txHeight.setForeground(Color.BLACK);
+		newWindow.txGrilla.setBackground(Color.WHITE);
+		newWindow.txGrilla.setForeground(Color.BLACK);
+		this.lbWidth.setBackground(Color.WHITE);
+		this.lbWidth.setForeground(Color.BLACK);
+		this.lbHeight.setBackground(Color.WHITE);
+		this.lbHeight.setForeground(Color.BLACK);
+		this.lbGrilla.setBackground(Color.WHITE);
+		this.lbGrilla.setForeground(Color.BLACK);
 		
 		this.getContentPane().add(lbWidth);
 		this.getContentPane().add(txWidth);
