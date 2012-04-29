@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.RadialGradientPaint;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -60,10 +61,7 @@ public class Point {
 			ArrayList<String> temp = (ArrayList<String>) aux.get(key).clone();
 			temp.addAll(nodes);
 			this.update2(temp, key);
-			
 		}
-		
-		
 	}
 	
 	
@@ -128,6 +126,54 @@ public class Point {
             }
         }
         return r;
+    }
+    
+    public static ArrayList<String> findRoad(Point start, Point end, HashMap<String, Road> roads){
+    	
+    	String road1 = null,road2 = null;
+    	for(String key:roads.keySet()){
+    		if(roads.containsKey(start.getName())){
+    			road1 = key;
+    			if (roads.containsKey(end.getName())) {
+    				road2 = key;
+				}
+    		}
+    		else if (roads.containsKey(end.getName())) {
+				road2= key;
+			}
+    	}
+    	
+    	Road r1 = roads.get(road1);
+    	Road r2 = roads.get(road2);
+    	
+    	ArrayList<String> aux = new ArrayList<String>();
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	for (String key : r1.getIntersections().keySet()) {
+    		
+			aux.addAll((ArrayList<String>) r1.getIntersections().get(key).getRoads().keySet());
+			
+    	}
+    	
+    	Boolean b = true;
+    	
+    	while (b){
+    		
+    		Iterator<String> i = aux.iterator();
+    		
+    		while(i.hasNext()){
+    			
+    			String s = i.next();
+    			roads.get(s).getIntersections();
+    			
+    		}
+    	}
+    	
     }
 	
 }

@@ -11,6 +11,10 @@ public class Road {
 	private HashMap<String, Intersection> intersections;
 	
 	
+	public HashMap<String, Intersection> getIntersections() {
+		return intersections;
+	}
+
 	public Road(String name){
 		this.name = name;
 		points = new HashMap<String, Point>();
