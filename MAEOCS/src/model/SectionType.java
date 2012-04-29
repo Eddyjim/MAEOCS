@@ -6,12 +6,6 @@ public enum SectionType {
 	 
 	ROAD,
 	 
-	IO,
-	 
-	IN,
-	 
-	OUT,
-	
-	INTERSECTION;
+	POINT
 	
 }

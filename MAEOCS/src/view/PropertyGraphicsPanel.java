@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,12 +22,12 @@ public class PropertyGraphicsPanel extends JPanel {
 	private JTextField nameTx;
 	private JLabel nameLb;
 	private JButton colorBt;
-	private JLabel colorLb;
+	private Label colorLb;
 	private JButton fontBt;
 	private JTextField fontTx;
 	
 	
-	public PropertyGraphicsPanel (State state){
+	public PropertyGraphicsPanel (){
 		super();
 		this.setLayout(new GridLayout (4,2));
 		this.controlsMatrixCreator();
@@ -35,12 +36,12 @@ public class PropertyGraphicsPanel extends JPanel {
 	private void controlsMatrixCreator(){
 		createBt = new JButton("Create");
 		nameTx = new JTextField ();
-		nameLb = new JLabel("Name");
+		nameLb = new JLabel("Name", JLabel.CENTER);
 		colorBt = new JButton("Color");
-		colorLb = new JLabel("C");
-		fontBt = new JButton("W");
+		colorLb = new Label();
+		fontBt = new JButton("Font");
 		fontTx = new JTextField("1");
-		
+				
 		createBt.setBackground(Color.WHITE);
 		createBt.setForeground(Color.BLACK);
 		nameTx.setBackground(Color.WHITE);
@@ -53,8 +54,7 @@ public class PropertyGraphicsPanel extends JPanel {
 		colorLb.setForeground(Color.BLACK);
 		fontBt.setBackground(Color.WHITE);
 		fontTx.setForeground(Color.BLACK);
-		
-		
+				
 		this.add(nameLb);
 		this.add(nameTx);
 		this.add(colorBt);
@@ -84,5 +84,9 @@ public class PropertyGraphicsPanel extends JPanel {
 	
 	public void setCreateBtAction (ActionListener ls){
 		this.createBt.addActionListener(ls);
+	}
+	
+	public void setLabelColor(Color color){
+		colorLb.setBackground(color);
 	}
 }

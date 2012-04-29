@@ -38,23 +38,25 @@ public class ToolsGraphicsPanel extends JPanel {
 		
 		JPanel auxPanel = new JPanel(new GridLayout (1,4));
 		
-		create.setBackground(Color.BLACK);
-		create.setForeground(Color.WHITE);
-		modify.setBackground(Color.BLACK);
-		modify.setForeground(Color.WHITE);
-		delete.setBackground(Color.BLACK);
-		delete.setForeground(Color.WHITE);
-		compile.setBackground(Color.BLACK);
-		compile.setForeground(Color.WHITE);
-		helpTx.setBackground(Color.BLACK);
-		helpTx.setForeground(Color.WHITE);
+		create.setBackground(Color.WHITE);
+		create.setForeground(Color.BLACK);
+		modify.setBackground(Color.WHITE);
+		modify.setForeground(Color.BLACK);
+		delete.setBackground(Color.WHITE);
+		delete.setForeground(Color.BLACK);
+		compile.setBackground(Color.WHITE);
+		compile.setForeground(Color.BLACK);
+		helpTx.setBackground(Color.WHITE);
+		helpTx.setForeground(Color.BLACK);
 
 		this.add(helpTx);
-		this.add(auxPanel);
 		auxPanel.add(create);
 		auxPanel.add(modify);
-		auxPanel.add(modify);
+		auxPanel.add(delete);
+		auxPanel.add(compile);
 		auxPanel.add(helpTx);
+		this.add(auxPanel);
+		
 	}
 	
 	public void setCreateBtAction(ActionListener ls){

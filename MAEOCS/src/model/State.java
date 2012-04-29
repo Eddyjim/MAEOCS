@@ -5,71 +5,35 @@ import java.awt.Color;
 import javax.swing.AbstractButton;
 
 import model.Observer;
-import view.DirectionGraphicsPanel;
+import view.ToolsGraphicsPanel;
 import view.MapGraphicsPanel;
 import view.TypeCreatorGraphicsPanel;
 
-public class State implements Observer {
+public class State {
  	 
-	private TypeCreatorGraphicsPanel toolsGraphicsPanel;
+	private SectionType type;
 	 
-	private MapGraphicsPanel mapGraphicsPanel;
-	 
-	private DirectionGraphicsPanel directionGraphicsPanel;
+	private Color color;
 	
-	private MapSection mapSection;
+	public State(){
+		type = SectionType.NULL;
+		color = null;
+	}
 		 
-	public void setMapSectionSelected(MapSection mapSectionSelected) {
-		this.mapSection = mapSectionSelected;
+	public void setStateType(SectionType type) {
+		this.type = type;
 	}
 	 
-	public MapSection getMapSectionSelected() {
-		return this.mapSection;
-	}
-	 
-	public void setDirecctionsState(Boolean[] direcctions) {
-		this.directionGraphicsPanel.setDirecctions(direcctions);
-		this.directionGraphicsPanel.paint();
-	}
-	 
-	public Boolean[] getDirecctionsState() {
-		return this.directionGraphicsPanel.getDirecctions();
-	}
-
-	@Override
-	public void update(TypeCreatorGraphicsPanel M) {
-		this.toolsGraphicsPanel = M;		
-	}
-
-	@Override
-	public void update(MapSection M) {
-		this.mapSection = M;
-	}
-
-	@Override
-	public void update(DirectionGraphicsPanel M) {
-		this.directionGraphicsPanel = M;
-	}
-
-	public DirectionGraphicsPanel getDirecctions() {
-		return this.directionGraphicsPanel;
-	}
-
-	public TypeCreatorGraphicsPanel getToolsState() {
-		return this.toolsGraphicsPanel;
+	public void setActualColor(Color color) {
+		this.color=color;
 	}
 	
-	public void setToolsState(SectionType type) {
-		this.toolsGraphicsPanel.setStateType(type);
+	public Color getColor() {
+		return color;
 	}
-
-	public void setTools(TypeCreatorGraphicsPanel toolsGraphicsPanel) {
-		this.toolsGraphicsPanel = toolsGraphicsPanel;
-		
-	}
-
-	public void setDirecctions(DirectionGraphicsPanel directionGraphicsPanel) {
-		this.directionGraphicsPanel = directionGraphicsPanel;		
+	
+	public SectionType getType() {
+		return type;
 	}
 
 }
