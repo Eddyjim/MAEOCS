@@ -64,7 +64,7 @@ public class Point {
 		}
 	}
 	
-	
+
 	
 	public  String[] dijstra(ArrayList<String>[][] mat, int start, int end)
     {
@@ -128,6 +128,7 @@ public class Point {
         return r;
     }
     
+    
     public static ArrayList<String> findRoad(Point start, Point end, HashMap<String, Road> roads){
     	
     	String road1 = null,road2 = null;
@@ -148,12 +149,7 @@ public class Point {
     	
     	ArrayList<String> aux = new ArrayList<String>();
     	
-    	
-    	
-    	
-    	
-    	
-    	
+    	    	
     	for (String key : r1.getIntersections().keySet()) {
     		
 			aux.addAll((ArrayList<String>) r1.getIntersections().get(key).getRoads().keySet());
@@ -173,6 +169,7 @@ public class Point {
     			
     		}
     	}
+		return aux;
     	
     }
 	
