@@ -70,10 +70,10 @@ public class MaeocsMappingApplication extends JFrame {
 	 * 
 	 * */
 	
-	Dimension principalDim = new Dimension (1200,50);
+	Dimension principalDim = new Dimension (800,50);
 	Dimension createDim = new Dimension (250,200);
 	Dimension propertiesDim = new Dimension (250,250);
-	Dimension toolsDim = new Dimension (1200,200);
+	Dimension toolsDim = new Dimension (800,150);
 	Dimension mapDim;
 
 	private State state;
@@ -210,7 +210,7 @@ public class MaeocsMappingApplication extends JFrame {
 							grid = MapGraphicsPanel.getInstance(sizeWindow.getWidhtSize(),
 							sizeWindow.getHeightSize(), sizeWindow.getGrind(), state);
 							
-							mapDim = new Dimension (sizeWindow.getWidhtSize(),sizeWindow.getHeightSize());
+							mapDim = new Dimension (sizeWindow.getWidhtSize()+8,sizeWindow.getHeightSize()+32);
 							
 							create.setLocation(660, 60);
 							create.getContentPane().setBackground(white);
@@ -230,25 +230,7 @@ public class MaeocsMappingApplication extends JFrame {
 					        mapa.setBackground(white);
 					        mapa.getContentPane().add(grid);
 					        mapa.getContentPane().setBackground(black);
-					        mapa.setSize(mapDim);
-					        
-					        
-					        JFrame boton = new JFrame("Boton");
-					        JButton bboton = new JButton ("boton");
-					        
-					        bboton.addActionListener(new ActionListener() {
-								
-								@Override
-								public void actionPerformed(ActionEvent e) {
-									System.out.println("Tamaño grilla: "+grid.getSize());
-							        System.out.println("tamaño mapa: "+mapa.getSize());
-									
-								}
-							});
-					        
-					        boton.add(bboton);
-					        boton.setVisible(true);
-					              					        
+					        mapa.setSize(mapDim);   					        
 					        mapa.setEnabled(true);
 							
 					        tool.setLocation(665, 100);

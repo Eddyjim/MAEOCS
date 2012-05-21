@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 import model.State;
 
@@ -21,7 +22,7 @@ public class ToolsGraphicsPanel extends JPanel {
 	private JButton modify;
 	private JButton delete;
 	private JButton compile;
-	private JTextArea helpTx;
+	private JTextPane helpTx;
 		
 	public ToolsGraphicsPanel (){
 		super();
@@ -34,7 +35,9 @@ public class ToolsGraphicsPanel extends JPanel {
 		modify = new JButton("Modify");
 		delete = new JButton("Delete");
 		compile = new JButton("Compile");
-		helpTx = new JTextArea("Help is going to appear here, stay attend XP");
+		helpTx = new JTextPane();
+		
+		helpTx.setText("Help is going to appear\nhere, stay attend XP");
 		
 		JPanel auxPanel = new JPanel(new GridLayout (1,4));
 		
