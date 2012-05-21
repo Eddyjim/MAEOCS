@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -48,9 +49,16 @@ public class MapGraphicsPanel extends JPanel{
     static int gridTam=0;
     
     /*
+     * Label para fondo de la ventana
+     */
+    static JLabel principalLabel = new JLabel ();
+    
+    /*
      * Color de fondo del mapa
      */
     static Color bgColor = new Color (52, 101, 164);
+    
+    
 
     private MapGraphicsPanel(int widthX, int heightY, int TamGrid, 
     		State state) {
@@ -59,22 +67,12 @@ public class MapGraphicsPanel extends JPanel{
     	this.gridTam = TamGrid;
     	this.state = state;
     	
-    	this.sectionW = (int)Math.ceil(width/gridTam);
-    	this.sectionH = (int)Math.ceil(height/gridTam);
+    	this.setMinimumSize(new Dimension(widthX, heightY));
+    	this.setMaximumSize(new Dimension(widthX, heightY));
+    	this.setSize(new Dimension(widthX, heightY));
     	
-    	this.width = sectionW*gridTam;
-    	this.height = sectionH*gridTam;
-    	
-    	Dimension dim = new Dimension (width, height);
-    	
-    	this.setSize(width, height);
-    	this.setMaximumSize(dim);
-    	this.setMinimumSize(dim);
-    	
-    	this.setBackground(Color.WHITE);
-    	
-    	this.setLayout(new GridLayout(gridTam, gridTam));
-    	
+    	principalLabel.setLayout(new GridLayout(gridTam, gridTam));
+    	this.setLayout(new GridLayout(1, 1));
         setOpaque (false);
         createGrid();
         this.setVisible(true);
@@ -115,13 +113,19 @@ public class MapGraphicsPanel extends JPanel{
     	for (int i = 0; i < gridTam; i++) {
 			for (int j = 0; j < gridTam; j++) {
 				mapSections[i][j]= new MapSection(state);
-				this.add(mapSections[i][j].getLabel());
+				principalLabel.add(mapSections[i][j].getLabel());
 			}
 		}
     }
 
 	public void setBackground(String img) {
 		mainBackGroundImg = this.createImage(img).getImage();
+	}
+
+	public void paintBackground(Image img) {
+		principalLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height, 1)));
+		principalLabel.setSize(width,height);
+		this.add(principalLabel);
 	}
 }
  

@@ -25,11 +25,14 @@ public class MapSection {
 	private SectionType type;
 		
 	private ImageIcon icon;
+
+	private JLabel jlabelVacia;
 	
 	
 	public MapSection (State state){
 		this.label = new Label("", Label.CENTER);
-		this.jlabel = new JLabel("", JLabel.CENTER);
+		this.jlabel = new JLabel();
+		this.jlabelVacia = new JLabel();
 		Border border = LineBorder.createGrayLineBorder();
 		jlabel.setBorder(border);
 		jlabel.setLayout(new GridLayout(1,1));
@@ -51,18 +54,14 @@ public class MapSection {
 				switch (state.getType()) {
 				
 				case NULL:
-					type = SectionType.NULL;
-					jlabel.setBackground(new Color(0, 0, 0, 0));
-					jlabel.setText("");
-					jlabel.setOpaque(false);
-					if(jlabel.getComponents().length!=0)
-						jlabel.remove(label);
+					;
 					break;
 				
 				case ROAD:
 					
 					type = SectionType.ROAD;
 					label.setBackground(state.getColor());
+					jlabel.setText("o");
 					label.setText("o");
 					jlabel.add(label);
 					break;
@@ -71,6 +70,7 @@ public class MapSection {
 					
 					type = SectionType.POINT;
 					label.setBackground(state.getColor());
+					jlabel.setText("p");
 					label.setText("p");
 					jlabel.add(label);
 					break;
@@ -101,6 +101,65 @@ public class MapSection {
 			public void mouseExited(MouseEvent e) {
 				;
 			}
+		});
+		
+		label.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				switch (state.getType()) {
+				
+				case NULL:
+					jlabel.setText("");
+					jlabel.removeAll();
+					break;
+				
+				case ROAD:
+					
+					type = SectionType.ROAD;
+					label.setBackground(state.getColor());
+					jlabel.setText("o");
+					label.setText("o");
+					break;
+					
+				case POINT:
+					
+					type = SectionType.POINT;
+					label.setBackground(state.getColor());
+					jlabel.setText("p");
+					label.setText("p");
+					break;
+				
+					
+				default:
+					break;
+			
+				}
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}			
 		});
 	}
 	

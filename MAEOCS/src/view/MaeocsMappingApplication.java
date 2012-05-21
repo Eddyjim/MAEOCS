@@ -13,9 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import model.SectionType;
 import model.State;
@@ -224,11 +226,29 @@ public class MaeocsMappingApplication extends JFrame {
 					        mapa.setLocation(10, 100);
 					        mapa.getContentPane().setBackground(white);
 					        mapa.setForeground(black);
-					        mapa.setMaximumSize(new Dimension(sizeWindow.getWidhtSize(),sizeWindow.getHeightSize()));
-					        mapa.setMinimumSize(new Dimension(sizeWindow.getWidhtSize(),sizeWindow.getHeightSize()));
 					        mapa.setResizable(true);
 					        mapa.setBackground(white);
 					        mapa.getContentPane().add(grid);
+					        mapa.getContentPane().setBackground(black);
+					        mapa.setSize(mapDim);
+					        
+					        
+					        JFrame boton = new JFrame("Boton");
+					        JButton bboton = new JButton ("boton");
+					        
+					        bboton.addActionListener(new ActionListener() {
+								
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									System.out.println("Tamaño grilla: "+grid.getSize());
+							        System.out.println("tamaño mapa: "+mapa.getSize());
+									
+								}
+							});
+					        
+					        boton.add(bboton);
+					        boton.setVisible(true);
+					              					        
 					        mapa.setEnabled(true);
 							
 					        tool.setLocation(665, 100);
@@ -292,15 +312,10 @@ public class MaeocsMappingApplication extends JFrame {
 					        tool.setVisible(true);
 					        mapa.setVisible(true);
 					        create.setVisible(true);
-					        properties.setVisible(true);
-					        
-					        
+					        properties.setVisible(true);		        
 							java.awt.Image img = new ImageIcon(imgFile.getAbsolutePath()).getImage();
-							Graphics g=grid.getGraphics();
-							g.drawImage(img, 0, 0, null);
-					        
-					        
-					        sizeWindow.dispose();
+							grid.paintBackground(img);
+							sizeWindow.dispose();
 						}
 						
 					}
