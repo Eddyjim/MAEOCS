@@ -28,8 +28,12 @@ public class MapSection {
 
 	private JLabel jlabelVacia;
 	
+	private int posI;
 	
-	public MapSection (State state){
+	private int posJ;
+	
+	
+	public MapSection (State state, int i, int j){
 		this.label = new Label("", Label.CENTER);
 		this.jlabel = new JLabel();
 		this.jlabelVacia = new JLabel();
@@ -40,6 +44,8 @@ public class MapSection {
 		this.state = state;
 		this.defineActionListener();
 		this.type = SectionType.NULL;
+		this.posI = i;
+		this.posJ = j;
 	}
 	
 	

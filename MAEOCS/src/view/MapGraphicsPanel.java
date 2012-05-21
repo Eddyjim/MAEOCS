@@ -112,7 +112,7 @@ public class MapGraphicsPanel extends JPanel{
     	
     	for (int i = 0; i < gridTam; i++) {
 			for (int j = 0; j < gridTam; j++) {
-				mapSections[i][j]= new MapSection(state);
+				mapSections[i][j]= new MapSection(state, i, j);
 				principalLabel.add(mapSections[i][j].getLabel());
 			}
 		}

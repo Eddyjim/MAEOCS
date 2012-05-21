@@ -230,7 +230,8 @@ public class MaeocsMappingApplication extends JFrame {
 					        mapa.setBackground(white);
 					        mapa.getContentPane().add(grid);
 					        mapa.getContentPane().setBackground(black);
-					        mapa.setSize(mapDim);   					        
+					        mapa.setSize(mapDim);
+					        mapa.setResizable(false);
 					        mapa.setEnabled(true);
 							
 					        tool.setLocation(665, 100);

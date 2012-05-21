@@ -81,6 +81,5 @@ public class ToolsGraphicsPanel extends JPanel {
 	public void setHelpText(ActionListener ls){
 		create.addActionListener(ls);
 	}
-	 
 }
  
