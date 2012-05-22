@@ -33,6 +33,8 @@ public class MaeocsMappingApplication extends JFrame {
 	private JFrame create;
 	
 	private JFrame properties;
+	
+	private JFrame simulator;
 		
 	private MapGraphicsPanel grid;
 	 
@@ -41,6 +43,8 @@ public class MaeocsMappingApplication extends JFrame {
 	private ToolsGraphicsPanel toolsPane;
 	
 	private PropertyGraphicsPanel propertiesPane; 
+	
+	private SimulatorPanel simulatorPane;
 	 
 	private JButton processMap;
 	
@@ -74,6 +78,7 @@ public class MaeocsMappingApplication extends JFrame {
 	Dimension createDim = new Dimension (250,200);
 	Dimension propertiesDim = new Dimension (250,250);
 	Dimension toolsDim = new Dimension (800,150);
+	Dimension simulatorDim = new Dimension(250, 670);
 	Dimension mapDim;
 
 	private State state;
@@ -173,6 +178,8 @@ public class MaeocsMappingApplication extends JFrame {
         toolsPane = new ToolsGraphicsPanel();
         toolsPane.setSize(createDim);        
         
+        
+        
         create = new JFrame("CREATE");
         
         mapa = new JFrame ("MAPA");
@@ -180,6 +187,8 @@ public class MaeocsMappingApplication extends JFrame {
         tool = new JFrame ("TOOLS");
         
         properties = new JFrame ("PROPERTIES");
+        
+        simulator = new JFrame ("SIMULATOR");
 
         //set action listeners
         
@@ -210,6 +219,9 @@ public class MaeocsMappingApplication extends JFrame {
 							grid = MapGraphicsPanel.getInstance(sizeWindow.getWidhtSize(),
 							sizeWindow.getHeightSize(), sizeWindow.getGrind(), state);
 							
+							simulatorPane = new SimulatorPanel(sizeWindow.getWidhtSize()/10,
+									sizeWindow.getHeightSize()/10, sizeWindow.getGrind());
+							
 							mapDim = new Dimension (sizeWindow.getWidhtSize()+8,sizeWindow.getHeightSize()+32);
 							
 							create.setLocation(660, 60);
@@ -226,7 +238,6 @@ public class MaeocsMappingApplication extends JFrame {
 					        mapa.setLocation(10, 100);
 					        mapa.getContentPane().setBackground(white);
 					        mapa.setForeground(black);
-					        mapa.setResizable(true);
 					        mapa.setBackground(white);
 					        mapa.getContentPane().add(grid);
 					        mapa.getContentPane().setBackground(black);
@@ -234,6 +245,12 @@ public class MaeocsMappingApplication extends JFrame {
 					        mapa.setResizable(false);
 					        mapa.setEnabled(true);
 							
+							simulator.setSize(simulatorDim);
+							simulator.getContentPane().setBackground(white);
+							simulator.setResizable(false);
+							simulator.add(simulatorPane);
+							simulator.setVisible(true);
+					        
 					        tool.setLocation(665, 100);
 					        tool.setBackground(white);
 					        tool.setForeground(black);
@@ -292,12 +309,27 @@ public class MaeocsMappingApplication extends JFrame {
 								}
 							});
 					        
+					        simulatorPane.setSimulateAction(new ActionListener() {
+								
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									for (int k = 0; k < 8; k++) {
+										simulatorPane.paintAPoint(20, k+3);
+									}
+									for (int k = 0; k < 7; k++) {
+										simulatorPane.paintAPoint(20-k, 11);
+									}
+								}
+							});
+					        
 					        tool.setVisible(true);
 					        mapa.setVisible(true);
 					        create.setVisible(true);
 					        properties.setVisible(true);		        
 							java.awt.Image img = new ImageIcon(imgFile.getAbsolutePath()).getImage();
 							grid.paintBackground(img);
+							simulatorPane.paintBackground(img);
+							
 							sizeWindow.dispose();
 						}
 						
