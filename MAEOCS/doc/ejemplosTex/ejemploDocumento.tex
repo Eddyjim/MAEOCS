@@ -1,0 +1,1242 @@
+%\documentclass[letterpaper,11pt]{report}
+\documentclass[letterpaper,12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,activeacute]{babel}
+\parindent=0mm
+\parskip=3mm
+\linespread{1.2}
+\usepackage[margin=3cm]{geometry}
+\usepackage[pdftex]{graphicx} %Para poner gráficas jpg y generar pdf
+\usepackage[pdfborder=0, colorlinks=true]{hyperref}
+\usepackage{fancyheadings} % Para control fino de los encabezados en todas las paginas
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+\usepackage{lscape}
+
+\newcommand{\fnz}{\footnotesize}
+
+%\makeindex
+\begin{document}
+
+\bibliographystyle{plain}
+\nocite{*}
+
+
+\begin{frontmatter}
+		% P\'agina inicial con el t\'itulo, autores y dem\'as !
+  \begin{titlepage}
+    \title{AndroidREST\\
+            Una experiencia con Android y servicios REST\\[3cm]}
+
+
+
+    \author{\textsf{Santiago Carrillo Barbosa}\\\textit{Escuela Colombiana de Ingeniería Julio Garavito}\\[10cm]}
+
+
+
+    \date{Diciembre de 2011}
+    \maketitle
+  \end{titlepage}
+		
+   % Tabla de contenido
+   \tableofcontents
+
+\chapter{Introducción}
+% Solamente en la introducción no se quiere el número de capítulo.
+ \lhead[\fancyplain{}{}]
+       {\fancyplain{}{\fnz{Introducción}}}
+ \rhead[\fancyplain{}{\fnz{Introducción}}]
+       {\fancyplain{}{}}
+
+La Ingeniería de  Sistemas es una de las carreras  que más evolución y
+cambios ha presentado  en la última década, desde  la masificación del
+internet   hasta  las  nuevas   tendencias  de   dispositivos  móviles
+inteligentes  con capacidades  de procesamiento  y memoria  de grandes
+magnitudes, superando  incluso gigantescos servidores que  eran lo más
+poderoso  tan  solo diez  años  atrás; además  de  esto  su tamaño  ha
+disminuido notablemente pasando a ser a penas tan grandes como la mano
+de una persona y hasta más pequeños. Todos estos factores directamente
+han impulsado  al software a  evolucionar en paralelo;  apareciendo de
+esta manera  nuevos lenguajes  y tendencias de  programación; sistemas
+operativos  que tienen  en cuenta  otros  factores como  el consumo  y
+ahorro  de energía  y que  hacen  un mejor  uso de  los recursos;  con
+arquitecturas  orientadas  a servicios  que  facilitan  el proceso  de
+desarrollo  de aplicaciones,  la mantenibilidad  de las  mismas  y las
+hacen   compatibles   e   integrables   con   otras   aplicaciones   y
+tecnologías. Todo esto conlleva  a que los futuros ingenieros deberían
+tener  un gran nivel  de exigencia  y alta  calidad en  su preparación
+académica y profesional; de tal  manera que conozcan y se familiaricen
+con estas tecnologías,  que su proceso de aprendizaje  permanezca a la
+vanguardia de los  avances en tecnológicos para que  de esta manera se
+puedan formar profesionales más completos y competitivos.
+
+En este documento se pretende  hacer un acercamiento a los componentes
+principales, arquitectura y algunas de las ventajas que ofrece Android
+como  sistema operativo  y  para el  desarrollo  de aplicaciones  para
+dispositivos móviles.  Para  empezar, en el capítulo 1  se exponen los
+objetivos y  justificación del trabajo, enseguida  se contextualiza al
+lector  con  una  descripción  técnica  y detallada  de  Android;  sus
+características  fundamentales, arquitectura  y en  general lo  que lo
+hace diferente a  otras tecnologías. En el capítulo 2  se habla de las
+aplicaciones   para   Android;   sus  características,   arquitectura,
+componentes principales, proceso de compilación y diferentes versiones
+existentes de Android junto con sus niveles de aplicación(API Levels).
+En  la  parte   central  del  documento,  el  capítulo 3  se  habla
+específicamente de la aplicación  que se elaboró en esta investigación
+con el  fin de explorar esta tecnología;  explicando su funcionalidad,
+el nivel del API y versión  para la que ésta fué elaborada. En el  capítulo  4  se hace  una
+descripción ya más detallada de algunos de los componentes principales
+que se utilizaron en la aplicación desarrollada “Fun Menu”\footnote{En esta aplicación se usaron gráficos que
+pertenecen a la marca comercial McDonald's \textregistered};  en primer
+lugar una descripción  en detalle del consumo de  servicios web con el
+estilo  arquitectónico REST  desde  un dispositivo  Android, luego  se
+explica  la manera  como  se elaboró  la  interfaz gráfica  utilizando
+archivos XML  y el uso  de vistas especiales  ofrecidas por el  SDK de
+Android. Al finalizar el capítulo se habla del tratamiento que se hizo
+a  eventos no  convencionales  como  el cambio  de  orientación de  la
+pantalla y  por último el  uso de componentes  de internacionalización
+que   fueron  implementados.    En  el   capítulo  5   encontramos  la
+documentación  relacionada  con la  arquitectura  de esta  aplicación:
+diagramas  de clase  y de  secuencia y  se muestran  unas estadísticas
+locales  de la  cantidad de  clases implementadas,  servicios y  de la
+aplicación  en  general.   Finalmente  se presentan  las  conclusiones
+obtenidas como resultado del proyecto.
+
+
+
+\end{frontmatter}
+
+\begin{mainmatter}
+ \pagestyle{fancyplain}
+ \lhead[\fancyplain{}{}]
+       {\fancyplain{}{\fnz{\rightmark}}}
+ \rhead[\fancyplain{}{\fnz{\rightmark}}]
+       {\fancyplain{}{}}
+
+\chapter{Objetivo}
+
+Desarrollo de una aplicación  en el ambiente Android para dispositivos
+táctiles móviles con  el objetivo de  incentivar el interés y  aprendizaje de esta
+tecnología en  estudiantes  y  profesores  de la  Escuela
+Colombiana de Ingeniería.
+
+\section{Objetivo General}
+Explorar y comprender la  arquitectura del sistema operativo Android y
+de sus  aplicaciones, componentes principales,  ventajas y facilidades
+que  ofrece  en  el   desarrollo  de  aplicaciones  para  dispositivos
+móviles,  de tal manera
+que se  fomente el  interés por esta  tecnología dentro de  la Escuela
+Colombiana de Ingeniería.
+
+\textbf{Objetivos Específicos:}
+
+Entender la arquitectura y componentes principales del sistema operativo Android y de sus aplicaciones.
+\begin{itemize}
+
+\item Desarrollar una aplicación funcional que utilice varios de los componentes ofrecidos por el SDK de Android.
+
+\item Implementar varios servicios web utilizando el estilo arquitectónico REST 
+y consumirlos desde un dispositivo móvil que funcione con  Android.
+
+\item Incentivar el interés por el desarrollo de aplicaciones para dispositivos móviles  
+Android dentro de la comunidad educativa de la Escuela Colombiana de Ingeniería
+\end{itemize}
+
+\section{Justificación}
+
+Actualmente  el  mercado y  popularidad  de  los dispositivos  móviles
+inteligentes está aumentando de manera significativa acompañado de las
+nuevas    tendencias   de   desarrollo    de   aplicaciones    y   sus
+tecnologías. Google con su stack  de soluciones Android domina el 33 %
+del mercado de acuerdo a  estudios realizados por la empresa Canalysis
+en  el 2010\footnote{  Google’s  Android becomes  the world’s  leading
+smart       phone      platform,      Canalysis,       tomado      de:
+\url{http://www.canalys.com/pr/2011/r2011013.html}  }.   Android --por
+ser  libre--  ha sido  adoptado  por  grandes  fabricantes como  Sony,
+Motorola,  Samsung, HTC,  LG entre  otros. Su  tienda  de aplicaciones
+Android    Market    tiene    ya    disponibles   más    de    200.000
+aplicaciones.  Basado en  estos  datos, creo  pertinente despertar  el
+interés de estudiantes y  profesores por el desarrollo de aplicaciones
+en tecnologías modernas teniendo en cuenta las tendencias del mercado.
+Se  debe  incentivar  a   la  comunidad  educativa  a  enseñar  nuevas
+tecnologías y a los estudiantes  y grupos de investigación o interés a
+hacer uso  de éstas para buscar posibles  aplicaciones y oportunidades
+en  las que  su implementación,  pueda, entre  otras cosas,  mejorar y
+optimizar los procesos en diferentes escenarios en las compañías o instituciones.
+
+
+\section{Contexto}
+
+La   nueva   tendencia  de   dispositivos   móviles   y  la   carreara
+“armamentista”  de los grandes  fabricantes de  éstos, cuyo  origen se
+remonta a la salida al mercado del iPhone en su primera versión.  Este
+es un dispositivo  bastante innovador que por medio  de sensores y una
+pantalla táctil  le dió a los  usuarios una experiencia  única y nunca
+antes  de  vista  de  interactuar  de  manera  sencilla,  intuitiva  y
+divertida con  la interfaz  gráfica del dispositivo  y su  conjunto de
+aplicaciones. Posterior a esto con la salida del iPad se dio paso a lo
+que sería la nueva era de dispositivos táctiles inteligentes(celulares
+y  tablets)  con sus  características  particulares  de hardware  como
+pantallas  táctiles, sensores  de gravedad  y procesadores  basados en
+arquitectura  ARM,  con  su   propio  sistema  operativo  orientado  a
+servicios han creado un nuevo paradigma en el mercado de desarrollo de
+aplicaciones  ofreciendo  nuevas  tecnologías,  herramientas  para  el
+desarrollo de  aplicaciones e igualmente la  comercialización de éstas
+con las  tiendas de cada fabricante como  lo son la iTunes  store y el
+Android Market entre otras.
+
+Por otro  lado encontramos  a Google Inc.   quien ofrece  Android como
+sistema operativo  para estos dispositivos;  este además de  tener una
+gran  comunidad  de desarrolladores  ofrece  muchísimas facilidades  y
+ventajas ya  que sus aplicaciones pueden  acceder a la  mayoría de los
+servicios que esta  empresa ofrece como Gmail, Google  Maps, Google+ y
+puede  ser integrado con  diferentes componentes  de hardware  como un
+GPS.  Para los  desarrolladores de  aplicaciones para  Android existen
+varias ventajas que este ofrece como:
+
+\begin{itemize}
+\item Su SDK  es totalmente gratuito  al igual que  tener una cuenta  en el
+Android  Market (A  diferencia de  Apple en  donde requiere  pagar una
+tarifa de inscripción 99 \$usd)
+
+\item Su  página  de  desarrolladores  ofrece  varios  tutoriales,  videos,
+conferencias  y  ejemplos  que  facilitan  el aprendizaje  de  este  a
+personas interesadas y novatas.
+
+\item El lenguaje de  programación que es usado es JAVA  lo cual le permite
+apoyarse  en  muchas  librerías   ya  desarrolladas  y  así  mismo  en
+comunidades de  soporte técnico experimentadas  ya que este es  uno de
+los lenguajes más populares del mercado.
+
+\item Google  ha  desarrollado  varias  librerías  que  le  ofrecen  a  los
+programadores  gran  variedad  de  objetos que  les  permiten  modelar
+muchísimos escenarios  para desarrollar aplicaciones  e interactuar de
+manera sencilla con los componentes de los dispositivos como sensores,
+cámaras, GPS, Bluetooth, micrófono, entre otros.
+
+\item Su diseño es  basado en una arquitectura orientada  a servicios (SOA)
+por lo que ofrece varios  servicios que pueden ser accedidos en tiempo
+de  ejecución  sin que  el  programador  tenga  que modificarlos  sino
+simplemente haciendo uso de éstos; como por ejemplo, acceso a una base
+de datos en SQLite.
+
+\item El SDK ofrece una aplicación  para crear la interfaz gráfica sencilla
+y fácil  de usar en  donde el programador puede  simplemente arrastrar
+los componentes con  el mouse y colocarlos directamente  en donde éste
+desea  e  igualmente   puede  configurarlos  (tamaño,  fuente,  color,
+ubicación, alineación , etc.).
+
+\item Ofrece gran variedad de componentes para el desarrollo de la interfaz
+gráfica que son usados  popularmente como una Rating Bar, Contenedores
+web, Campos de texto, botones, imágenes entre otros.
+
+\item Maneja el  Layout de la interfaz gráfica  de manera sencilla con
+  una orientación horizontal o  vertical, lo que facilita la ubicación
+  y configuración  de los elementos  como si fueran tablas  fáciles de
+  configurar.
+
+\item Utiliza el sistema de seguridad y control de las aplicaciones de
+  JAVA de  la Sand Box  cuando éstas se  ejecutan lo que  evita que
+  pongan  en riesgo  la  integridad del  sistema  operativo y  generen
+  fallas en el mismo.
+
+\end{itemize}
+
+\chapter{Marco Teórico}
+
+\begin{center}
+\includegraphics{./imagenes/android_logo.jpg}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=
+\end{center}
+
+
+\section{Introducción a Android}
+Android es  un stack de soluciones software  para dispositivos móviles
+compuesto  de un  sistema operativo,  un middleware  y un  conjunto de
+aplicaciones   claves  desarrollado  por   la  empresa   Android  Inc.
+Adquirida por Google Inc. en el 2005.
+
+El sistema operativo de dispositivos móviles Android está basado en el
+kernel  de  Linux versión  2.6  para  los  servicios del  núcleo  como
+seguridad,  manejo  de  memoria,   procesos,  redes  y  el  modelo  de
+drivers. Su desarrollo  es conocido como el proyecto  The Android Open
+Source  Project (AOSP)  y es  realizado por  la Open  Handset Alliance
+quienes   promueven  el   desarrollo  de   estándares   abiertos  para
+dispositivos  móviles  y  está   liderada,  entre  otros,  por  Google
+Inc. Actualmente  es el  sistema operativo más  vendido en  el mercado
+como plataforma para celulares inteligentes (Smart Phones).
+
+Android  cuenta   con  una   gran  comunidad  de   desarrolladores  de
+aplicaciones. Actualmente se encuentran disponibles cerca de 200.000 y
+el Android Market  es la tienda en línea  de aplicaciones manejada por
+Google de donde estas pueden ser adquiridas y descargadas directamente
+desde cualquier dispositivo móvil con sistema operativo Android.
+
+Las  aplicaciones son  desarrolladas principalmente  en el  lenguaje de
+programación Java, accediendo al  control del dispositivo por medio de
+unas librerías Java desarrolladas por Google.
+
+
+
+El software stack de Android cuenta con los siguientes elementos:
+\begin{itemize}
+\item  Framework  de la  Aplicación  que  permite  la reutilización  y
+  remplazo de componentes.
+\item   Máquina   Virtual    Dalvik   optimizada   para   dispositivos
+  móviles. Está  basada en una arquitectura de  registros a diferencia
+  de la tradicional JVM que  funciona con stacks.  
+\item Browser integrado
+  basado en el  motor Webkit de código libre.
+\item Gráficas optimizadas
+  proporcionadas por una librería  personalizada de gráficos para 2D y
+  3D(  Basada  en la  especificación  OpenGL  ES  1.0). 
+\item  SQLite  para
+  almacenamiento de  bases de datos.  
+\item Soporte Multimedia  para audio,
+  video e imágenes en formatos (MPEG4, H.264, MP3, AAC, AMR, JPG, PNG,
+  GIF). 
+\item Telefonía GSM (dependiente del hardware).  
+\item Bluetooth, EDGE,
+  3G,  y WiFi  (dependiente del  hardware).  
+\item Cámara,  GPS, brújula  y
+  acelerómetro  (dependiente  del  hardware).  
+\item Ambiente  Mejorado  de
+  Desarrollo  incluyendo  un   emulador,  herramientas  para  depurar,
+  memoria, profiling de desempeño y un plugin para el IDE de Eclipse. \\
+\end{itemize}
+
+
+\section{Arquitectura de Android}
+
+
+\begin{center}
+\includegraphics{./imagenes/android-architecture2.jpg}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=
+\end{center}
+\begin{center}Arquitectura Android \cite{And}\end{center}
+
+
+
+
+
+\section{Aplicaciones en Android}
+
+Las aplicaciones en Android son todas escritas en lenguaje Java y
+desarrolladas en un framework que permite a los programadores hacer
+uso de los diferentes componentes de hardware de los dispositivos
+móviles.  De igual manera este da acceso a las interfaces de
+programación usadas en el núcleo del sistema operativo y está diseñado
+para reutilizar los componentes.  Su arquitectura es orientada a
+servicios (SOA). Este estílo arquitectonico se basa en un conjunto de
+principios y metodologías para desarrollar software a manera de
+servicios interoperables ofreciendo alta escalabilidad de las
+aplicaciones. De esta manera Android ofrece dentro de su arquitectura
+diferentes servicios los cuales pueden ser llamados desde cualquier
+lugar de la aplicación; esto se realiza a través de un objeto especial
+llamado \texttt{Intent}(descripción abstracta de una operación que va a ser
+ejecutada).  Este estilo de arquitectura es una de las grandes
+ventajas de Android ya que las aplicaciones son altamente desacopladas
+facilitando su mantenimiento y desarrollo.  De esta manera cada
+aplicación es un conjunto de servicios y sistemas que incluyen:
+
+\begin{itemize}
+\item Conjunto  de \texttt{Views} utilizados para construir  una aplicación que
+  incluye listas,  grids, campos de  texto, botones y  navegadores web
+  integrables.
+
+\item  \texttt{Content Providers}  que permiten  a las  aplicaciones  acceder a
+  datos de otras aplicaciones.
+\item \texttt{Resource Manager} permiten acceder a recursos no codificados como
+  Strings, gráficos y archivos de layout.
+\item \texttt{Notifications Manager} que  le permite a las aplicaciones mostrar
+  alertas personalizadas en la barra de notificaciones.
+\item  \texttt{Activity  Manager}  que  controla   el  ciclo  de  vida  de  las
+  aplicaciones y proporciona un Navigation Back Stack.
+
+\end{itemize}
+
+El  Android  SDK  tools  compila  el código  de  cualquier  aplicación
+convirtiéndolo en un  paquete Android, con la extensión  \texttt{.apk}, el cual
+es utilizado como instalador por los dispositivos que tienen instalado
+Android. Una vez una aplicación  es instalada ella misma se encarga de
+manejar su propia Sand Box de seguridad.
+
+\subsection{Componentes de las  Aplicaciones}
+
+Los componentes de las  aplicaciones son paquetes que tienen funciones
+específicas y un  único bloque de construcción en el  que se define su
+comportamiento. Existen 4 tipos de componentes de una aplicación, cada
+uno con su propósito y ciclo de vida definido:
+
+\begin{quote}
+
+\textsf{Activities}: Una \texttt{Activity} representa  una única pantalla de la interfaz
+gráfica del usuario.
+
+\textsf{Services}: Un \texttt{Service} es un componente que se ejecuta simultáneamente a
+la aplicación para realizar una tarea o proceso de larga duración.
+
+\textsf{Content  Provider}: Manejan un  conjunto de  aplicaciones de  datos que
+permiten  almacenar información  en un  sistema de  archivos  como por
+ejemplo SQLite.
+
+\textsf{Broadcast Receivers}: Componentes del  sistema que responden a mensajes
+de  broadcast   emitidos  por   cualquiera  de  los   componentes  del
+dispositivo como por ejemplo un cambio en la posición de la pantalla.
+\end{quote}
+
+Los  \verb|Activities, Services, Broadcast Receivers|  son activados  por un
+mensaje asincrónico llamado  \texttt{Intent} el cual realiza un  bind para cada
+uno de éstos en tiempo de  ejecución validando si pertenecen o no a la
+aplicación que  se está ejecutando.  Este mensaje es creado  por medio
+del objeto \texttt{Intent} en el que se  define qué tipo de componente va a ser
+activado.
+
+Los \texttt{Content Providers}  son activados por medio de  una solicitud de un
+\texttt{ContentResolver} encargado de  manejar todas las transacciones directas
+permitiendo tener una capa de seguridad en la aplicación.
+
+
+\subsection{Manifest File de las Aplicaciones}
+
+Antes de  cargar cualquier aplicación,  el sistema hace  referencia al
+archivo  \texttt{AndroidManifest.xml}   en  el  cual  los   compontes  de  cada
+aplicación son mencionados con sus respectivas características como:
+
+\begin{itemize}
+\item Permisos que la aplicación  requiere.
+\item El nivel mínimo del API requerido para ejecutar la aplicación.
+\item El hardware y Software que la aplicación requiere para que sea ejecutada correctamente.
+\item API de las librerías utilizadas por la aplicación.
+\end{itemize}
+  
+
+\subsection{Recursos de las aplicaciones:}
+Todos los  recursos que quieran  ser usados por las  aplicaciones como
+imágenes, archivos  de sonidos, videos,  etc deberán ser  definidos en
+archivos  XML  para  permitirle  a  la aplicación  manejar  de  manera
+dinámica  la configuración  de  la interfaz  gráfica  haciendo uso  de
+diferentes  recursos   en  función  de  las   características  de  los
+dispositivos como por ejemplo las dimensiones de la pantalla.
+
+\subsection{Ahorro de Energía}
+
+Uno de los factores de mayor  relevancia y que se debe tener en cuenta
+al desarrollar aplicaciones para dispositivos móviles es el del ahorro
+de energía  ya que esta  es muy limitada.  Por ende se  debe procurar
+ejecutar  los  \texttt{Services}  únicamente  cundo  éstos  sean  requeridos  y
+finalizarlos una vez hayan cumplido  su función. Por otro lado se debe
+tener  en  cuenta el  ciclo  de vida  de  las  \texttt{Activiti}es (ver figura \ref{cap:CiclVid}
+) tratando  de detenerlas o  simplemente 
+terminarlas cuando éstas  no sean requeridas por la aplicación. 
+
+
+
+\begin{figure}	
+\begin{center}
+\includegraphics{./imagenes/activity_lifecycle2.png}
+\end{center}
+\caption{Ciclo de vida Activity \cite{andActi}} \label{cap:CiclVid}
+\end{figure} 
+
+\subsection{Proceso de Compilación}
+\begin{enumerate}
+ \item El   Android   Asset   Packaging   Tool   (\texttt{aapt})   toma   el   archivo
+\texttt{AndroidManifest.xml}  y  los  archivos  XML  de las  \texttt{Activities}  y  los
+compila.  Se  genera el archivo  \texttt{R.java} para referenciar  los recursos
+desde el código de Java.
+
+\item El  \texttt{aidl}   tool  convierte  cualquier   interfaz  \texttt{.aid} en  Interfaces
+Java. Todo el  código java incluyendo el archivo \texttt{R.java}  y los \texttt{.aid} es
+compilado por el compilador de Java generando archivos \texttt{.class}.
+
+\item El \texttt{dex} tool convierte todos  los archivos \texttt{.class}( incluyendo el de las
+librerías  importadas usadas  por el  proyecto) a  código  byte Dalvik
+(\texttt{.dex}).
+
+\item Todos los recursos no compilados como imágenes y los archivos \texttt{.dex} son
+enviados al \texttt{apkbuilder} tool el cual los empaca en un archivo \texttt{.apk}.
+
+\item Una  vez  el  \texttt{.apk}  es  construido  este deberá  ser  firmado  por  el
+desarrollador  ya  sea como  debug  o release  key  antes  de que  sea
+instalado en los dispositivos.
+
+\item Finalmente la aplicación deberá ser alineada con el \texttt{zipalign} tool para
+disminuir el uso de memoria cuando esta es ejecutada.
+
+Para poder entender mejor el proceso se puede referir a la figura~\ref{cap:ProcComp}
+
+\end{enumerate}
+
+ 
+  \begin{figure}	
+  \begin{center}
+  \includegraphics{./imagenes/build2.png}
+  \end{center}
+  \caption{Proceso de Compilación  \cite{Build}} \label{cap:ProcComp}
+  \end{figure} 
+
+\subsection{Ambiente de Programación}
+
+La  aplicación fue desarrollada  en el  ambiente de  desarrollo Spring
+Source Tool Suite (Eclipse version Helios de Spring)  con el plugin del 
+SDK de Android para Eclipse. En el anexo puede encontrar un tutorial
+donde se explica en detalle la configuración incial mínima requerida para
+desarrollar una aplicación. Igualmente se detalla como crear una primera 
+aplicación para comprobar si la configuración realizada es correcta.
+
+
+\section{Dispositivos}
+
+
+\subsection{Niveles del Api de Android}
+
+Android ofrece  un framework Api el  cual puede ser  utilizado por las
+aplicaciones para interactuar con el sistema. Este Api es una colección de conjuntos de: 
+\begin{itemize}
+\item Paquetes  y clases  principales.
+\item Elementos y  Atributos  XML para  las
+declaraciones en  el archivo  \texttt{AndroidManifest.xml} y para  el control y  acceso de
+recursos.  
+
+\item \texttt{Intents} para acceder a los servicios ofrecidos por el SDK.   
+
+\item Permisos que las aplicaciones pueden
+solicitar y los que son requeridos por el sistema.
+\end{itemize}
+
+
+Cada versión de la plataforma  Android está diseñada para soportar una
+versión del  Api definida por  un número identificador  entero llamado
+``API  Level''.  Se ofrece compatibilidad hacia arriba; es decir, un nivel es soportado por las
+versiones  posteriores.   Actualmente  se encuentran  disponibles  varias
+versiones como se muestra en el cuadro~\ref{cap:NivelApi}.
+
+
+\begin{table}[t]
+
+    \begin{tabular}{ | r | l | l | l |}
+    \hline
+    \textbf{Platform Version} & \textbf{API Level} & \textbf{VERSION CODE} & \textbf{Notes} \\ \hline
+    Android 4.0 & 14 & ICE CREAM SANDWICH &Platform Highlights\\ \hline
+Android 3.2 & 13 & HONEYCOMB MR2 & \\ \hline
+Android 3.1.x & 12 & HONEYCOMB MR1 & Platform Highlights\\ \hline
+Android 3.0.x & 11 & HONEYCOMB & Platform Highlights\\ \hline
+Android 2.3.4 & & & \\
+Android 2.3.3  & 10 &  GINGERBREAD MR1 & Platform Highlights \\ \cline{2-2}
+\hline
+Android 2.3.2 & & & \\
+Android 2.3.1 & & & \\ 
+Android 2.3 & 9 & GINGERBREAD & \\ \cline{3-2}
+\hline
+Android 2.2.x & 8 & FROYO & Platform Highlights \\ \hline
+Android 2.1.x & 7 & ECLAIR MR1 & Platform Highlights \\ \hline
+Android 2.0.1 & 6 & ECLAIR 0 1 &\\ \hline
+Android 2.0 & 5 & ECLAIR &\\ \hline
+Android 1.6 & 4 & DONUT & Platform Highlights \\ \hline
+Android 1.5 & 3 & CUPCAKE & Platform Highlights \\ \hline
+Android 1.1 & 2 & BASE 1 1 &\\ \hline
+Android 1.0 & 1 & BASE & \\ \hline
+    \end{tabular}
+
+\caption{Niveles del API de Android \cite{API}}  \label{cap:NivelApi}
+\end{table} 
+
+
+\chapter{Descripción de la Aplicación Fun Menu}
+
+\begin{center}
+ \includegraphics{./imagenes/logo_funmenu.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=
+\end{center}
+
+Fun  Menu es  una  aplicación creada  para  dispositivos táctiles  con
+sistema  operativo  Android en  versiones  2.2  o  superiores que  les
+permite a  sus usuarios  navegar de manera  interactiva el menú  de un
+restaurante,   seleccionar  los   diferentes   ítems,  modificar   sus
+cantidades, leer  recomendaciones y  calificaciones de los  platos por
+otros usuarios,  realizar una orden y  el respectivo pago  a través de
+internet  o  simplemente generando  la  orden  en  caja para  pago  en
+efectivo. Fun Menu fue elaborado  con base en algunos de los productos
+de la cadena de restaurantes Mc Donalds para mostrarles a los usuarios
+su funcionamiento  a través de  esta reconocida marca,  facilitando su
+entendimiento e interacción
+
+La  actividad o  pantalla  principal de  Fun  Menu les  permite a  los
+usuarios ya registrados autenticarse o a  los que no lo están crear un
+usuario para guardar sus  preferencias y datos personales manejando un
+alto    nivel     de    seguridad    basado     en    encripción    de
+datos.  Alternativamente, si los  clientes desean,  pueden simplemente
+explorar el menú sin necesidad de ingresar ningún tipo de información. 
+
+
+
+\begin{center}
+ \includegraphics{./imagenes/principal.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=  
+
+\end{center}
+
+La pantalla del  menú principal de Fun Menu les da  a los usuarios una
+serie de opciones de los diferentes ítems que ofrece el menú por medio
+de  botones  táctiles  como  hamburguesas, combos,  bebidas,  postres,
+desayunos a  los cuales pueden  navegar libremente haciendo  tap sobre
+uno éstos con el dedo.
+
+\begin{center}
+ \includegraphics{./imagenes/menu_incial.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=  
+
+\end{center}
+
+Una vez el usuario escoge una de las posibles opciones Fun Menu genera
+una nueva  pantalla o actividad  en la cual  se le muestran  los ítems
+disponibles  con  su respectiva  imagen,  descripción, calificación  y
+precio. El usuario puede  directamente seleccionar la cantidad de cada
+ítem con los  botones + y – y  agregar éste a la lista de  la orden.
+ La orden se muestra  en la parte inferior de manera  automática una vez el
+primer ítem es agregado y  se mantiene presente en todas las pantallas
+de  las diferentes  opciones  del menú,  almacenando  todos los  ítems
+seleccionados.
+
+\begin{center}
+ \includegraphics{./imagenes/orders_added.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=  
+
+\end{center}
+
+Para editar  los ítems de  la orden en  Fun Menu se puede  utilizar el
+diálogo de  edición el cual aparece  cuando se deja  presionado por un
+tiempo el ítem sobre la tabla que contiene el pedido, como lo indica el
+diálogo de ayuda que aparece al presionar el botón de ayuda, el cual se muestra
+como una interrogación inscrita dentro de un círculo como puede verse en
+las dos figuras anteriores.
+
+\begin{center}
+ \includegraphics{./imagenes/edit_item_dialog.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=  
+
+\end{center}
+
+\begin{center}
+ \includegraphics{./imagenes/help_dialog.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=  
+
+
+\end{center}
+
+Finalmente, el usuario puede enviar la orden oprimiendo el botón correspondiente. En el siguiente capítulo
+se describen detalles de la implementación de estos procesos.
+
+\chapter{Descripción detallada de implementación de componentes}
+
+En este capítulo se describen algunos aspectos de la implementación de Fun Menu. No se describe
+en detalle toda la aplicación ya que lo que se pretende es ilustrar algunas características peculiares de Android.
+
+\section{Un servicio REST en Fun Menu}
+
+Dentro de las librerías de  Android se incluyen las del protocolo HTTP
+de Apache,  las cuales fueron  utilizadas para consumir  dos servicios
+REST (\cite{rest}) que fueron expuestos desde la aplicación web desarrollada para el
+proyecto como servidor. Para ésto  se creó en la aplicación de Android
+Fun Menu la clase \texttt{RestServices.java}, en la cual se incluyen dos métodos para
+consumir cada  uno de los  servicios expuestos por el  servidor.  Para
+cada  uno de  los métodos  de la  clase \texttt{RestServices.java}  se hace  uso del
+objeto \texttt{StringEntity}; en éste se colocan los datos que se van enviar al
+servidor  y son  codificados con  el  tipo \texttt{text/plain}.  Los datos  son
+enviados por medio del método \texttt{POST}  obteniendo así a través de éste --en
+el \texttt{response}-- el número de la  orden generada. El código en detalle para
+enviar una orden es el siguiente:
+
+
+
+\lstset{language=Java, tabsize=2, showstringspaces=false}
+\begin{scriptsize}
+\begin{lstlisting}
+
+public String sendOrder(String orderInfo){
+		
+	String responseText = "";
+
+	//Se asigna la url asociada al recurso REST
+	String uri ="http://"+ipAddress+":8080/FunMenuWebApp/rest/FunMenuServices/addOrder/";
+
+	HttpPost httpPost = new HttpPost(uri);
+	DefaultHttpClient httpClient = new DefaultHttpClient();
+
+	try {
+		    //Se construye el objeto StringEntity a partir del String que va ser enviado
+		    StringEntity entity = new StringEntity(orderInfo,"UTF-8");
+
+		    //Se asigna el tipo de codificacion a ser enviada
+		    entity.setContentEncoding(HTTP.PLAIN_TEXT_TYPE);
+
+		    //Se definie el tipo de contenido            
+		    entity.setContentType("text/plain");
+
+		    //Se coloca la entidad dentro del objeto POST  
+		    httpPost.setEntity(entity);
+
+		    //Se ejecuta la peticion POST 
+		    HttpResponse httpResponse = httpClient.execute(httpPost);
+
+		    //Se recupera la respuesta de la peticion POST
+		    HttpEntity httpEntity = httpResponse.getEntity();
+
+		    //Se recupera el texto regresado en el response
+		    responseText = EntityUtils.toString(httpEntity);
+		    Log.d("DeveloperLog","ResponseText: "+responseText);
+	            
+	} catch (UnsupportedEncodingException e) {
+		    Log.e("Error","Error in sendOrder: "+e);          
+	} catch (Exception e2) {
+		    Log.e("Error","Error in sendOrder: "+e2);				
+	}
+	return responseText;
+}
+  
+\end{lstlisting}
+\end{scriptsize}
+
+\section{Desarrollo de la interfaz gráfica Fun Menu}
+
+Android  permite desarrollar la  interfaz gráfica  de dos  maneras: La
+primera es  la tradicionalmente  usada en Java,  que es  construir los
+objetos de la interfaz como  objetos creando una referencia en memoria
+o instancia, configurando sus parámetros  por medio de sus métodos set y
+relacionándolos entre sí  según corresponda como por ejemplo agregando
+unos dentro de otros (contenedores).   La segunda forma y más poderosa
+e innovadora por parte de Android es por medio de archivos XML; estos
+son  configurados desde  una ventana  de edición  especial la  cual se
+instala como  parte del plugin  de eclipse desde  la cual se  pueden ir
+agregando  los elementos  que se  desee simplemente  arrastrándolos al
+lugar deseado. Permite igualmente configurar los atributos de cada uno
+de los  elementos desde un panel  de manera muy  sencilla e intuitiva.
+Para la  aplicación Fun Menu todas  las pantallas o  actividades de la
+interfaz  grafica  fueron desarrolladas  en  archivos  XML; estos  son
+cargados  en tiempo  de ejecución  y construidos  haciendo  el llamado
+respectivo a la clase ya que  para cada uno de éstos se deberá definir
+un archivo Java en donde se  defina el comportamiento y las acciones que
+va a realizar de cada elemento. Los archivos XML que definen la interfaz de
+las actividades se encuentran ubicados en la carpeta de recursos (\texttt{res})
+y en ésta dentro de la carpeta \texttt{layout}.
+
+Código XML de la ventana de ayuda: \texttt{help\_edit\_item.xml}
+
+\lstset{language=Xml, tabsize=2, showstringspaces=false}\ttfamily
+\begin{scriptsize}
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" 
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:id="@+id/textView1" 
+		android:text="@string/alert_dialog_help_delete_item"
+		android:layout_marginTop="10dp" 
+		android:layout_marginLeft="5dp"
+		android:layout_marginRight="5dp">
+	</TextView>
+
+	<ImageView android:src="@drawable/hand_pic"
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content"
+		android:id="@+id/imageView1" 
+		android:layout_gravity="center"
+		android:layout_marginTop="10dp">
+	</ImageView>
+
+</LinearLayout>  
+\end{lstlisting}
+\end{scriptsize}
+
+\normalfont
+
+Para poder cargar correctamente el archivo XML en un elemento de la
+interfaz gráfica ---o más conocido en la documentación de Android como
+\textit{inflar} el elemento--- se hace referencia al \texttt{ID} autogenerado por el
+compilador y a la clase en la cual éste es referenciado y
+configurado. Para esto se realiza entonces el llamado desde el método
+\texttt{onCreate} heredado de la clase \texttt{Activity} de la siguiente manera:
+
+
+\begin{scriptsize}
+\begin{lstlisting}
+
+   super.onCreate(savedInstanceState,R.layout.defaultmenu,"Menu");
+
+\end{lstlisting}
+\end{scriptsize}
+
+\section{Uso de elementos y vista especiales de Android  en Fun Menu}
+
+En la  aplicación de Fun  Menu se utilizaron dos  elementos especiales
+ofrecidos  por  el  SDK  de   Android.  El  primero  es  la  barra  de
+calificaciones  o \texttt{rating  bar};  esta  fue usada  para  que el  usuario
+califique los  elementos del menú; estas  calificaciones son manejadas
+por  medio de  diferentes métodos  y propiedades  como se  realizó por
+ejemplo  en  el  constructor  de  la clase  \texttt{DefaultMenu}  en  donde  se
+configura la calificación y comportamiento de la barra que califica el
+ítem destacado del menú:
+
+
+\begin{scriptsize}
+\begin{lstlisting}
+
+	ratingBarMenu = (RatingBar) findViewById(R.id.ratingBarMenu);
+	ratingBarMenu.setRating(Float.parseFloat("3.5"));
+	ratingBarMenu.setClickable(false);
+	ratingBarMenu.setEnabled(false);
+\end{lstlisting}
+\end{scriptsize}
+
+
+El segundo elemento utilizado es una \texttt{WebView} la cual, como su nombre lo
+indica, es una vista que muestra contenido web. Esta vista se configura también desde el
+código de la aplicación y  permite cargar el contenido total de
+cualquier \texttt{url}, siempre y cuando la aplicación tenga permiso de acceder
+a internet (Configurándolo en el \texttt{AndroidManifest.xml}) y el dispositivo
+tenga conectividad a internet.  Este elemento se utilizó para cargar el
+contenido de la página web para móviles de Mc Donald’s y se configuró
+de la siguiente manera en la clase \texttt{WebsiteReview}:
+
+
+\begin{scriptsize}
+\begin{lstlisting}
+
+private String url = "http://mobile.mcstate.com/";
+WebView webView;
+
+public void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.websitereview);
+	findViewById(R.id.buttonBack).setOnClickListener(this);
+	findViewById(R.id.buttonBack2).setOnClickListener(this);
+	webView = (WebView) findViewById(R.id.webViewAmerican);
+	webView.requestFocus(View.FOCUS_DOWN);
+	webView.setOnTouchListener(new View.OnTouchListener()
+	{
+	    @Override
+	    public boolean onTouch(View v, MotionEvent event)
+	    {
+	        switch (event.getAction())
+	        {
+	            case MotionEvent.ACTION_DOWN:
+	            case MotionEvent.ACTION_UP:
+	                if (!v.hasFocus())
+	                {
+	                    v.requestFocus();
+	                }
+	                break;
+	        }
+	        return false;
+	    }
+	});
+	webView.loadUrl(url);
+\end{lstlisting}
+\end{scriptsize}
+
+\section{Tratamiento de eventos no convencionales}
+
+Para el tratamiento de eventos no convencionales se trato únicamente
+el caso en que la orientación de pantalla del dispositivo cambie. Para
+esto se sobrescribió el método responsable de construir
+nuevamente las actividades cuando ocurre un cambio de orientación en
+el dispositivo, de tal manera que la información recopilada hasta ese
+momento --relacionada al pedido-- no se pierda. Para esto se agregó el
+parámetro correspondiente: \verb|android:configChanges="orientation"| dentro
+del \texttt{AndroidManifest.xml} como se hizo por ejemplo en la definición de
+la actividad \texttt{MenuBreakfast}:
+
+
+\lstset{language=Xml, tabsize=2, showstringspaces=false}\ttfamily
+\begin{scriptsize}
+\begin{lstlisting}
+<activity android:name="Order" android:label="@string/view_order_name" 
+	android:configChanges="orientation">
+  <intent-filter>
+	<action android:name="android.intent.action.VIEW">
+	</action>
+	<category android:name="android.intent.category.DEFAULT">
+	</category>
+  </intent-filter>
+</activity>
+
+\end{lstlisting}
+\end{scriptsize}
+
+\normalfont
+
+Igualmente se sobrescribió el método \texttt{onConfigurationChanged} para que
+se guardara la orden cada vez que se presentara un evento de este tipo.
+
+
+\begin{scriptsize}
+\begin{lstlisting}
+@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig); 
+		saveOrder();   
+		
+	}
+\end{lstlisting}
+\end{scriptsize}
+
+\section{Uso de internacionalización en Fun Menu}
+Fun Menu cuenta con compatibilidad multilenguaje. Está disponible en
+este momento en los idiomas español e inglés; estos fueron implementados
+con la facilidad que ofrece Android para la ubicación (\texttt{Locale}). 
+
+Las  aplicaciones de  Android  dan  la opción  de  definir los  textos
+requeridos  en  la interfaz  de  usuario  en  el archivo  \texttt{strings.xml},
+ubicado dentro  de la carpeta  de \texttt{recursos/values}; de este  archivo se
+toman los textos referenciados  por la aplicación. Android
+permite  crear varias versiones  de este archivo, para manejar  los diferentes
+idiomas( un archivo por cada idioma). Los archivos
+conservan el mismo nombre \texttt{strings.xml} pero se definen como archivos de idioma
+utilizando como  nombre del idioma  las dos letras  estándar definidas
+internacionalmente (\texttt{es} = español, \texttt{en}=  inglés, \texttt{de}= Alemán, etc). Si la
+configuración fue realizada  correctamente estos serán ubicados dentro
+del  directorio correspondiente  al  idioma  seleccionado: \texttt{values-es}
+(español) y \texttt{values-en} (inglés).
+
+\chapter{Documentación de la Arquitectura}
+En este capítulo se muestran los componentes de la arquitectura del proyecto que fueron elaborados en el 
+lenguaje UML con la herramienta Start UML. A continuación encontrarán los diferentes diagramas de clases 
+de la aplicación de Android y del servidor que ofrece los servicios REST, los casos de uso que fueron 
+implementados y los diagramas de secuencia de cada uno de los casos de uso.  
+
+\section{Diagramas de clases}
+
+
+\begin{landscape}
+ \begin{figure}
+  \includegraphics{./imagenes/class_diagram_android.png}
+  \caption{Aplicación Android Fun Menu}
+ \end{figure}
+
+\end{landscape}
+
+
+ 
+
+\begin{landscape}
+ \begin{figure}
+  \includegraphics{./imagenes/class_diagram_server.png}
+  \caption{Aplicación Servidor Web Fun Menu}
+ \end{figure}
+
+\end{landscape}
+
+
+
+\begin{figure}
+  \includegraphics{./imagenes/use_cases_2.jpg}
+  \caption{Casos de Uso}
+\end{figure}
+
+
+
+
+\section{Diagramas de Secuencia}
+ 
+\begin{landscape}
+ \begin{figure}
+  \includegraphics{./imagenes/sequenceDiagram01_2.jpg}
+  \caption{Consultar elementos del menú}
+ \end{figure}
+\end{landscape}
+
+
+\begin{landscape}
+ \begin{figure}
+  \includegraphics{./imagenes/sequenceDiagram02_2.jpg}
+  \caption{Autenticarse}
+ \end{figure}
+\end{landscape}
+
+
+\begin{figure}
+  \includegraphics{./imagenes/sequenceDiagram03_2.jpg}
+  \caption{Solicitar un pedido}
+\end{figure}
+
+
+\begin{landscape}
+ \begin{figure}
+  \includegraphics{./imagenes/sequenceDiagram04_2.jpg}
+  \caption{Modificar pedido existente}
+ \end{figure}
+\end{landscape}
+
+
+
+
+\section{Estadísticas de la aplicación}
+
+En esta sección se muestran algunas estadísticas realizadas a partir de los datos de la
+aplicación como por ejemplo la cantidad empleada de cada tipo de archivo, los tipos de recuros usados  y
+los elementos especiales de la aplicación Fun Menu.
+   
+ \begin{tabular}{|l|l|}
+    \hline
+    \multicolumn{2}{|c|}{Código JAVA} \\ 
+    \hline 
+    Clases Java Escritas & 15\\ \hline
+    Clases Java Autogeneradas & 1 \\ \hline
+ \end{tabular}                
+
+\begin{center}
+ \includegraphics{./imagenes/stadistics1.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=  
+
+\end{center}
+
+ \begin{tabular}{|l|l|}
+    \hline
+    \multicolumn{2}{|c|}{Recursos} \\ 
+    \hline
+    Imágenes Baja Resolución & 1\\ \hline
+    Imágenes Media Resolución & 1\\ \hline
+    Imágenes Alta Resolución & 24\\ \hline
+    Activities (Archivos XML) & 12\\ \hline
+    strings.xml & 3\\ \hline
+ \end{tabular}                
+
+\begin{center}
+ \includegraphics{./imagenes/stadistics2.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=  
+
+\end{center}
+
+ \begin{tabular}{|l|l|}
+    \hline	
+    \multicolumn{2}{|c|}{Archivos Especiales} \\ 
+    \hline  
+    AndroidManifest.xml & 1 \\ \hline
+    Cantidad de Recursos de Android Empleados & 12 \\ \hline
+\end{tabular}                
+
+ \begin{tabular}{|l|l|}
+    \hline
+    \multicolumn{2}{|c|}{Total} \\ 
+    \hline  
+    Clases Java & 16\\ \hline
+    XML & 16\\ \hline
+    PNG & 26\\ \hline
+    .apk & 1\\ \hline
+    .jar & 1\\ \hline
+    .properties & 1\\ \hline
+    .cfg & 1\\ \hline
+\end{tabular}                
+
+\begin{center}
+ \includegraphics{./imagenes/stadistics3.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=  
+
+\end{center}
+
+
+
+\chapter{Conclusiones}
+\begin{itemize}
+
+
+
+
+\item  El desarrollo  de aplicaciones para  dispositivos móviles es  un nuevo
+paradigma  que está  marcando una  nueva era,  que ofrece  variedad de
+oportunidades a  los programadores y puede ser  aplicado en diferentes
+áreas de negocio.
+
+\item Android   es  una   tecnología  relativamente   fácil  de   usar  para
+programadores  con conocimientos  avanzados  en Java,  sin embargo  es
+importante hacer uso de las facilidades que el Android SDK proporciona
+y  de los  servicios y  componentes  existentes que  este ofrece  para
+diferentes  funcionalidades como  por  ejemplo consultar  una base  de
+datos, acceder  información de locación ( idioma),  realizar alertas a
+través  de la  barra de  notificaciones además  de los  diferentes API
+elaborados por Google y 100\% compatibles como Google Maps.
+
+\item Es  importante considerar otros  factores al  desarrollar aplicaciones
+para dispositivos móviles  como el consumo de recursos  para el ahorro
+de energía y  el uso del procesador para balancear  la carga con otras
+aplicaciones  ejecutadas  por el  procesador  y  no  agotar de  manera
+innecesaria la batería del dispositivo.
+
+\item Al desarrollar  una aplicación se debe  tener en cuenta  la versión de
+Android para la cual esta es creada ya que solo se va a poder ejecutar
+en dispositivos con versiones iguales o superiores.
+
+\item Los  dispositivos   táctiles,  móviles  e   inteligentes  ofrecen  una
+facilidad enorme  al desarrollar la  interfaz gráfica, sin  embargo es
+importante hacer  un uso  optimo de las  dimensiones de la  pantalla y
+utilizar  unidades que  se  configuren de  manera  dinámica acorde  al
+tamaño de la pantalla y  haga uso adecuado del espacio disponible para
+que así  la misma versión  pueda ser ejecutada en  varios dispositivos
+con características  diferentes. Para esto Android  ofrece los pixeles
+dinámicos (\texttt{dp}) para definir  los tamaños de los diferentes componentes
+de  acuerdo  a  la  configuración   de  la  resolución  y  tamaño  del
+dispositivo. También permite  usar configuraciones como “match parent”
+de  tal  forma  que  el  componente ocupe  tanto  espacio  como  tenga
+disponible.  El estilo arquitectónico  REST para servicios web permite
+crear   aplicaciones   que   interactúen   con   otras   completamente
+desacopladas;   esto  facilita   la   comunicación  entre   diferentes
+tecnologías y aplicaciones además de la mantenibilidad. Sin embargo es
+importante  considerar que  se  debe tener  conocimientos básicos  del
+protocolo HTTP y los servicios que este involucra para poder hacer una
+implementación correcta que funcione de manera optima.
+
+\item Las  aplicaciones  en  Android  tienen una  Arquitectura  Orientada  a
+Servicios (SOA);  el desarrollador  accede los diferentes  servicios y
+actividades   desde   el   componente   principal  (definido   en   el
+\texttt{AndroidManifest.xml})   o   desde  algún   otra   Actividad  que   este
+ejecutándose;  de esta manera  se escogen  los servicios  requeridos e
+involucrados en tiempo de ejecución, se define igualmente la lógica de
+la  navegabilidad  y  las  actividades que  deberán  ser  instanciadas
+haciendo  el llamado  respectivo a  cada una  de estas  en  el momento
+requerido.  Esta arquitectura  facilita el  proceso de  desarrollo así
+como la mantenibilidad  de la aplicación misma ya  que el acoplamiento
+entre los servicios y los componentes es muy bajo o nulo.
+
+\item Esta aplicación  podría ser extendida para  que manejara completamente
+el proceso  de pedidos de un  restaurante, de tal manera  que desde el
+dispositivo  móvil  se  puedan   modificar  los  elementos  del  menú,
+igualmente que  este actualice los  inventarios y se comunique  con el
+punto de  ventas (POS) para la  facturación a través  de servicios web
+como el que fue implementado para la autenticación. La arquitectura de
+la aplicación y más que todo de las aplicaciones en Android en general
+permite  que  esta  pueda   evolucionar  fácilmente  y  se  le  puedan
+implementar  nuevas  funcionalidades  fácilmente  sin alterar  las  ya
+existentes.
+
+\end{itemize}
+
+\appendix
+
+\chapter{Mi primera aplicación en \texttt{Android}}
+
+La idea de esta sección es poder realizar la aplicación más básica para Android.
+Para esto necesitamos primero tener el SDK de Android e instalar en éste una vez
+sea descargado e instlado el paquete de la versión de Android 2.2 (API 8) ya que 
+es el más popular actualmente y hará que la aplicación funcione en el 98\% 
+de los dispositivos del mercado; el SDK lo pueden descargar directamente en el 
+siguiente enlace:\\
+\url{http://developer.android.com/sdk/index.html.}\\ 
+
+Por otro lado requerimos del IDE de Eclipse en una versión reciente (Helios o Indigo)
+con el plugin de Android el cual lo pueden instalar desde el mismo Eclipse dándole 
+click a la pestaña de help y luego ``install new software'', ahí pegamos el siguiente enlace:\\
+\url{https://dl-ssl.google.com/android/eclipse/}\\
+
+Le damos add, luego seleccionamos todos los componentes y le damos siguiente, aceptar y finalizar.\\
+
+Una vez el plugin sea instalado correctamente, al igual que el SDK de Android 
+con el paquete de la versión 2.2 debemos entonces relacionar la ubicación del 
+SDK de Android dentro de Eclipse dándole click a la pestaña de window, luego 
+preferences, luego seleccionamos la opción que dice Android en la parte izquierda; 
+en esta colocamos entonces la ubicación en donde quedo instalado nuestro SDK de 
+Android en donde dice SDK Location con la opción browse.\\
+
+\begin{center}
+ \includegraphics{./imagenes/preferences2.png}
+ % .: 0x0 pixel, 0dpi, 0.00x0.00 cm, bb=  
+
+\end{center}
+
+Una vez realizados todos estos cambios vamos entonces a crear el emulador en 
+el que se quieren probar nuestras aplicaciones, para esto le damos click al 
+icono de los emuladores de Android dentro de Eclipse el cual debió haber 
+aparecido luego de que instalamos el plugin de Android.\\
+
+\includegraphics{./imagenes/eclipsebar.png}
+
+Una vez tengamos la ventana con los emuladores le damos click a pestaña que 
+dice new, acá debemos configurar el emulador para que este corra las aplicaciones 
+para Android versión 2.2 de la siguiente manera:
+
+\begin{center}
+\includegraphics{./imagenes/createEmulator2.png}
+\end{center}
+
+Una vez el emulador este creado podemos entonces crear nuestra primera aplicación 
+Hello World simplemente dándole click a la pestaña de file, luego new, luego other 
+y luego seleccionamos dentro de la carpeta de Android; Android Project, posterior 
+a esto nos muestra las siguientes ventanas de configuración en donde debemos colocar:
+
+
+\begin{center}
+\includegraphics{./imagenes/creationScreens1.png}
+\end{center}
+
+\begin{center}
+\includegraphics{./imagenes/creationScreens2.png}
+\end{center}
+
+\begin{center}
+\includegraphics{./imagenes/creationScreens3.png}
+\end{center}
+
+
+Le damos click a finish y finalmente podemos probar nuestra primera aplicación dándole 
+click derecho a la carpeta del proyecto creada y Run as: Android Application. Si todo 
+fue realizado correctamente el programa deberá arrancar la ejecución del emulador y 
+después de un tiempo una vez la aplicación sea cargada deberá mostrarles la siguiente pantalla:
+
+\begin{center}
+\includegraphics{./imagenes/helloWorld.png}
+\end{center}
+
+
+Esta es una aplicación clásica y sin ninguna funcionalidad sin embargo es necesario que la 
+podemos hacer; más que todo para poder probar y entender la configuración de todos los 
+componentes requeridos para desarrollar una aplicación para Android.
+
+
+\end{mainmatter}
+
+
+%\begin{backmatter}
+\begin{thebibliography}{50}
+\bibitem{And} \textit{Android Developers Official Website}.\\
+  \url{http://developer.android.com/guide/basics/what-is-android.html}
+\bibitem{Build}
+  \url{http://developer.android.com/guide/developing/building/index.html#detailed-build}
+\bibitem{API}
+  \url{http://developer.android.com/guide/appendix/api-levels.html}
+\bibitem{WikiAnd}
+  \url{http://en.wikipedia.org/wiki/Android_(operating_system)}
+\bibitem{WikiOp}
+  \url{http://en.wikipedia.org/wiki/Open_Handset_Alliance}
+\bibitem{Fig1}
+  \url{http://en.wikipedia.org/wiki/Dalvik_(software)}
+\bibitem{deve}
+  \url{http://thedevelopersinfo.com/2009/11/17/using-assets-in-android/}
+\bibitem{dalvikvm}
+  \url{http://www.dalvikvm.com/}
+\bibitem{spring}
+  \textit{Spring in Action 3rd Edition}. Craig Walls. \textsf{Manning}
+\bibitem{thinkJ}
+\textit{Thinking in Java, Fourth Edition}. Bruce Eckel.
+\bibitem{androidAction}
+\textit{Android in Action, Second Edition}. W. Frank Ableson, Robi Sen, Chris King. \textsf{Manning}
+\bibitem{beginAnd}
+\textit{Beginning Android 2}. Mark L. Murphy. \textsf{Apress}
+\bibitem{AndCook}
+\textit{The Android Developer's Cookbook. Building Applications with the Android SDK}. James Steele, Nelson To.
+\textsf{Addison-Wesley}
+\bibitem{rest}
+\textit{RESTful Web Services}. Leonard Richardson, Sam Ruby. \textsf{O'Reilly}.
+\bibitem{andActi}
+\url{http://developer.android.com/reference/android/app/Activity.html} 
+\end{thebibliography}
+%\end{backmatter}
+
+
+\end{document}          

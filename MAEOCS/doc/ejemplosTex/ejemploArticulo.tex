@@ -1,0 +1,296 @@
+
+\documentclass[journal]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+%\usepackage{program}
+%\usepackage[spanish,activeacute]{babel}
+\usepackage{graphics}   % Para incluir EPS.
+%\usepackage{rotating}   % Para rotar tablas.
+\usepackage{array}      % Para hacer tablas raras.
+\usepackage{epsfig}
+%\usepackage{amstex}      % Debe estar despues de babel !!!
+\usepackage{amsmath}      % Debe estar despues de babel !!!
+\usepackage{cite}
+\usepackage{listings}
+
+\newcommand{\eci}{\textsf{Escuela Colombiana de Ingeniería~}}
+\newcommand{\eciu}{\textsf{Escuela Colombiana de Ingeniería}}
+\newcommand{\Rlb}{\textsf{Rodrigo L'opez B.}}
+\newcommand{\pfx}{\textsf{ProofNix~}}
+\newcommand{\pfxu}{\textsf{ProofNix}}
+\newcommand{\pfs}{\textsf{ProofStar~}}
+\newcommand{\pfsu}{\textsf{ProofStar}}
+\newcommand{\eclp}{\textsf{Eclipse~}}
+\newcommand{\eclpu}{\textsf{Eclipse}}
+\newcommand{\mnf}{\texttt{MANIFEST.MF~}}
+\newcommand{\mnfu}{\texttt{MANIFEST.MF}}
+\newcommand{\plg}{\texttt{plugin.xml~}}
+\newcommand{\plgu}{\texttt{plugin.xml}}
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Reporte de Investigación sobre Eclipse RCP para el proyecto \pfx RCP (Marzo 2010)}
+
+\author{Oscar~E.~Barrios,~\IEEEmembership{Estudiante,~\eci,}
+        Luis~Molina,~\IEEEmembership{Estudiante,~\eci,}}
+
+% The paper headers
+\markboth{\pfx~RCP,~Reporte~de~Investigacion, No.~1, Marzo~2010}%
+{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Journals}
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+%\boldmath
+RCP es una herramienta de implementación de clientes enriquecidos de \eclp basada en el modelo OSGi. Para desarrollar sobre esta arquitectura es necesario llevar  a cabo una enorme 
+cantidad de trabajo investigativo y crear ambientes controlados de prueba de tal manera que se inspecciones 
+los elementos relevantes para el proyecto. 
+\end{abstract}
+
+\begin{IEEEkeywords}
+RCP, \eclp, OSGi, prototipos.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+\section{Introducción}
+
+\IEEEPARstart{E}{ste} documento es un resumen sobre los avances obtenidos en la investigación sobre 
+el ambiente RCP de \eclp. Debido a la dispersa y de alguna manera escasa documentación sobre el tema, el equipo se ha 
+dado a la tarea de recolectar, utilizar, decantar y resumir la información adquirida sobre la plataforma. Guiados bajo 
+un esquema de creación de prototipos, nos hemos dado a la tarea de construir una aplicación RCP que si bien no le subyace 
+ninguna lógica de aplicación, sí resulta útil a la hora de preparar conocimientos y mostrar no sólo las posibilidades de 
+la plataforma sino facilitar mediante documentación los usos que se le pueden aplicar enfocados al proyecto \pfx. 
+
+En este primer documento sobre el uso de RCP se explora un producto que se creó con el fin de mostrar de manera concreta 
+algunos de los aspectos vitales de la implementación sobre RCP.
+El enfoque que le hemos querido dar al trabajo está ligado a las facilidades que entrega \eclp para crear clientes 
+RCP, en particular, los \textit{Wizards} que permiten crear, mediante ambientes sencillos y de alguna manera intuitivos, los elementos 
+necesarios de la aplicación.
+Por esto mismo se proveerán varias imágenes sobre la utilización de los \textit{Wizards}, contrastándolas con la simplicidad que proveen 
+frente a la edición sobre los archivos de configuración para los elementos de la interfaz.
+Del mismo modo se explicarán de manera general los componentes necesarios para el funcionamiento de la aplicación como lo son 
+comandos, vistas, perspectivas y las clases java subyacentes que permiten personalizar la funcionalidad de cada uno de éstos 
+elementos, además de las clases directivas Advisors, que tienen un papel fundamental a la hora de ajustar la aplicación según 
+se desee.
+
+Se dejarán de lado algunos conceptos que se suponen conocidos por el lector como la arquitectura básica de una aplicación RCP o 
+la estructura de plugins para concentrarnos en el contenido mismo de cada uno de los elementos utilizados para darle vida a 
+nuestro prototipo.
+De la misma manera y en aras de conservar el enfoque que se le quiere dar al desarrollo, se dejarán de lado algunas 
+particularidades relacionadas con el código de las clases, centrándonos sólo en los fragmentos modificados o en aquellas partes 
+que consideramos pertinentes.
+
+
+\section{Consideración Sobre el IDE}
+Para crear un proyecto de RCP es importante tener en cuenta que el IDE de desarrollo Java no es suficiente; es 
+necesario obtener el IDE para desarrollo de \textit{Plug-Ins} o de la misma manera extender el IDE que se tenga. No se explicará acá 
+como hacerlo pero se puede obtener el IDE específico para trabajo de \textit{Plug-Ins} en \verb|www.eclipse.org|
+
+\section{El \mnf y \plgu}
+Ya que nuestro desarrollo está basado por completo en \textit{Wizards}, hay que entender sobre qué trabajan dichos \textit{Wizards}. Los dos 
+componentes esenciales de arquitectura de un Plug-in (la pieza de software mínima instalable y ejecutable de \eclp) son los 
+archivos \mnf y \plgu. El primero contiene la descripción de cómo el plugin se describe ante el sistema, el segundo contiene la 
+descripción de las extensiones (componentes que se agregan al \textit{Plug-In}) y los puntos de extensión (lugares donde el desarrollador 
+permite conectar otras extensiones). 
+
+Los \textit{Wizards} de \eclp simplifican la manipulación de dichos archivos y contribuyen 
+automatizando algunas tareas dispendiosas que alejan al desarrollador de la visión general de lo que busca construir sin decantar 
+ni sobresimplificar.
+Para acceder a dichos \textit{Wizards}, basta con hacer doble click en \mnf en la vista de exploración del proyecto, ubicado en el 
+directorio \texttt{META-INF} del proyecto.
+
+\section{Perspectivas Y Vistas}
+Una \textbf{Perspectiva} \cite{SiVl} \textit{(Perspective)} es definida como el conjunto inicial de herramientas y vistas en el \textbf{Workbench}, son las 
+perspectivas las que proveen la estructura general de una tarea de desarrollo.
+
+Una \textbf{Vista}\cite{SiVl} \textit{(View)} es la estructura de ventana o de barra lateral utilizada para la mayoría de tareas del Workbench 
+y cuya función principal es presentar información de alguna manera al usuario. A ellas se pueden enlazar varios tipos de 
+elementos como exploradores, editores, tableros de comando y demás, haciéndolas un componente muy flexible y versátil.
+
+Vamos a mostrar el procedimiento de creación de una vista:
+\begin{enumerate}
+\item Acceder a \mnf.
+\item En la pestaña de \textit{Extensiones}, seleccionar \textit{Add}...
+\item En el cuadro de diálogo escribir \textit{View}
+\item De las alternativas mostradas seleccionar \texttt{org.eclipse.ui.views}
+\item Click en \textit{Finish}.
+\end{enumerate}
+
+Desde ésta extensión podemos agregar las vistas que necesitemos. Una vista es única para todo el producto, no existen varias "instancias" 
+de la misma vista, esto significa que si una vista está contenida en varias perspectivas, será la misma vista, mostrando los mismos elementos siempre.
+Para agregar la vista nos ubicamos en la pestaña \textit{Extensions} y:
+\begin{enumerate}
+ \item Click derecho en \texttt{org.eclipse.ui.views} 
+ \item \textit{New} $>$ \textit{View}
+\end{enumerate}
+Los atributos de la vista que utilizaremos son:
+\begin{itemize}
+ \item id: es indispensable seleccionar un identificador único para cada elemento del \textit{Plug-In}, por buena práctica haremos que coincida 
+con el nombre del componente siempre, de este modo, si el campo name es MainView, y nuestro proyecto se llama eci.edu.pgr1.sandboxrcp, 
+entonces el id de la vista debe ser \texttt{eci.edu.pgr1.sandboxrcp.views.mainView}.
+\item name: El nombre que le daremos a la vista, para identificarla como usuario, siguiendo el ejemplo: MainView
+\item class: es la clase que maneja la lógica de la vista, el nombre es autogenerado, y debemos es crear la clase, para ello hacemos 
+click en el hipervínculo class, que como resultado nos mostrará la ventana de creación de la clase correspondiente clase Java.
+\end{itemize}
+Los demás atributos no se tocarán en este documento.
+\\
+Ahora creemos alguna perspectiva para añadir las vistas recién creadas. El prototipo que hemos creado cuenta con dos perspectivas, una 
+principal, construida por defecto usualmente, y una auxiliar, con el fin demostrar algunos cambios a la hora de establecer la distribución 
+de las vistas que contiene.
+La perspectiva se crea accediendo a \mnf, y, sobre la pestaña de Extensions, hacer click en Add, escribir perspective en el campo de búsqueda 
+y seleccionar \texttt{org.eclipse.ui.perspectives}. Si ya existe la extensión, podemos continuar desde el siguiente párrafo. Esto creará una nueva extensión 
+de perspectivas bajo la cual subordinaremos las perspectivas que incluyamos de ahora en adelante.
+Una vez hecho esto, hacemos click derecho sobre la extensión recién creada, navegamos a New y seleccionamos \textit{Perspective}. Debemos proporcionar un \textit{id}, 
+\textit{name} y \textit{class} de la misma manera como se hizo con el View.
+
+\section{Comandos}
+La interacción usual de cualquier interfaz suele ser basada en botones. RCP permite desplegar una serie de comandos que dependiendo de su contexto 
+se comportan de maneras distintas, haciéndolos versátiles y sencillos de implementar.
+Lars Vogela \cite{VoLa} describe los comandos como una descripción declarativa de un componente que es independiente de los detalles de implementación. 
+Un \textit{command} puede ser categorizado y se le puede asignar una tecla al \textit{command}. Pueden ser además utilizados en \textit{menus}, \textit{toolbars} y/o menús contextuales.
+El procedimiento de creación de comandos es muy similar a los ya creados, agregando algunos pasos adicionales.
+Para crear un \textit{command} accedemos a la pestaña \textit{Extensions} de \mnf, agregamos una extensión, buscamos \textit{command} y agregamos \texttt{org.eclipse.ui.commands}. 
+Hacemos click derecho sobre la extensión y agregamos command. Los comandos necesitan un id, un nombre y en particular un \textit{Handler}, que será la clase 
+encargada de manejar la lógica del \textit{command}.
+\begin{center}
+ \begin{figure}
+ \centering
+ \includegraphics[bb=0 0 255 179]{./imagenes/figura1.jpg}
+ % figura1.jpg: 340x238 pixel, 96dpi, 9.00x6.30 cm, bb=0 0 255 179
+ \caption{Panel \textit{Extensions} con los distintos comandos utilizados en el prototipo, todo \textit{command} debe especificar un id, un nombre y un handler que 
+	  describe su lógica interna.}
+\end{figure}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|c|l|}\hline
+bb & gg & hh\\
+nn & mm & ñ\\\hline
+\end{tabular}
+\end{center}
+
+
+Creemos el \textit{command} Exit entonces, encargado de salir de la aplicación. Para ello, una vez creado el \textit{command}:
+\begin{enumerate}
+ \item Escribimos en su id: \texttt{eci.edu.sandboxrcp.commands.Exit}. 
+ \item En el campo name ingresamos \textit{Exit}
+ \item En el campo defaultHandler  hacemos click en el hipervínculo y creamos la clase \texttt{CommandExit}.
+ \item Asegurémonos que dicha clase implemente \texttt{IHandler} y extienda a clase \texttt{AbstractHandler}.
+ \item El código de la clase \texttt{CommandExit} debe ser:
+\end{enumerate}
+
+\lstset{language=Java, tabsize=4}
+\begin{scriptsize}\ttfamily\begin{lstlisting}
+package eci.edu.pgr1.sandboxrcp.commands;
+
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IHandler;
+import org.eclipse.ui.handlers.HandlerUtil;
+
+public class CommandExit extends AbstractHandler 
+  implements IHandler {
+
+    @Override
+    public Object execute(ExecutionEvent event) 
+    throws ExecutionException {
+	  HandlerUtil.getActiveWorkbenchWindow(event).
+	    close();
+	  return null;
+  }
+}
+\end{lstlisting}\end{scriptsize}
+
+\section{Advisors}
+Los \textit{Advisors} son parte esencial de RCP, pues son los encargados de la configuración general del \textit{Workbench}, la ventana del \textit{Workbench} y la barra de acciones. 
+El proceso es iniciado dentro del programa principal con una llamada a \texttt{PlatformUI.createAndRunWorkbench (Display, ApplicationWorkbenchAdvisor)}. Son tres clases: 
+\texttt{WorkbenchAdvisor}, \texttt{WorkbenchWindowAdvisor}, y \texttt{ActionBarAdvisor}.\cite{SiVl}
+En el prototipo, personalizamos el ApplicationWorkbenchWindowAdvisor, este elemento se crea una vez por cada ventana de \textit{Workbench} y se utiliza para configurar 
+la ventana. Una aplicación puede utilizar algunos métodos para cambar la configuración de la ventana. Nuestra configuración es la siguiente (los comentarios describen 
+la funcionalidad de cada línea:  
+
+\lstset{language=Java, tabsize=4}
+\begin{scriptsize}\ttfamily\begin{lstlisting}
+public void preWindowOpen() {
+    IWorkbenchWindowConfigurer configurer =
+      getWindowConfigurer();
+    //Tamano inicial de la ventana
+    configurer.setInitialSize(new Point(400, 300));
+    //Mostrar la barra de herramientas, llamada Coolbar
+    configurer.setShowCoolBar(true);
+    //Mostrar la barra de cambio de perspectivas
+    configurer.setShowPerspectiveBar(true);
+    //Mostrar la barra de menu
+    configurer.setShowMenuBar(true);
+    //Mostrar la barra de status
+    configurer.setShowStatusLine(false);
+    
+    IPreferenceStore apiStore = PlatformUI.
+      getPreferenceStore();
+    apiStore.setValue(
+      IWorkbenchPreferenceConstants.DOCK_PERSPECTIVE_BAR,
+      "TOP_LEFT");
+}
+\end{lstlisting}\end{scriptsize}
+
+\section{Integrando los componentes}
+Ahora integremos nuestros componentes. El prototipo que hemos creado cuenta con dos perspectivas, una principal, construida por defecto usualmente, y una auxiliar, 
+con el fin demostrar algunos cambios a la hora de establecer la distribución de las vistas que contiene.
+Para ello añadimos en primera instancia las vistas que queramos a la perspectiva correspondiente. Por ejemplo, agregar el \texttt{MainView} creado anteriormente es muy sencillo, 
+sólo falta añadirlo mediante código a la perspectiva de la siguiente manera (adicionalmente agregamos una consola, para contrastar con la vista, nótese los atributos 
+de posición relativa: 
+
+\lstset{language=Java, tabsize=4}
+\begin{scriptsize}\ttfamily\begin{lstlisting}
+public void createInitialLayout(IPageLayout layout) {
+    layout.setEditorAreaVisible(false);
+    String editorArea = layout.getEditorArea();  
+    // Consola
+    layout.addStandaloneView(
+      IConsoleConstants.ID_CONSOLE_VIEW, true, 
+      IPageLayout.BOTTOM, 0.95f, editorArea);
+    //Agregar el MAin VIew
+    layout.
+      addStandaloneView(
+	"eci.edu.pgr1.sandboxrcp.views.mainView", 
+      true, IPageLayout.LEFT,  0.75f, editorArea);
+}
+
+\end{lstlisting}\end{scriptsize}
+Ahora agreguemos el botón a un \textit{menu contributor}, que no es más que un contenedor dentro del cual pueden albergarse otros menús o botones. Dicho \textit{menu contributor} será 
+agregado a nuestro \textit{MainView} que ya pertenece a la perspectiva predeterminada.
+El \textit{menu contributor} se agrega de la siguiente manera:
+
+\begin{enumerate}
+ \item En \mnf accedemos a \textit{Extensions}.
+ \item En Extensions damos click en \textit{Add}...
+ \item Escribimos \textit{menu} y seleccionamos \texttt{eclipse.ui.menu}.
+ \item En \textit{locationURI} ponemos \texttt{menu:org.eclipse.ui.main.menu}.
+ \item Damos click derecho sobre nuestro \textit{contributor} y damos click en \textit{New$>$menu}.
+ \item Ponemos en el campo \textit{label}: \textit{File}.
+ \item Hacemos click derecho en nuestro \textit{menu File}, \textit{New $>$ command}.
+ \item En éste \textit{Wizard} vamos a enlazar el \textit{command Exit} que previamente definimos a un botón del \textit{menu File}. Frente \textit{commandId} seleccionamos \textit{Browse}, 
+ escribimos \texttt{eci.edu.pgr1.sandboxrcp.commands.Exit} y seleccionamos la entrada.
+ \item En label ingresamos \textit{Exit}.
+\end{enumerate}
+Éste procedimiento agrega un menú en la barra principal de nuestro \textit{Workbench}, con un submenú llamado \textit{File} que tiene una opción \textit{Exit}. Dicho botón sale de la aplicación.
+El \textit{URI} que ingresamos en el menu contributor es una especificación que define el punto de inserción en el cual se añaden sus elementos, de tal manera que se tenga una 
+"ruta" del contenedor dentro del cual se van a añadir componentes.
+Normalmente el \textit{URI} consta de tres partes, la primera es el esquema, que tipo de componente administra la contribución. El \textit{ID} es típicamente el tipo de contribución y 
+finalmente se puede realizar una consulta sobre la posición del componente.
+
+\renewcommand{\refname}{Bibliografía}
+\begin{thebibliography}{50}
+\bibitem{SiVl} Vladimir Silva \textit{Eclipse Rich Client Platform Projects}. APress 2009.
+\bibitem{VoLa} Lars Vogel. \textit{Eclipse RCP - Tutorial (Eclipse 3.5)}\\
+\begin{scriptsize}  \verb|http://www.vogella.de/articles/RichClientPlatform/article.html|\end{scriptsize}
+\end{thebibliography}
+
+\end{document}
+
+
