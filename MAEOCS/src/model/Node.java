@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 
 public class Node{
+	private MapSection mapSection;
 	private String name;
 	private boolean visited = false;
 	private java.awt.Point position;
