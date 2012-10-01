@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="app_name">ClaseSabado302</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_list_view_demo">ListViewDemo</string>
+
+</resources>

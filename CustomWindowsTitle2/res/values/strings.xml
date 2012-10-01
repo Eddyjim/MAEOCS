@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">CustomWindowsTitle</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_window_style">WindowStyle</string>
+    <string name="title_activity_custom_window">CustomWindow</string>
+    <string name="title_activity_news">News</string>
+    <string name="title_activity_info">Info</string>
+
+</resources>

@@ -10,7 +10,15 @@ import java.util.Map.Entry;
 
 public class MapModel {
 	
-	private HashMap<String, Node> map;
+	private static HashMap<String, Node> map;
+	
+	public MapModel(){
+		map = new HashMap<String, Node>();
+	}
+	
+	public static void addNode(String name, Node node){
+		map.put(name, node);
+	}
 	
 	/**
 	 * Search engine that calculates the optimal road to connect two points using
@@ -19,7 +27,7 @@ public class MapModel {
 	 * @param pointA
 	 * @param pointB
 	 */
-	public ArrayList<String> aStar(Node pointA, Node pointB){
+	public static ArrayList<String> aStar(Node pointA, Node pointB){
 		
 		HashMap<String, ArrayList<String>> roads;
 		
@@ -53,7 +61,7 @@ public class MapModel {
 	 * @param roads
 	 * @return
 	 */
-	private HashMap<String, ArrayList<String>> getChoices(
+	private static HashMap<String, ArrayList<String>> getChoices(
 			HashMap<String, ArrayList<String>> roads) {
 		
 		HashMap<String,ArrayList<String>> conections = new HashMap<String, ArrayList<String>>();
@@ -87,7 +95,7 @@ public class MapModel {
 	 * @param pointB
 	 * @return
 	 */
-	private String bestChoice(HashMap<String, ArrayList<String>> choices, Node pointB) {
+	private static String bestChoice(HashMap<String, ArrayList<String>> choices, Node pointB) {
 		
 		double min = Double.MAX_VALUE;
 		
@@ -112,7 +120,7 @@ public class MapModel {
 	 * 
 	 * @param roads
 	 */
-	private void cleanRoads(HashMap<String, ArrayList<String>> roads) {
+	private static void cleanRoads(HashMap<String, ArrayList<String>> roads) {
 		
 		HashMap<String,ArrayList<String>> conections = new HashMap<String, ArrayList<String>>();
 		

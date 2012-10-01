@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ProgressBar
+        android:id="@+id/progressBarbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/TV_Loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/progressBarbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:text="Loading"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/buttonOK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TV_Loading"
+        android:layout_marginBottom="28dp"
+        android:layout_toLeftOf="@+id/TV_Loading"
+        android:text="OK" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonOK"
+        android:layout_alignBottom="@+id/buttonOK"
+        android:layout_toRightOf="@+id/TV_Loading"
+        android:text="Cancel" />
+
+    <EditText
+        android:id="@+id/editText_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/editText_Pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText_Name"
+        android:layout_below="@+id/editText_Name"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="textPassword" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText_Name"
+        android:layout_alignBottom="@+id/editText_Name"
+        android:layout_toLeftOf="@+id/editText_Name"
+        android:text="NAME"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editText_Pass"
+        android:layout_alignBottom="@+id/editText_Pass"
+        android:layout_alignParentLeft="true"
+        android:text="PASS"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

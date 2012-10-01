@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <CheckBox
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="CheckBox" />
+
+    <RadioGroup
+        android:id="@+id/GAME_RPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/check"
+        android:layout_below="@+id/check"
+        android:layout_marginTop="53dp" >
+
+        <RadioButton
+            android:id="@+id/Rock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Rock" />
+
+        <RadioButton
+            android:id="@+id/Paper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paper" />
+
+        <RadioButton
+            android:id="@+id/Scisors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scisors" />
+    </RadioGroup>
+
+</RelativeLayout>

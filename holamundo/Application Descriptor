@@ -1,0 +1,7 @@
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: MIDlet Suite Vendor
+MIDlet-Jar-URL: holamundo.jar
+MicroEdition-Configuration: CLDC-1.0
+MIDlet-1: hola,,hola
+MicroEdition-Profile: MIDP-2.1
+MIDlet-Name: holamundo MIDlet Suite

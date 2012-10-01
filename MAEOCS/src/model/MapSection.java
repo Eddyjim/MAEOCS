@@ -32,6 +32,8 @@ public class MapSection {
 	
 	private int posJ;
 	
+	private Node node;
+	
 	
 	public MapSection (State state, int i, int j){
 		this.label = new Label("", Label.CENTER);
@@ -46,6 +48,14 @@ public class MapSection {
 		this.type = SectionType.NULL;
 		this.posI = i;
 		this.posJ = j;
+	}
+	
+	public void setNode(Node node){
+		this.node=node;
+	}
+	
+	public Node getNode(){
+		return node;
 	}
 	
 	
@@ -70,6 +80,7 @@ public class MapSection {
 					jlabel.setText("o");
 					label.setText("o");
 					jlabel.add(label);
+					
 					break;
 					
 				case POINT:

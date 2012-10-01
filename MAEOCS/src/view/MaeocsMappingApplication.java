@@ -19,10 +19,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import model.MapModel;
 import model.SectionType;
 import model.State;
 
 public class MaeocsMappingApplication extends JFrame {
+	
+	private MapModel model = new MapModel();
  
 	private JFrame principal = this;
 	
@@ -94,6 +97,7 @@ public class MaeocsMappingApplication extends JFrame {
 		this.interfaceGenerator();
 		this.setResizable(false);
 		this.setVisible(true);
+		
 	}
 	
 	public void interfaceGenerator (){
