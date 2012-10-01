@@ -1,0 +1,102 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+%\usepackage{program}
+\usepackage[spanish,activeacute]{babel}  %Para inlcuir caracteres de español
+\usepackage[pdftex]{graphics}   % Para incluir EPS.
+% %\usepackage{rotating}   % Para rotar tablas.
+\usepackage{array}      % Para hacer tablas raras.
+\usepackage{epsfig}
+%\usepackage{amstex}      % Debe estar despues de babel !!!
+\usepackage{amsmath}      % Debe estar despues de babel !!!
+\usepackage{cite}
+\usepackage{listings}
+
+\newcommand{\eci}{\textsf{Escuela Colombiana de Ingeniería Julio Garavito~}}
+\newcommand{\eciu}{\textsf{Escuela Colombiana de Ingeniería}}
+\newcommand{\Rlb}{\textsf{Rodrigo López B.}}
+\newcommand{\andr}{\texttt{Android}}
+\newcommand{\andrs}{\texttt{Android~}}
+\newcommand{\asdk}{\texttt{Android SDK~}}
+\newcommand{\mae}{\texttt{MAEOCS}}
+\newcommand{\amnf}{\texttt{AndroidManifest.xml}}
+\newcommand{\amnfs}{\texttt{AndroidManifest.xml~}}
+\newcommand{\dalvm}{\texttt{Dalvik virtual machine}}
+\newcommand{\cp}{\texttt{Content Providers}}
+\newcommand{\rem}{\texttt{Resource Manager}}
+\newcommand{\rems}{\texttt{Resource Manager}}
+\newcommand{\nm}{\texttt{Notification Manager}}
+\newcommand{\am}{\texttt{Activity Manager}}
+\newcommand{\andres}{\texttt{Android REST}}
+\newcommand{\funs}{\texttt{Fun Menu~}}
+\newcommand{\fun}{\texttt{Fun Menu}}
+\newcommand{\aosp}{\texttt{The Android Open Source Project}}
+\newcommand{\aosps}{\texttt{The Android Open Source Project~}}
+\newcommand{\apf}{\texttt{The Android Application Framework~}}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{MAEOCS: Mobile Application for Easy Orientation in Confined Spaces}
+\date{Octubre 2012}
+\author{Carlos Gaitán Mora,~\IEEEmembership{Estudiante,~\eci,}}
+\author{Edward Jiménez Martínez,~\IEEEmembership{Estudiante,~\eci,}}
+
+% The paper headers
+\markboth{MAEOCS,~Artículo de Proyecto de Grado, Diciembre~2012}%
+{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Journals}
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+%\boldmath
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+Android, Java, GPS.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+\section{Introducción}
+
+\IEEEPARstart{H}{oy} en día es fácil evidenciar cómo los planteles públicos y privados van en crecimiento, ampliando sus zonas en incluso dispersadoras en diferentes puntos de un mismo sector, por ello las personas que son nuevas en estos ambientes, o que poseen mala memoria,  alguna discapacidad cognitiva, o tenga problemas para comunicarse a otros, lo cual les impide ubicarse de una forma fácil y se ven afectadas cuando pierden el tiempo mientras miran mapas que son poco claros. 
+
+Teniendo en cuenta que en esta era tecnológica, los dispositivos móviles cuentan con una capacidad de procesamiento que día a día aumenta. Las limitaciones que se tenía para resolver problemas de la vida cotidiana a través de un computador se hacen cada vez mas pequeñas. Esta tecnología a impulsado un nuevo modelo de desarrollo de aplicaciones para dispositivos móviles. Se han desarrollado frameworks y arquitecturas que facilitan el desarrollo e interacción con distintas tecnologías. 
+
+En este documento se describe el desarrollo de una aplicación que permite orientar a una persona a su destino dentro de un sitio cerrado donde un GPS convencional no pueda hacerlo, a través de su celular. Esta aplicación requiere el desarrollo de una aplicación que permita la creación de un mapa que pueda usarse en la aplicación móvil. Se describe la metodología que se utiliza para encontrar los caminos que muestra la aplicación. Y se mostrarán los resultados obtenidos tanto a nivel técnico de las aplicaciones, como de los resultados funcionales de la aplicación. 
+
+\renewcommand{\refname}{References}
+\begin{thebibliography}{50}
+\bibitem{And} Android Developers Official Website.\\
+\begin{scriptsize}  \verb|http://developer.android.com/guide/basics/what-is-android.html|\end{scriptsize}
+\bibitem{WikiAnd}
+\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Android_(operating_system)|\end{scriptsize}
+\bibitem{WikiOp}
+\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Open_Handset_Alliance|\end{scriptsize}
+\bibitem{dalvik}
+\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Dalvik_(software)|\end{scriptsize}
+\bibitem{deve}
+\begin{scriptsize}  \verb|http://thedevelopersinfo.com/2009/11/17/using-assets-in-android/|\end{scriptsize}
+\bibitem{dalvikvm}
+\begin{scriptsize}  \verb|http://www.dalvikvm.com/|\end{scriptsize}
+\bibitem{soa}
+\begin{scriptsize}  \verb|http://developer.android.com/reference/android/util/Log.html| \end{scriptsize}`
+\begin{scriptsize}Android in Action, Second Edition, W. Frank Ableson, Robi Sen, Chris King, Manning \end{scriptsize}
+\bibitem{beginAnd}
+\begin{scriptsize}Beginning Android 2, Mark L. Murphy, Apress \end{scriptsize}
+\bibitem{andCook}
+\begin{scriptsize}The Android Developer's Cookbook Building Applications with the Android SDK, James Steele, Nelson To, 
+Addison-Wesley \end{scriptsize}
+\bibitem{rest}
+
+\end{thebibliography}
+
+\end{document}
+
+
