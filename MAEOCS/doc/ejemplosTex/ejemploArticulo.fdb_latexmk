@@ -1,0 +1,9 @@
+# Fdb version 3
+["pdflatex"] 1349112000 "ejemploArticulo.tex" "ejemploArticulo.pdf" "ejemploArticulo" 1349112000
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1348781929 2235430 3e6acba31b259c8ffbe7391ac2aae894 ""
+  "IEEEtran.cls" 0 -1 0 ""
+  "ejemploArticulo.aux" 1349111817 8 a94a2480d3289e625eea47cd1b285758 ""
+  "ejemploArticulo.tex" 1349111996 17203 7a5147122f1e4f6ed3c7348c8824f517 ""
+  (generated)
+  "ejemploArticulo.pdf"
+  "ejemploArticulo.log"

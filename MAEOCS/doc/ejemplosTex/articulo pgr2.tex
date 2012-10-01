@@ -1,0 +1,377 @@
+
+\documentclass[journal]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+%\usepackage{program}
+%\usepackage[spanish,activeacute]{babel}
+\usepackage[pdftex]{graphics}   % Para incluir EPS.
+% %\usepackage{rotating}   % Para rotar tablas.
+\usepackage{array}      % Para hacer tablas raras.
+\usepackage{epsfig}
+%\usepackage{amstex}      % Debe estar despues de babel !!!
+\usepackage{amsmath}      % Debe estar despues de babel !!!
+\usepackage{cite}
+\usepackage{listings}
+
+\newcommand{\eci}{\textsf{Escuela Colombiana de Ingeniería Julio Garavito~}}
+\newcommand{\eciu}{\textsf{Escuela Colombiana de Ingeniería}}
+\newcommand{\Rlb}{\textsf{Rodrigo L'opez B.}}
+\newcommand{\andr}{\texttt{Android}}
+\newcommand{\andrs}{\texttt{Android~}}
+\newcommand{\asdk}{\texttt{Android SDK~}}
+\newcommand{\restf}{\texttt{RESTFUL}}
+\newcommand{\rests}{\texttt{REST Service}}
+\newcommand{\restss}{\texttt{REST Service~}}
+\newcommand{\rest}{\texttt{REST~}}
+\newcommand{\restw}{\texttt{REST Web Service}}
+\newcommand{\restws}{\texttt{REST Web Service~}}
+\newcommand{\amnf}{\texttt{AndroidManifest.xml}}
+\newcommand{\amnfs}{\texttt{AndroidManifest.xml~}}
+\newcommand{\dalvm}{\texttt{Dalvik virtual machine}}
+\newcommand{\cp}{\texttt{Content Providers}}
+\newcommand{\rem}{\texttt{Resource Manager}}
+\newcommand{\rems}{\texttt{Resource Manager}}
+\newcommand{\nm}{\texttt{Notification Manager}}
+\newcommand{\am}{\texttt{Activity Manager}}
+\newcommand{\andres}{\texttt{Android REST}}
+\newcommand{\funs}{\texttt{Fun Menu~}}
+\newcommand{\fun}{\texttt{Fun Menu}}
+\newcommand{\aosp}{\texttt{The Android Open Source Project}}
+\newcommand{\aosps}{\texttt{The Android Open Source Project~}}
+\newcommand{\apf}{\texttt{The Android Application Framework~}}
+\newcommand{\dexs}{\texttt{.dex~}}
+\newcommand{\dex}{\texttt{.dex}}
+\newcommand{\dvms}{\texttt{Dalvik Virtual Machine~}}
+\newcommand{\dvm}{\texttt{Dalvik Virtual Machine}}
+\newcommand{\dm}{\texttt{Dalvik VM}}
+\newcommand{\dms}{\texttt{Dalvik VM~}}
+\newcommand{\cop}{\texttt{Content Providers}}
+\newcommand{\cops}{\texttt{Content Providers~}}
+\newcommand{\act}{\texttt{Activities}}
+\newcommand{\acts}{\texttt{Activities~}}
+\newcommand{\ser}{\texttt{Services}}
+\newcommand{\sers}{\texttt{Services~}}
+\newcommand{\bre}{\texttt{Broadcast Receivers}}
+\newcommand{\bres}{\texttt{Broadcast Receivers~}}
+\newcommand{\vi}{\texttt{Views}}
+\newcommand{\vis}{\texttt{Views~}}
+\newcommand{\nom}{\texttt{Notifications Manager}}
+\newcommand{\noms}{\texttt{Notifications Manager~}}
+\newcommand{\acm}{\texttt{Activity Manager}}
+\newcommand{\acms}{\texttt{Activity Manager~}}
+\newcommand{\inte}{\texttt{Intent}}
+\newcommand{\intes}{\texttt{Intent~}}
+\newcommand{\cor}{\texttt{ContentResolver}}
+\newcommand{\cors}{\texttt{ContentResolver~}}
+\newcommand{\stre}{\texttt{StringEntity}}
+\newcommand{\stres}{\texttt{StringEntity~}}
+\newcommand{\httpre}{\texttt{HttpResponse}}
+\newcommand{\httpres}{\texttt{HttpResponse~}}
+\newcommand{\srcs}{\texttt{src~}}
+\newcommand{\src}{\texttt{src}}
+\newcommand{\gens}{\texttt{gen~}}
+\newcommand{\ases}{\texttt{assets~}}
+\newcommand{\ress}{\texttt{res~}}
+\newcommand{\rjavas}{\texttt{R.java~}}
+\newcommand{\edte}{\texttt{EditTexts}}
+\newcommand{\edtes}{\texttt{EditTexts~}}
+\newcommand{\but}{\texttt{Buttons}}
+\newcommand{\buts}{\texttt{Buttons~}}
+\newcommand{\texvs}{\texttt{TextView~}}
+\newcommand{\texv}{\texttt{TextView}}
+\newcommand{\spins}{\texttt{Spinner~}}
+\newcommand{\spin}{\texttt{Spinner}}
+\newcommand{\imvis}{\texttt{ImageView~}}
+\newcommand{\imvi}{\texttt{ImageView}}
+\newcommand{\pltes}{\texttt{Plain Text~}}
+\newcommand{\mids}{\texttt{Middlet~}}
+
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Android and RESTFUL Services}
+\date{Septiembre 2011}
+\author{Santiago~Carrillo,~\IEEEmembership{Student,~\eci,}}
+
+% The paper headers
+\markboth{AndroidREST,~Graduation Project Article, December~2011}%
+{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Journals}
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+%\boldmath
+This research is the first approach at the \eci to the Software Stack \andrs for mobile
+devices. Its structure, basic components and some of the frameworks provided to develop applications.
+As part of these research an application was developed using some of the \andrs components. The application uses the REST
+architecture's style for web services to send and retrieve some data from a Server Application.
+This application helps restaurants to improve ordering process through an interactive and touch user interface that uses
+different components provided by the \asdk.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Android REST, Android, Restful, Activity, Content Providers, Resource Manager, Notification Manager, Activity Manager.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+
+\IEEEPARstart{T}{oday's} mobile devices have evolved into ``super computers'' with a large processing capacity and memory, sizes
+that can fit in our hands and even smaller, which have brought along new market tendencies, new ways of software development
+and  new technologies that provide different frameworks and architectures that reduces complexity and allow interconnectivity with
+other applications and platforms. A new era of service oriented architectures SOA\cite{soa} has begun to challenge future engineers in
+terms of knowing how to create solutions using those devices and handle the technologies involved.
+
+In this document I give a basic overview to the software stack \andr\cite{WikiAnd}, its architecture and main components. Also 
+I explain the approach applied in this research for development of an application for \andrs which consumes a \rests\cite{rest}. 
+In the first sections I explain the reader the basic components of \andr, after this I introduce the application \funs that was
+developed and the main components that were used, followed by a detailed explanation of how to consume \restss and the code
+behind this functionality. Finally, I show the results and present conclusions of the project and the advantages that
+this technology has to offer to the developers interested in \andr.
+
+
+\section{Android Overview}
+\andrs Operating System is based on Linux version 2.6 for the core system services such as security, memory management, process
+management, network stack, and driver model. Its development is known as \aosps and is done by the Open Handset Alliance which 
+``is a business alliance of 84 firms to develop open standards for mobile devices''\cite{WikiOp}. \andrs applications are written
+in the Java language and an extra set of C/C++ libraries. Such solution allows developer to access the different hardware and 
+software components of different devices through the \apf which simplifies development process and permits code reuse.
+
+
+
+\section{The Android Architecture}
+The \andrs Architecture is basically divided into 3 layers and the runtime components\cite{And}. At the bottom of the structure we find
+the Linux based components that provide the basic functionality for the Operating System. On the next level there are the Libraries
+that allow the interaction between the applications and the lower level layer. Also at this level, we find the runtime supported by the
+Core Libraries and the \dvm(Process Virtual Machine for \andrs Operating System for mobile devices. It executes \dexs files 
+extension. The \dms has a register-based architecture; different to the classical stack architecture of a Java Virtual Machine)
+\cite{dalvikvm}\cite{dalvik}. At the top level there is the Applications Layer divided in two parts. The first and lower part holds the Application 
+Framework and the top one holds the user's applications.
+
+
+ \begin{figure}[hb]
+\centering
+ \includegraphics{./imagenes/android-architecture.jpg}
+% \includegraphics[bb=0 0 255 179]{./imagenes/system-architecture.jpg}
+ % figura1.jpg: 340x234 pixel, 96dpi, 9.00x6.30 cm, bb=0 0 255 179
+ \caption{\andrs Architecture.} \cite{And}
+\end{figure}
+
+
+
+\section{Android Applications' Architecture}
+ All \andrs application are written in the Java language with a framework that  allow developers to use the mobile devices
+hardware components, and access the Operating System core functionalities. Each application is composed of a set of services and
+resources that include:
+
+\begin{itemize}
+  \item  Set of \vi: used to build the application's GUI, including lists, grids, text fields, buttons, and web browsers.
+  \item  \cop: enable applications to access data from another applications.
+  \item  \rem: provide access to non-coded resources like strings, graphics, and layout files.
+  \item  \nm: allows the applications to show notifications through the  personalized notifications bar.
+  \item  \am: handles the application's life-cycle and offers a navigation Back Stack that stores the activities created by 
+	      the application in execution time.
+\end{itemize}
+
+
+
+The \andrs Application's Components are packages with specific functionality and a unique construction block that defines 
+its behavior\cite{And}.. There are 4 types of components that together make the application work and have different functionalities:
+
+\begin{itemize}
+  \item  \act: represent a unique screen from the Graphic User Interface.
+  \item  \ser: executes long duration operations or remote process in background while the application is running.
+  \item  \cop: allows the applications to store, retrieve and share data with different applications.
+  \item  \bre: responds to system-wide broadcast announcements produced by any of the system components like a screen rotation.
+\end{itemize}
+
+\act, \sers and \bres are activated by an asynchronous message called an \inte, which binds every component to each other at runtime 
+to validate whether the components are part of the current application\cite{And}.	 The \cops  are activated by a request from a 
+\cors that handles all transactions in a layer of abstraction giving security to the application.\\[1mm]
+
+ 
+\textbf{The Android Manifest File}\\[1mm]
+Before loading any application the System refers to the \amnfs file where the application components are defined with their 
+characteristics such as:
+
+\begin{itemize}
+  \item  User permissions that the application requires.
+  \item  The minimum API level required to run the application.
+  \item  The Hardware and Software components that the application requires.
+  \item  API libraries used by the application.\\[1mm]
+\end{itemize}
+
+
+\textbf{Application Resources}\\[1mm]
+All the resources that the application requires to run, different from source code such as images, audio or video files, or 
+any other components related to the Graphic User Interface, are defined in separate XML files that facilitate any changes 
+and configurations to the application like language compatibility and the different screen sizes.\\
+
+An \andrs project structure is divided into 4 main folders, 2 properties files, the \andrs libraries and the \amnfs mentioned 
+before. The first is the \srcs folder where all the Java files are kept. The second one is the \gens folder holding the \rjavas file 
+generated by the compiler in which  a unique ID is created for all the non code resources. The third one is the \ases folder that 
+holds other resources that do not have an auto generated ID\cite{beginAnd}. Finally the \ress folder that holds all the resources that the application
+can have and the XML files that describe the activities components inflated at Runtime: visual components are extracted to Java
+files from XML files. \\
+
+\textbf{The \andrs Log Service}
+
+When an Application is developed it is always required to follow how the written code logic  behaves at runtime and also to keep
+track of the Errors and Bugs. For that \asdk offers a very useful Log Service that can be accessed by importing and calling the Log 
+class also included in the \andrs Libraries. The Log service allows you to define a tag to identify the message and also to 
+categorize it according to the priority using the corresponding lowercase letter, for example 'e' for error \cite{log}. 
+The categories that the developer can use are:\\
+
+\begin{itemize}
+  \item ASSERT
+  \item DEBUG
+  \item ERROR
+  \item INFO
+  \item VERBOSE
+  \item WARN
+\end{itemize}
+
+\section{Fun Menu Application}
+ \begin{figure}[hb]
+ \centering
+ \includegraphics{./imagenes/logo.png}
+ \caption{\andrs Fun Menu Logo}
+\end{figure}
+
+\funs is an application created for the new mobile devices known as Tablets that run in \andrs Operating System version 2.2 
+or higher. This application allows users to navigate through a Restaurant's Menu in a very friendly and interactive way, going 
+through the different menu items with their description, photo, ratings made by other customers, prices, and so on. The customers 
+can choose the items they would like to order by just clicking the add button on the screen. This puts the item into an order list 
+that handles the whole order. Once the items are selected, the order can be sent to a server showing the total price and items 
+quantity before it is submitted. The order is sent consuming a \restss\cite{rest} running in a Server Application that handles 
+the orders processing. \funs application is based on Mc Donald's restaurant, since it is a very popular business which makes 
+easier the understanding and interaction with the products for almost every one.\\
+
+This application has several \andrs components. At the first screen we find a login page that allows users to have stored
+preferences. It uses \edte, \but, \texv, \spins and \imvis components to display a basic login screen with some images from the
+restaurant and  the application logo. When we tap the ``Menu'' Button the application goes to the Main Menu screen. At the Main Menu 
+screen we find the different categories for the products like beverages, meals and desserts. In each one of those categories the 
+corresponding items are displayed showing their basic description, order, quantity, price, item image, and a special element offered 
+by the \andrs GUI called Rating Bar. Here customers can rate the products, and the restaurants can have a feedback.
+Once all the ordering process is done, we can go to the submit order screen where all the items selected are shown in 
+a list and can be edited or deleted before the order is sent. If the order is ready the customer can send it by just taping at 
+the ``Send'' Button. This Button has an action associated that consumes a \rests\cite{rest}.  \\
+
+Android includes the HTTP protocol Apache  libraries which were used to consume the \restss\cite{rest} in the application. To 
+send the order it creates  a \stres Object to populate the data using the codification type \pltes; the data is sent by using the
+POST method in the \httpres Object as we can see in the following code:  
+
+\lstset{language=Java, tabsize=2, showstringspaces=false}
+\begin{scriptsize}\ttfamily\begin{lstlisting}
+private void sendOrder() {
+
+  String orderString;
+  SharedPreferences preferences = 
+     getSharedPreferences("Order", 0);
+  orderString = preferences.getString("orderString", null);
+  String uri = 
+     "http://192.168.1.11:8080/WebApplication1
+        /rest/DummyServices/addOrder/";
+
+  HttpPost httpPost = new HttpPost(uri);
+  DefaultHttpClient httpClient = new DefaultHttpClient();
+  try {
+    StringEntity entity = 
+      new StringEntity(orderString,"UTF-8");
+    entity.setContentEncoding(HTTP.PLAIN_TEXT_TYPE);
+    entity.setContentType("text/plain");
+    httpPost.setEntity(entity);
+    HttpResponse httpResponse = httpClient.execute(httpPost);
+    Log.d("DeveloperLog","After try with httpRespones:"
+         +httpResponse.toString());
+	            
+  } catch (UnsupportedEncodingException e) {
+    Log.e("Error","Error in sendOrder: "+e);
+  } catch (Exception e2) {
+    Log.e("Error","Error in sendOrder: "+e2);
+  }
+}
+  
+\end{lstlisting}\end{scriptsize}
+
+\
+
+
+\section{Conclusions}
+\begin{itemize}
+  \item Mobile applications development is a new paradigm that has been strongly impacting the market by offering different 
+opportunities and a variety of new technologies to developers. This can be applied to many different areas of
+business.
+  \item Android is a new technology fairly easy to use for experienced Java developers. However it is important to know about the 
+different services, components and functionalities that \apf offers. This components are for example services to create
+a connection to a Data Base, access location information, set Notifications or Alarms, different Google's APIs like Google Maps
+and to use the device Hardware among many others.  
+  \item When you develop an application for mobile  devices there are certain things that you should consider such as the usage of 
+resources as well as the processing time to balance the load with other applications running in the background to save and optimize the usage 
+of the device battery.
+  \item \andrs has several versions; thus, it is important to decide for which of those version are you developing the application,
+because your Application can only be run in devices that have the same or a higher version of Android.
+  \item The new mobile devices offer many features for developing the Graphic User Interface. However, it is important to optimize
+ the configuration of the different elements in the display considering the variety of sizes that the devices can have. For 
+this, \andrs offers the dynamical pixels (dp) to define the sizes of the different component according to the screen configuration.
+Also, you can use match parent for the layout configuration so that the content can use as much space as you have available, and many
+other options. 
+
+\item \rest Architecture gives a very low coupling solution for the application's interactions and development.
+It facilitates the communication  between different technologies and applications. However it is important to keep in mind that
+you should know the basic components of the HTTP Protocol and the services that it involves.
+
+\item The \andrs applications have a Service Oriented Architecture. The developer accesses the different services and activities 
+from the main component defined in the \amnf. The developer chooses the required services that are invoked at run time as well as
+the navigation logic and activities to be instantiated. This architecture makes easier the development process as well as the 
+software maintenance since the coupling is very low between services and the application's components.
+
+\end{itemize}
+
+
+
+
+
+ 
+
+ 
+
+\renewcommand{\refname}{References}
+
+\begin{thebibliography}{50}
+\bibitem{And} Android Developers Official Website.\\
+\begin{scriptsize}  \verb|http://developer.android.com/guide/basics/what-is-android.html|\end{scriptsize}
+\bibitem{WikiAnd}
+\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Android_(operating_system)|\end{scriptsize}
+\bibitem{WikiOp}
+\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Open_Handset_Alliance|\end{scriptsize}
+\bibitem{dalvik}
+\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Dalvik_(software)|\end{scriptsize}
+\bibitem{deve}
+\begin{scriptsize}  \verb|http://thedevelopersinfo.com/2009/11/17/using-assets-in-android/|\end{scriptsize}
+\bibitem{dalvikvm}
+\begin{scriptsize}  \verb|http://www.dalvikvm.com/|\end{scriptsize}
+\bibitem{soa}
+\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Service-oriented_architecture| \end{scriptsize}
+\bibitem{log}
+\begin{scriptsize}  \verb|http://developer.android.com/reference/android/util/Log.html| \end{scriptsize}`
+\begin{scriptsize}Android in Action, Second Edition, W. Frank Ableson, Robi Sen, Chris King, Manning \end{scriptsize}
+\bibitem{beginAnd}
+\begin{scriptsize}Beginning Android 2, Mark L. Murphy, Apress \end{scriptsize}
+\bibitem{andCook}
+\begin{scriptsize}The Android Developer's Cookbook Building Applications with the Android SDK, James Steele, Nelson To, 
+Addison-Wesley \end{scriptsize}
+\bibitem{rest}
+\begin{scriptsize}RESTFul Web Services. Leonard Richardson, Sam Ruby. O'Reilly
+\end{scriptsize}
+
+\end{thebibliography}
+
+\end{document}
+

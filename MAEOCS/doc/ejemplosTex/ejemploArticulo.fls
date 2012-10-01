@@ -1,0 +1,4 @@
+PWD /mnt/eddy/workspace/MAEOCS/MAEOCS/doc/ejemplosTex
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT ejemploArticulo.tex
+OUTPUT ejemploArticulo.log
