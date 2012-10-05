@@ -54,12 +54,12 @@
 \theorembodyfont{\upshape}% El font del cuerpo del teorema sera normal.
 
 \usepackage[letterpaper,margin=30mm]{geometry} %para cuadrar el formato de la página (Kopka, pag 49)
-\usepackage{slashbox}    % para hacer celdas de tablas con diagonales.
+%\usepackage{slashbox}    % para hacer celdas de tablas con diagonales.
 
 %\usepackage{program}
 
 \usepackage{fancyhdr} % Para control fino de los encabezados en todas las paginas
-
+\usepackage{hyperref}
 
 \newenvironment{myprog}{\footnotesize
 \begin{quote} 
@@ -158,7 +158,7 @@ PPP\= PPP\= PPP\= PPP\= PPP\=\kill}{\end{tabbing}
    % Tabla de contenido
    \tableofcontents
 
-\chapter{Prefacio}
+\chapter{Introducción}
 % Solamente en el prefacio no se quiere el número de capítulo.
  \lhead[\fancyplain{}{}]
        {\fancyplain{}{\fnz{PREFACIO}}}
@@ -182,7 +182,7 @@ El presente libro pretende ofrecer una guía rápida y simple de lo que es la cr
        {\fancyplain{}{}}
 
 
-\part{Porque dispositivos móviles y porque Android}
+\part{Por qué dispositivos móviles y por qué Android}
 %\setcounter{chapter}{1}
 %\setcounter{page}{22}
 %\setcounter{ejemplo}{0}
@@ -199,20 +199,20 @@ Todo comenzó en el siglo XX cuando Martin Cooper cuando
 %\setcounter{page}{30}
 \setcounter{ejemplo}{0}
 %\setcounter{chapter}{2}
-\chapter{Porque un dispositivo móvil}\label{cap:moviles}
+\chapter{Por qué un dispositivo móvil}\label{cap:moviles}
 
-Actualmente en el mundo hay mas de 4 billones de dispositivos en uso (más de la cantidad de lineas telefónicas existentes)
+Actualmente en el mundo hay mas de 4 millardos de dispositivos en uso (más de la cantidad de lineas telefónicas existentes)
 
 	
-	%\begin{center} 
-	%	\includegraphics[width=120pt]{\convert androidpart1.jpg androidpart1.eps}\\
-	%\end{center}
+	\begin{center} 
+		\includegraphics[scale=0.5]{androidpart1.jpg}\\
+	\end{center}
 
 
 %\setcounter{page}{45}
 \setcounter{ejemplo}{0}
 %\setcounter{chapter}{3}
-\chapter{Porque en Android}
+\chapter{Por qué en Android}
 % \rfoot[\fnz{Adaptado de \emph{Machines, Languages and Computation} de Denning, Dennis, Qualitz}]
 %       {\fnz{Adaptado de \emph{Machines, Languages and Computation} de Denning, Dennis, Qualitz}}
 
@@ -239,7 +239,13 @@ Actualmente en el mundo hay mas de 4 billones de dispositivos en uso (más de la
 % \rfoot[\fnz{Adaptado de \emph{Machines, Languages and Computation} de Denning, Dennis, Qualitz}]
 %       {\fnz{Adaptado de \emph{Machines, Languages and Computation} de Denning, Dennis, Qualitz}}
 
+\part{MAEOCS}
+
+
+
 \part{Desarrollando aplicaciones en Android}
+
+
 %\setcounter{ejemplo}{0}
 \chapter{Instalando todo lo necesario para empezar}\label{cap:actividad}
 % \rfoot[\fnz{Adaptado de \emph{Programming Language Processors} de David Watt}]
@@ -276,9 +282,9 @@ Actualmente en el mundo hay mas de 4 billones de dispositivos en uso (más de la
 
 \end{mainmatter}
 
-\begin{backmatter}
-\bibliography{lenguajes}
-\printindex
-\end{backmatter}
+% \begin{backmatter}
+% \bibliography{lenguajes}
+% \printindex
+% \end{backmatter}
 
 \end{document}
