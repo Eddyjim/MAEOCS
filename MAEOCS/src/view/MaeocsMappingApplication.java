@@ -19,13 +19,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import model.MapModel;
 import model.SectionType;
 import model.State;
 
 public class MaeocsMappingApplication extends JFrame {
-	
-	private MapModel model = new MapModel();
  
 	private JFrame principal = this;
 	
@@ -39,7 +36,7 @@ public class MaeocsMappingApplication extends JFrame {
 	
 	private JFrame simulator;
 		
-	private MapGraphicsPanel grid;
+	private MapPanel grid;
 	 
 	private TypeCreatorGraphicsPanel createPane;
 	
@@ -63,14 +60,14 @@ public class MaeocsMappingApplication extends JFrame {
 	/*
 	 * Colors
 	 * */
-	private final Color black = new Color(0, 0, 0);
-	private final Color grayblack = new Color(50, 50, 50);
-	private final Color white = new Color(255, 255, 255);
-	private final Color blue = new Color(114, 159, 207);
-	private final Color green = new Color(138, 226, 52);
-	private final Color orange = new Color(252, 175, 62);
-	private final Color purple = new Color(173, 127, 168);
-	private final Color yellow = new Color(252, 233, 79);
+	public static final Color black = new Color(0, 0, 0);
+	public static final Color grayblack = new Color(50, 50, 50);
+	public static final Color white = new Color(255, 255, 255);
+	public static final Color blue = new Color(114, 159, 207);
+	public static final Color green = new Color(138, 226, 52);
+	public static final Color orange = new Color(252, 175, 62);
+	public static final Color purple = new Color(173, 127, 168);
+	public static final Color yellow = new Color(252, 233, 79);
 	
 	/*
 	 * Dimensiones
@@ -97,7 +94,6 @@ public class MaeocsMappingApplication extends JFrame {
 		this.interfaceGenerator();
 		this.setResizable(false);
 		this.setVisible(true);
-		
 	}
 	
 	public void interfaceGenerator (){
@@ -210,7 +206,7 @@ public class MaeocsMappingApplication extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				final newWindow sizeWindow =new newWindow(principal);
+				final DimensionsWindow sizeWindow =new DimensionsWindow(principal);
 				
 				sizeWindow.setOkActionListener(new ActionListener() {
 					
@@ -220,7 +216,7 @@ public class MaeocsMappingApplication extends JFrame {
 						
 						if(sizeWindow.getWidhtSize()>100&& sizeWindow.getHeightSize()>100&&sizeWindow.getGrind()>10){
 							
-							grid = MapGraphicsPanel.getInstance(sizeWindow.getWidhtSize(),
+							grid = MapPanel.getInstance(sizeWindow.getWidhtSize(),
 							sizeWindow.getHeightSize(), sizeWindow.getGrind(), state);
 							
 							simulatorPane = new SimulatorPanel(sizeWindow.getWidhtSize()/10,
