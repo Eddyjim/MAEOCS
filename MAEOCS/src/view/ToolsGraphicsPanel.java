@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
-import model.State;
 
 public class ToolsGraphicsPanel extends JPanel {
  

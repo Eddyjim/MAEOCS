@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import model.State;
 
 public class PropertyGraphicsPanel extends JPanel {
 	

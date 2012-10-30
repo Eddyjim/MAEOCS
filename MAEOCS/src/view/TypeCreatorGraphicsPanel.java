@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import model.SectionType;
-import model.State;
 
 public class TypeCreatorGraphicsPanel extends JPanel {
  

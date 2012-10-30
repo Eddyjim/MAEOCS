@@ -1,5 +1,6 @@
 package model;
 
+import view.MapSection;
 import view.ToolsGraphicsPanel;
 import view.TypeCreatorGraphicsPanel;
 

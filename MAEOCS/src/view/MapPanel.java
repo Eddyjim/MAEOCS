@@ -10,69 +10,64 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
-import model.MapSection;
-import model.SectionType;
-import model.State;
 
 public class MapPanel extends JPanel{
- 	
-    private int width=0;
-    private int height=0;
 
+	 private int width=0;
+	 private int height=0;
+	
     /**
-     * Dimensiones de cada sección, en pixeles
+     * Section size, in pixels
      */
     private int sectionW=0;
     private int sectionH=0;
 
-    /*
-     * Estado de la seleccion del panel de secciones
+    /**
+     * Selected state
      */
     private State state;
-    /*
-     * Grilla de secciones
-     */
     
+    /**
+     * Section gird
+     */
     private MapSection[][] mapSections;
     
-    /*
-     * Imagen usada para pintar el mapa
+    /**
+     * Background image that contains the map
      */
     static Image mainBackGroundImg;
     
-    /*
-     * Tamano de la Grilla
+    /**
+     * Grid Size
      */
-    static int gridTam=0;
+    static int gridSize=0;
     
-    /*
-     * Label para fondo de la ventana
+    /**
+     * Back label
      */
     static JLabel principalLabel = new JLabel ();
     
-    /*
-     * Color de fondo del mapa
+    /**
+     * Window Background
      */
     static Color bgColor = new Color (52, 101, 164);
     
     public MapPanel() {
-		// TODO Auto-generated constructor stub
+		
 	}
     
     public void resize(int widthX, int heightY, int TamGrid) {
     	this.width = widthX;
     	this.height = heightY;
-    	this.gridTam = TamGrid;
+    	this.gridSize = TamGrid;
     	this.state = null;
     	
     	this.setMinimumSize(new Dimension(widthX, heightY));
     	this.setMaximumSize(new Dimension(widthX, heightY));
     	this.setSize(new Dimension(widthX, heightY));
     	
-    	principalLabel.setLayout(new GridLayout(gridTam, gridTam));
+    	principalLabel.setLayout(new GridLayout(gridSize, gridSize));
     	this.setLayout(new GridLayout(1, 1));
         setOpaque (false);
         createGrid();
@@ -109,10 +104,10 @@ public class MapPanel extends JPanel{
 	 }
     
     private void createGrid(){
-    	this.mapSections = new MapSection[gridTam][gridTam];
+    	this.mapSections = new MapSection[gridSize][gridSize];
     	
-    	for (int i = 0; i < gridTam; i++) {
-			for (int j = 0; j < gridTam; j++) {
+    	for (int i = 0; i < gridSize; i++) {
+			for (int j = 0; j < gridSize; j++) {
 				mapSections[i][j]= new MapSection(state, i, j);
 				principalLabel.add(mapSections[i][j].getLabel());
 			}

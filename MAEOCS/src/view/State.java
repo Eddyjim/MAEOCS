@@ -1,13 +1,11 @@
-package model;
+package view;
 
 import java.awt.Color;
 
 import javax.swing.AbstractButton;
 
 import model.Observer;
-import view.ToolsGraphicsPanel;
-import view.MapGraphicsPanel;
-import view.TypeCreatorGraphicsPanel;
+import model.SectionType;
 
 public class State {
  	 

@@ -20,7 +20,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import model.SectionType;
-import model.State;
 
 public class MaeocsMappingApplication extends JFrame {
  

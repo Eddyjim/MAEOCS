@@ -1,6 +1,5 @@
-package model;
+package view;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Label;
@@ -13,6 +12,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+
+import model.Node;
+import model.SectionType;
 
 public class MapSection {
  
