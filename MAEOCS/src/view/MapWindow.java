@@ -4,11 +4,13 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class MapWindow extends JFrame{
 	
 	private MapPanel map;
 	private Dimension mapDimension;
-
+	private DimensionsWindow dimensionWindow;
+	
 	public MapWindow() {
 		 setLocation(10, 100);
 	     getContentPane().setBackground(Theme.background);
@@ -27,5 +29,13 @@ public class MapWindow extends JFrame{
 	    setSize(mapDimension);
 	    setResizable(false);
 	    setEnabled(true);
+	}
+	
+	public void setDimensionWindow(DimensionsWindow dimensionWindow){
+		this.dimensionWindow = dimensionWindow;
+	}
+	
+	public void resize(){
+		dimensionWindow.beVisible();
 	}
 }

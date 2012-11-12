@@ -40,16 +40,16 @@ public class ToolsGraphicsPanel extends JPanel {
 		
 		JPanel auxPanel = new JPanel(new GridLayout (1,4));
 		
-		create.setBackground(Color.WHITE);
-		create.setForeground(Color.BLACK);
-		modify.setBackground(Color.WHITE);
-		modify.setForeground(Color.BLACK);
-		delete.setBackground(Color.WHITE);
-		delete.setForeground(Color.BLACK);
-		compile.setBackground(Color.WHITE);
-		compile.setForeground(Color.BLACK);
-		helpTx.setBackground(Color.WHITE);
-		helpTx.setForeground(Color.BLACK);
+		create.setBackground(Theme.background);
+		create.setForeground(Theme.foreground);
+		modify.setBackground(Theme.background);
+		modify.setForeground(Theme.foreground);
+		delete.setBackground(Theme.background);
+		delete.setForeground(Theme.foreground);
+		compile.setBackground(Theme.background);
+		compile.setForeground(Theme.foreground);
+		helpTx.setBackground(Theme.background);
+		helpTx.setForeground(Theme.foreground);
 
 		this.add(helpTx);
 		auxPanel.add(create);

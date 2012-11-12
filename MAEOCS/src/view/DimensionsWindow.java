@@ -1,17 +1,22 @@
 package view;
 
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * 
+ * @author Carlos Gaitán && Edward Jiménez
+ * 
+ * This class shows a window that allows to set the dimensions of the map.
+ */
+
+@SuppressWarnings("serial")
 public class DimensionsWindow extends JFrame {
 	
 	private static JTextField txWidth = new JTextField();
@@ -25,6 +30,11 @@ public class DimensionsWindow extends JFrame {
 	
 	private MapWindow map;
 	
+	/**
+	 * The creator for this class
+	 * @param MapWindow is is the map window that can be modified with this class. 
+	 */
+	@SuppressWarnings("static-access")
 	public DimensionsWindow (MapWindow map){
 		super();
 		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -39,6 +49,9 @@ public class DimensionsWindow extends JFrame {
 //		principal.setEnabled(false);
 	}
 
+	/**
+	 * This method generates the interface to show up, with colors and sizes.
+	 */
 	private void generateInterface() {
 		
 		this.lbWidth = new JLabel ("Width");
@@ -79,26 +92,52 @@ public class DimensionsWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				map.newSize(Integer.parseInt(txWidth.getText()), Integer.parseInt(txWidth.getText()), Integer.parseInt(txGrindSize.getText()));
+				map.newSize(Integer.parseInt(
+						txWidth.getText()), 
+						Integer.parseInt(txWidth.getText()), 
+						Integer.parseInt(txGrindSize.getText()));
+				setVisible(false);
 				
 			}
 		});
 		
 	}
 	
+	/**
+	 * This method allows to make visible again the window to edit it's size
+	 */
+	public void beVisible(){
+		this.setVisible(true);
+	}
 	
+	/**
+	 * This method allows to change the action made by the ok_button
+	 * @param actionListener is the action that is executed when the button is pressed
+	 */
 	public void setOkActionListener(ActionListener actionListener){
 		ok_button.addActionListener(actionListener); 
 	}
 	
+	/**
+	 * In case of need the window's width size it can be requested
+	 * @return An integer that contains the window's width size
+	 */
 	public int getWidhtSize(){
 		return Integer.parseInt(txWidth.getText());
 	}
 	
+	/**
+	 * In case of need the window's height size it can be requested
+	 * @return An integer that contains the window's height size
+	 */
 	public int getHeightSize() {
 		return Integer.parseInt(txHeight.getText());
 	}
 	
+	/**
+	 * In case of need the grind's size, it can be requested
+	 * @return An integer that contains the grind size
+	 */
 	public int getGrindSize(){
 		return Integer.parseInt(txGrindSize.getText());
 	}

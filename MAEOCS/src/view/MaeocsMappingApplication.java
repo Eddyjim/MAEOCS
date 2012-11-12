@@ -180,15 +180,10 @@ public class MaeocsMappingApplication extends JFrame {
         
         
         create = new JFrame("CREATE");
-        
         mapa = new JFrame ("MAPA");
-        
         tool = new JFrame ("TOOLS");
-        
         properties = new JFrame ("PROPERTIES");
-        
         simulator = new JFrame ("SIMULATOR");
-
         //set action listeners
         
         openAction.addActionListener(new ActionListener() {
@@ -205,7 +200,7 @@ public class MaeocsMappingApplication extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				final DimensionsWindow sizeWindow =new DimensionsWindow(principal);
+				final DimensionsWindow sizeWindow = new DimensionsWindow(principal);
 				
 				sizeWindow.setOkActionListener(new ActionListener() {
 					
@@ -340,7 +335,8 @@ public class MaeocsMappingApplication extends JFrame {
 	
 	
 	public static void main(String[] args) {
-		new MaeocsMappingApplication();
+		GeneralMenuBar menu = new GeneralMenuBar();
+		
 	}
 
 	public void setMapEnabled(boolean b) {

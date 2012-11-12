@@ -1,8 +1,6 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,12 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JTabbedPane;
+
+
 /**
  * 
  * @author Eddyjim
  *	This class is the main menu of the interface for the application
  */
+@SuppressWarnings("serial")
 public class GeneralMenuBar extends JFrame{
 	
 	private JMenuBar menuBar;
@@ -29,6 +29,9 @@ public class GeneralMenuBar extends JFrame{
 	Dimension simulatorDim = new Dimension(250, 670);
 	Dimension mapDim;
 	
+	/**
+	 * Standard creator for the General Menu Bar
+	 */
 	public GeneralMenuBar(){
 		
 		this.setSize(principalDim);
@@ -114,16 +117,12 @@ public class GeneralMenuBar extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				
 				selected = new MapWindow();
-				DimensionsWindow dimensions = new DimensionsWindow(selected);
+				selected.setDimensionWindow(new DimensionsWindow(selected));
 			
 			}
 		});
         
+        menuBar.updateUI();        
         
-        
-	}
-	
-	public static void main(String args[]){
-		new GeneralMenuBar().setVisible(true);
 	}
 }

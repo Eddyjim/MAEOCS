@@ -12,16 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
+@SuppressWarnings("serial")
 public class MapPanel extends JPanel{
 
 	 private int width=0;
 	 private int height=0;
 	
-    /**
-     * Section size, in pixels
-     */
-    private int sectionW=0;
-    private int sectionH=0;
 
     /**
      * Selected state
@@ -57,7 +53,9 @@ public class MapPanel extends JPanel{
 		
 	}
     
-    public void resize(int widthX, int heightY, int TamGrid) {
+    @SuppressWarnings("static-access")
+	public void resize(int widthX, int heightY, int TamGrid) {
+    	
     	this.width = widthX;
     	this.height = heightY;
     	this.gridSize = TamGrid;
