@@ -19,7 +19,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import model.SectionType;
 
 public class MaeocsMappingApplication extends JFrame {
  
@@ -267,7 +266,7 @@ public class MaeocsMappingApplication extends JFrame {
 								
 								@Override
 								public void actionPerformed(ActionEvent arg0) {
-									state.setStateType(SectionType.ROAD);									
+									state.setStateType(SelectedState.ROAD);									
 								}
 							});
 					        
@@ -275,7 +274,7 @@ public class MaeocsMappingApplication extends JFrame {
 								
 								@Override
 								public void actionPerformed(ActionEvent arg0) {
-									state.setStateType(SectionType.NULL);									
+									state.setStateType(SelectedState.NULL);									
 								}
 							});
 
@@ -283,7 +282,7 @@ public class MaeocsMappingApplication extends JFrame {
 								
 								@Override
 								public void actionPerformed(ActionEvent arg0) {
-									state.setStateType(SectionType.POINT);									
+									state.setStateType(SelectedState.POINT);									
 								}
 							});
 					        

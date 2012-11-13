@@ -4,10 +4,12 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -18,9 +20,13 @@ import javax.swing.JMenuItem;
 @SuppressWarnings("serial")
 public class GeneralMenuBar extends JFrame{
 	
+	private GeneralMenuBar parent = this;
 	private JMenuBar menuBar;
-	
+	private ToolsGraphicsPanel tools;
 	private MapWindow selected;
+	private AtributesPanel atributes;
+	private State selectedState;
+	
 	
 	Dimension principalDim = new Dimension (800,50);
 	Dimension createDim = new Dimension (250,200);
@@ -35,7 +41,7 @@ public class GeneralMenuBar extends JFrame{
 	public GeneralMenuBar(){
 		
 		this.setSize(principalDim);
-		this.setLocation(10, 10);
+		this.setLocation(Theme.menuBarLocation);
 		this.setBackground(Theme.background);
 		this.setForeground(Theme.foreground);
 		this.setMaximumSize(principalDim);
@@ -76,13 +82,20 @@ public class GeneralMenuBar extends JFrame{
         menuBar.add(viewMenu);
         
         // Create and add simple menu item to one of the drop down menu
-        JMenuItem newAction = new JMenuItem("New");
-        newAction.setForeground(MaeocsMappingApplication.black);
-        newAction.setBackground(MaeocsMappingApplication.white);
+        final JMenuItem newAction = new JMenuItem("New");
+        newAction.setForeground(Theme.foreground);
+        newAction.setBackground(Theme.background);
+
+        final JMenuItem editAction = new JMenuItem("Edit Size");
+        editAction.setForeground(Theme.blockedForeground);
+        editAction.setBackground(Theme.background);
+        editAction.setEnabled(false);
+
+        final JMenuItem openImageAction = new JMenuItem("OpenImage");
+        openImageAction.setForeground(Theme.blockedForeground);
+        openImageAction.setBackground(Theme.background);
+        openImageAction.setEnabled(false);
         
-//        JMenuItem openAction = new JMenuItem("OpenImage");
-//        openAction.setForeground(MaeocsMappingApplication.black);
-//        openAction.setBackground(MaeocsMappingApplication.white);
         
         JMenuItem exitAction = new JMenuItem("Exit");
         exitAction.setForeground(Theme.foreground);
@@ -103,7 +116,8 @@ public class GeneralMenuBar extends JFrame{
         //add the items to the menu item
         
         fileMenu.add(newAction);
-//        fileMenu.add(openAction);
+        fileMenu.add(editAction);
+        fileMenu.add(openImageAction);
         fileMenu.addSeparator();
         fileMenu.add(exitAction);
         editMenu.add(cutAction);
@@ -115,10 +129,100 @@ public class GeneralMenuBar extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
 				selected = new MapWindow();
-				selected.setDimensionWindow(new DimensionsWindow(selected));
+				new DimensionsWindow(selected);
+				
+				editAction.setEnabled(true);
+				editAction.setForeground(Theme.foreground);
+				
+//				openImageAction.setEnabled(true);
+//				openImageAction.setForeground(Theme.foreground);
+				
+			}
 			
+		});
+        
+        editAction.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				new DimensionsWindow(selected);
+			}
+		});
+        
+        openImageAction.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileFilter(new FileNameExtensionFilter("png", "JPG & GIF Images", "jpg", "gif"));
+				chooser.setDialogTitle("Map Selection");
+				chooser.setAcceptAllFileFilterUsed(false);
+				chooser.showOpenDialog(parent);
+				String imgFile = chooser.getSelectedFile().getPath();
+				System.out.println(imgFile);
+				selected.setBackgroundImage(imgFile);
+				
+			}
+		});
+        
+        tools = new ToolsGraphicsPanel();
+        atributes = new AtributesPanel();
+       
+        selectedState = new State();
+        
+        tools.setSelectBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.SELECT);
+				
+			}
+		});
+        
+        tools.setRoadBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.ROAD);
+				
+			}
+		});
+        
+        tools.setLocalBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.LOCAL);
+				
+			}
+		});
+        
+        tools.setStairsBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.STAIRS);
+				
+			}
+		});
+        
+        tools.setExitBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.EXIT);
+				
+			}
+		});
+        
+        tools.setEraseBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.ERASE);
+				
 			}
 		});
         

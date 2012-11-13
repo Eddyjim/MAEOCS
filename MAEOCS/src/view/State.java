@@ -5,24 +5,23 @@ import java.awt.Color;
 import javax.swing.AbstractButton;
 
 import model.Observer;
-import model.SectionType;
 
 public class State {
  	 
-	private SectionType type;
+	private SelectedState type;
 	 
 	private Color color;
 	
 	public State(){
-		type = SectionType.NULL;
+		type = SelectedState.SELECT;
 		color = null;
 	}
 		 
-	public void setStateType(SectionType type) {
+	public void setStateType(SelectedState type) {
 		this.type = type;
 	}
 	 
-	public void setActualColor(Color color) {
+	public void updateColor(Color color) {
 		this.color=color;
 	}
 	
@@ -30,7 +29,7 @@ public class State {
 		return color;
 	}
 	
-	public SectionType getType() {
+	public SelectedState getType() {
 		return type;
 	}
 

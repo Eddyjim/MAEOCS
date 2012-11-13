@@ -42,12 +42,12 @@ public class MapPanel extends JPanel{
     /**
      * Back label
      */
-    static JLabel principalLabel = new JLabel ();
+    static JLabel backGroundlLabel = new JLabel ();
     
     /**
      * Window Background
      */
-    static Color bgColor = new Color (52, 101, 164);
+    static Color bgColor = Theme.background;
     
     public MapPanel() {
 		
@@ -64,21 +64,14 @@ public class MapPanel extends JPanel{
     	this.setMinimumSize(new Dimension(widthX, heightY));
     	this.setMaximumSize(new Dimension(widthX, heightY));
     	this.setSize(new Dimension(widthX, heightY));
-    	
-    	principalLabel.setLayout(new GridLayout(gridSize, gridSize));
+
+    	backGroundlLabel.setLayout(new GridLayout(gridSize, gridSize));
     	this.setLayout(new GridLayout(1, 1));
-        setOpaque (false);
         createGrid();
+        this.add(backGroundlLabel);
         this.setVisible(true);
-        
     }
-    
-    public static MapPanel getInstance (int widthX, int heightY, int TamGrid,
-    		State state){
-    	return new MapPanel ();
-    }
-    
-    
+
     public ImageIcon createImage(String path) {
 	  URL imgURL = getClass().getResource(path);
 	     if (imgURL != null) {
@@ -107,19 +100,20 @@ public class MapPanel extends JPanel{
     	for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
 				mapSections[i][j]= new MapSection(state, i, j);
-				principalLabel.add(mapSections[i][j].getLabel());
+				backGroundlLabel.add(mapSections[i][j].getLabel());
 			}
 		}
     }
 
-	public void setBackground(String img) {
-		mainBackGroundImg = this.createImage(img).getImage();
+	public void setBackground(String imgFile) {
+		mainBackGroundImg = this.createImage(imgFile).getImage();
+		
 	}
 
 	public void paintBackground(Image img) {
-		principalLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height, 1)));
-		principalLabel.setSize(width,height);
-		this.add(principalLabel);
+		backGroundlLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height, 1)));
+		backGroundlLabel.setSize(width,height);
+		this.add(backGroundlLabel);
 	}
 }
  

@@ -97,7 +97,6 @@ public class DimensionsWindow extends JFrame {
 						Integer.parseInt(txWidth.getText()), 
 						Integer.parseInt(txGrindSize.getText()));
 				setVisible(false);
-				
 			}
 		});
 		

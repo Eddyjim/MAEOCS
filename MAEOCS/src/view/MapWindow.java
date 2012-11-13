@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.Dimension;
+import java.io.File;
 
 import javax.swing.JFrame;
+
 
 @SuppressWarnings("serial")
 public class MapWindow extends JFrame{
@@ -10,6 +12,7 @@ public class MapWindow extends JFrame{
 	private MapPanel map;
 	private Dimension mapDimension;
 	private DimensionsWindow dimensionWindow;
+	private String imgFile;
 	
 	public MapWindow() {
 		 setLocation(10, 100);
@@ -18,13 +21,15 @@ public class MapWindow extends JFrame{
 	     setBackground(Theme.background);
 	     getContentPane().setBackground(Theme.black);
 	     map = new MapPanel();
+	     this.add(map);
 	     setEnabled(true);
+	     setVisible(true);
 	}
 	
 	public void newSize(int width, int height, int gridSize){
 		 
 	    map.resize(width,height, gridSize);
-	    getContentPane().add(map);
+	    
 	    mapDimension = new Dimension (width+8,height+32);
 	    setSize(mapDimension);
 	    setResizable(false);
@@ -37,5 +42,12 @@ public class MapWindow extends JFrame{
 	
 	public void resize(){
 		dimensionWindow.beVisible();
+	}
+
+	public void setBackgroundImage(String imgFile2) {
+		this.imgFile = imgFile2;
+		
+		map.setBackground(imgFile2);
+		
 	}
 }

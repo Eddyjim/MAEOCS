@@ -14,7 +14,6 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import model.Node;
-import model.SectionType;
 
 public class MapSection {
  
@@ -24,11 +23,11 @@ public class MapSection {
 	
 	protected JLabel jlabel;
 	
-	private SectionType type;
+	private SelectedState type;
 		
 	private ImageIcon icon;
 
-	private JLabel jlabelVacia;
+	private JLabel empyLabel;
 	
 	private int posI;
 	
@@ -40,28 +39,20 @@ public class MapSection {
 	public MapSection (State state, int i, int j){
 		this.label = new Label("", Label.CENTER);
 		this.jlabel = new JLabel();
-		this.jlabelVacia = new JLabel();
+		this.empyLabel = new JLabel();
 		Border border = LineBorder.createGrayLineBorder();
 		jlabel.setBorder(border);
 		jlabel.setLayout(new GridLayout(1,1));
 		jlabel.setOpaque(false);
 		this.state = state;
-		this.defineActionListener();
-		this.type = SectionType.NULL;
+		this.setActionListener();
+		this.type = SelectedState.SELECT;
 		this.posI = i;
 		this.posJ = j;
 	}
 	
-	public void setNode(Node node){
-		this.node=node;
-	}
 	
-	public Node getNode(){
-		return node;
-	}
-	
-	
-	private void defineActionListener(){
+	private void setActionListener(){
 		
 		final MapSection thisMapSection = this;
 		
@@ -71,29 +62,32 @@ public class MapSection {
 				
 				switch (state.getType()) {
 				
-				case NULL:
-					;
+				case SELECT:
+					
 					break;
 				
 				case ROAD:
 					
-					type = SectionType.ROAD;
-					label.setBackground(state.getColor());
-					jlabel.setText("o");
-					label.setText("o");
+					type = SelectedState.ROAD;
+					label.setBackground(Theme.roadColor);
+					//jlabel.setText("o");
+					//label.setText("o");
 					jlabel.add(label);
 					
 					break;
 					
-				case POINT:
+				case LOCAL:
 					
-					type = SectionType.POINT;
-					label.setBackground(state.getColor());
+					type = SelectedState.LOCAL;
+					label.setBackground(Theme.localColor);
 					jlabel.setText("p");
 					label.setText("p");
 					jlabel.add(label);
 					break;
 				
+				case STAIRS:
+					
+					type = SelectedState.STAIRS;
 					
 				default:
 					break;
@@ -128,14 +122,14 @@ public class MapSection {
 			public void mouseClicked(MouseEvent e) {
 				switch (state.getType()) {
 				
-				case NULL:
+				case SELECT:
 					jlabel.setText("");
 					jlabel.removeAll();
 					break;
 				
 				case ROAD:
 					
-					type = SectionType.ROAD;
+					type = SelectedState.ROAD;
 					label.setBackground(state.getColor());
 					jlabel.setText("o");
 					label.setText("o");
@@ -143,7 +137,7 @@ public class MapSection {
 					
 				case POINT:
 					
-					type = SectionType.POINT;
+					type = SelectedState.POINT;
 					label.setBackground(state.getColor());
 					jlabel.setText("p");
 					label.setText("p");

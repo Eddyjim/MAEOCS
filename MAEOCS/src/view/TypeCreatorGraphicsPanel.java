@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import model.SectionType;
 
 public class TypeCreatorGraphicsPanel extends JPanel {
  
@@ -16,7 +15,7 @@ public class TypeCreatorGraphicsPanel extends JPanel {
 	
 	private Boolean pressed;
 
-	private SectionType type;
+	private SelectedState type;
 	
 	private JButton nulo;
 	private JButton road;
