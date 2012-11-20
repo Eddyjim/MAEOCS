@@ -2,8 +2,11 @@ package view;
 
 import java.awt.Dimension;
 import java.io.File;
+import java.nio.channels.FileChannel.MapMode;
 
 import javax.swing.JFrame;
+
+import model.MapModel;
 
 
 @SuppressWarnings("serial")
@@ -13,6 +16,7 @@ public class MapWindow extends JFrame{
 	private Dimension mapDimension;
 	private DimensionsWindow dimensionWindow;
 	private String imgFile;
+	
 	
 	public MapWindow(State state) {
 		 setLocation(10, 100);
@@ -24,6 +28,7 @@ public class MapWindow extends JFrame{
 	     this.add(map);
 	     setEnabled(true);
 	     setVisible(true);
+	     
 	}
 	
 	public void newSize(int width, int height, int gridSize){

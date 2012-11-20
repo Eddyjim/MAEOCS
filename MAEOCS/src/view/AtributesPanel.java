@@ -23,6 +23,7 @@ public class AtributesPanel extends JFrame {
 		this.setTitle("Atributes");
 		
 		this.setSize(Theme.atributesPanelDimension);
+		setLocation(Theme.atributesPanelLocation);
 		panel = new JPanel();
 		this.add(panel);
 		panel.setLayout(new GridLayout(2,2));

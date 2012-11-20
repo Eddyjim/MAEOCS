@@ -11,12 +11,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.MapModel;
+
 
 @SuppressWarnings("serial")
 public class MapPanel extends JPanel{
 
 	 private int width=0;
 	 private int height=0;
+	 
+	 private MapModel model;
 	
 
     /**
@@ -50,9 +54,10 @@ public class MapPanel extends JPanel{
     static Color bgColor = Theme.background;
     
     public MapPanel(State state) {
+    	
     	this.state = state;
-		
-	}
+    	model = new MapModel();
+    }
     
     @SuppressWarnings("static-access")
 	public void resize(int widthX, int heightY, int TamGrid) {
@@ -99,7 +104,7 @@ public class MapPanel extends JPanel{
     	
     	for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
-				mapSections[i][j]= new MapSection(state, i, j);
+				mapSections[i][j]= new MapSection(state, i, j, model);
 				backGroundlLabel.add(mapSections[i][j].getLabel());
 			}
 		}
