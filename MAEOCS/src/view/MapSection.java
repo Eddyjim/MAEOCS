@@ -15,15 +15,13 @@ import javax.swing.border.LineBorder;
 
 import model.Node;
 
-public class MapSection {
+public class MapSection extends JLabel{
  
 	private State state;
 	
 	protected Label label;
 	
-	protected JLabel jlabel;
-	
-	private SelectedState type;
+	private PointType type;
 		
 	private ImageIcon icon;
 
@@ -33,22 +31,23 @@ public class MapSection {
 	
 	private int posJ;
 	
-	private Node node;
-	
-	
 	public MapSection (State state, int i, int j){
+		
+		super();
 		this.label = new Label("", Label.CENTER);
-		this.jlabel = new JLabel();
 		this.empyLabel = new JLabel();
 		Border border = LineBorder.createGrayLineBorder();
-		jlabel.setBorder(border);
-		jlabel.setLayout(new GridLayout(1,1));
-		jlabel.setOpaque(false);
+		this.setVisible(true);
+		setBorder(border);
+		setLayout(new GridLayout(1,1));
+		setOpaque(false);
+		
 		this.state = state;
 		this.setActionListener();
-		this.type = SelectedState.SELECT;
+		this.type = PointType.NULL;
 		this.posI = i;
 		this.posJ = j;
+		
 	}
 	
 	
@@ -56,42 +55,45 @@ public class MapSection {
 		
 		final MapSection thisMapSection = this;
 		
-		jlabel.addMouseListener( new MouseListener() {
+		addMouseListener( new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				switch (state.getType()) {
 				
-				case SELECT:
+					case SELECT:
+						
+						break;
 					
+					case ROAD:
+						
+						type = PointType.ROAD;
+						label.setBackground(Theme.roadColor);
+						add(label);
+						
+						break;
+						
+					case LOCAL:
+						
+						type = PointType.LOCAL;
+						label.setBackground(Theme.localColor);
+						add(label);
+						break;
+					
+					case STAIRS:
+						
+						type = PointType.STAIRS;
+						
 					break;
-				
-				case ROAD:
 					
-					type = SelectedState.ROAD;
-					label.setBackground(Theme.roadColor);
-					//jlabel.setText("o");
-					//label.setText("o");
-					jlabel.add(label);
-					
+					case EXIT:
+						type = PointType.EXIT;
 					break;
 					
-				case LOCAL:
-					
-					type = SelectedState.LOCAL;
-					label.setBackground(Theme.localColor);
-					jlabel.setText("p");
-					label.setText("p");
-					jlabel.add(label);
+					case ERASE:
+						type = PointType.NULL;
 					break;
-				
-				case STAIRS:
 					
-					type = SelectedState.STAIRS;
-					
-				default:
-					break;
-				
 				}
 			}
 	
@@ -123,24 +125,18 @@ public class MapSection {
 				switch (state.getType()) {
 				
 				case SELECT:
-					jlabel.setText("");
-					jlabel.removeAll();
 					break;
 				
 				case ROAD:
 					
-					type = SelectedState.ROAD;
-					label.setBackground(state.getColor());
-					jlabel.setText("o");
-					label.setText("o");
+					type = PointType.ROAD;
+					label.setBackground(Theme.roadColor);
 					break;
 					
-				case POINT:
+				case LOCAL:
 					
-					type = SelectedState.POINT;
-					label.setBackground(state.getColor());
-					jlabel.setText("p");
-					label.setText("p");
+					type = PointType.LOCAL;
+					label.setBackground(Theme.localColor);
 					break;
 				
 					
@@ -175,9 +171,10 @@ public class MapSection {
 			}			
 		});
 	}
-	
+
+
 	public Component getLabel() {
-		return jlabel;
+		return this;
 	}
 	
 }

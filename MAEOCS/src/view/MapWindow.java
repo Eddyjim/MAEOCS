@@ -14,13 +14,13 @@ public class MapWindow extends JFrame{
 	private DimensionsWindow dimensionWindow;
 	private String imgFile;
 	
-	public MapWindow() {
+	public MapWindow(State state) {
 		 setLocation(10, 100);
 	     getContentPane().setBackground(Theme.background);
 	     setForeground(Theme.foreground);
 	     setBackground(Theme.background);
 	     getContentPane().setBackground(Theme.black);
-	     map = new MapPanel();
+	     map = new MapPanel(state);
 	     this.add(map);
 	     setEnabled(true);
 	     setVisible(true);

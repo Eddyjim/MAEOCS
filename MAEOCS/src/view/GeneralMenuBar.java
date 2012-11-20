@@ -48,6 +48,7 @@ public class GeneralMenuBar extends JFrame{
 		this.setMinimumSize(principalDim);
 		this.setResizable(false);
 		this.setVisible(true);
+		selectedState = new State();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
@@ -129,7 +130,7 @@ public class GeneralMenuBar extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				selected = new MapWindow();
+				selected = new MapWindow(selectedState);
 				new DimensionsWindow(selected);
 				
 				editAction.setEnabled(true);
@@ -170,7 +171,7 @@ public class GeneralMenuBar extends JFrame{
         tools = new ToolsGraphicsPanel();
         atributes = new AtributesPanel();
        
-        selectedState = new State();
+        
         
         tools.setSelectBtAction(new ActionListener() {
 			

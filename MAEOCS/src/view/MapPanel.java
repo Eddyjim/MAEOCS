@@ -49,7 +49,8 @@ public class MapPanel extends JPanel{
      */
     static Color bgColor = Theme.background;
     
-    public MapPanel() {
+    public MapPanel(State state) {
+    	this.state = state;
 		
 	}
     
@@ -59,7 +60,6 @@ public class MapPanel extends JPanel{
     	this.width = widthX;
     	this.height = heightY;
     	this.gridSize = TamGrid;
-    	this.state = null;
     	
     	this.setMinimumSize(new Dimension(widthX, heightY));
     	this.setMaximumSize(new Dimension(widthX, heightY));
