@@ -2,10 +2,16 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.image.ImageObserver;
 import java.net.URL;
+import java.text.AttributedCharacterIterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -96,6 +102,7 @@ public class MapPanel extends JPanel{
         createGrid();
         this.add(backGroundlLabel);
         this.setVisible(true);
+        this.setOpaque(true);
     }
 
     public ImageIcon createImage(String path) {
@@ -135,14 +142,19 @@ public class MapPanel extends JPanel{
     }
 
 	public void setBackground(String imgFile) {
-		mainBackGroundImg = this.createImage(imgFile).getImage();
+		ImageIcon icon = new ImageIcon(imgFile);
+		
+		Image temp = icon.getImage();
+		
+		mainBackGroundImg = temp.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		icon = new ImageIcon(mainBackGroundImg);
+		backGroundlLabel.setIcon(icon);
 		
 	}
 
 	public void paintBackground(Image img) {
 		backGroundlLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height, 1)));
 		backGroundlLabel.setSize(width,height);
-		this.add(backGroundlLabel);
 	}
 }
  

@@ -50,7 +50,7 @@ public class MapSection extends JLabel{
 		this.setVisible(true);
 		setBorder(border);
 		setLayout(new GridLayout(1,1));
-		setOpaque(true);
+		setOpaque(false);
 		
 		this.model = model;
 		
@@ -71,6 +71,8 @@ public class MapSection extends JLabel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				
+				
 				if (node == null){
 					
 					String name = ""+posX+","+posY;
@@ -86,7 +88,7 @@ public class MapSection extends JLabel{
 				Iterator<Node> i = connections.iterator();
 				
 				/**
-				 * Adds all the adjacent nodes that have not been added
+				 * Adds all the adjacent nodes that have not been added in the model
 				 */
 				while (i.hasNext()) {
 					Node n = i.next();
@@ -94,6 +96,8 @@ public class MapSection extends JLabel{
 						n.addConnection(node.getName(), node);
 						node.addConnection(n.getName(), n);
 				}
+				
+				setOpaque(true);
 				
 				switch (state.getType()) {
 				
@@ -103,8 +107,10 @@ public class MapSection extends JLabel{
 					
 					case ROAD:
 						
-						type = PointType.ROAD;
-						setBackground(Theme.roadColor);
+						if(!type.equals(PointType.ROAD)){
+							type = PointType.ROAD;
+							setBackground(Theme.roadColor);
+						}
 						
 					break;
 						

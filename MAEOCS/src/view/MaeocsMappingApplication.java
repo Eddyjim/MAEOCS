@@ -136,8 +136,8 @@ public class MaeocsMappingApplication extends JFrame{
 				editAction.setEnabled(true);
 				editAction.setForeground(Theme.foreground);
 				
-//				openImageAction.setEnabled(true);
-//				openImageAction.setForeground(Theme.foreground);
+				openImageAction.setEnabled(true);
+				openImageAction.setForeground(Theme.foreground);
 				
 			}
 			
@@ -156,6 +156,7 @@ public class MaeocsMappingApplication extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				JFileChooser chooser = new JFileChooser();
 				chooser.setFileFilter(new FileNameExtensionFilter("png", "JPG & GIF Images", "jpg", "gif"));
 				chooser.setDialogTitle("Map Selection");

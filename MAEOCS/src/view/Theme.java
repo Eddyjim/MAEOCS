@@ -31,7 +31,8 @@ public class Theme {
 	 */
 	public static final Point menuBarLocation = new Point(190, 0);
 	public static final Point toolBarLocation = new Point(50, 70);
-	public static Point atributesPanelLocation = new Point(1000,70);
+	public static final Point atributesPanelLocation = new Point(1000,70);
+	public static final Point mapWindowLocation = new Point(190,70);
 	
 	/**
 	 * This are the color values on the interface
@@ -50,10 +51,9 @@ public class Theme {
 	/**
 	 * This are the dimensions of all windows and panels
 	 */
-	public static Dimension toolBarDimension = new Dimension(20,300);
+	public static Dimension toolBarDimension = new Dimension(15,300);
 	public static Dimension toolIconDimension = new Dimension(20,10);
-	
-	public static Dimension atributesPanelDimension = new Dimension(300,100);
+	public static Dimension atributesPanelDimension = new Dimension(300,150);
 
 	
 	

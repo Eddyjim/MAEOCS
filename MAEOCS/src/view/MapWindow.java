@@ -22,7 +22,7 @@ public class MapWindow extends JFrame{
 	
 	
 	public MapWindow(State state) {
-		 setLocation(10, 100);
+		 setLocation(Theme.mapWindowLocation);
 	     getContentPane().setBackground(Theme.background);
 	     setForeground(Theme.foreground);
 	     setBackground(Theme.background);
@@ -53,6 +53,7 @@ public class MapWindow extends JFrame{
 	}
 
 	public void setBackgroundImage(String imgFile2) {
+		
 		this.imgFile = imgFile2;
 		
 		map.setBackground(imgFile2);

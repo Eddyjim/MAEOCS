@@ -46,7 +46,7 @@ public class AtributesPanel extends JFrame {
 		setLocation(Theme.atributesPanelLocation);
 		panel = new JPanel();
 		this.add(panel);
-		panel.setLayout(new GridLayout(2,4));
+		panel.setLayout(new GridLayout(4,2));
 		
 		/*
 		 * Create the components
@@ -71,13 +71,12 @@ public class AtributesPanel extends JFrame {
 		lbLocalName.setBackground(Theme.background);
 		lbLocalName.setForeground(Theme.foreground);
 		lbLocalNumber.setBackground(Theme.background);
-		lbLocalNumber.setForeground(Theme.background);
+		lbLocalNumber.setForeground(Theme.foreground);
 		lbCategory.setBackground(Theme.background);
 		lbCategory.setForeground(Theme.foreground);
 		
 		cbCategory.setBackground(Theme.background);
 		cbCategory.setForeground(Theme.foreground);
-		
 		
 		/*
 		 * Add the categories to the comboBox
@@ -85,6 +84,8 @@ public class AtributesPanel extends JFrame {
 		cbCategory.addItem("Restroom");
 		cbCategory.addItem("Restaurant");
 		cbCategory.addItem("Shoping");
+
+		txId.setEnabled(false);
 		
 		/*
 		 * Add the components to the panel
