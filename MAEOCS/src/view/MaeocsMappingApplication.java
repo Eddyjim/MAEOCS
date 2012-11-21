@@ -1,76 +1,32 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
-public class MaeocsMappingApplication extends JFrame {
- 
-	private JFrame principal = this;
+/**
+ * 
+ * @author Eddyjim
+ *	This class is the main menu of the interface for the application
+ */
+@SuppressWarnings("serial")
+public class MaeocsMappingApplication extends JFrame{
 	
-	private JFrame mapa;
+	private MaeocsMappingApplication parent = this;
+	private JMenuBar menuBar;
+	private ToolsGraphicsPanel tools;
+	private MapWindow selected;
+	private AtributesPanel atributes;
+	private State selectedState;
 	
-	private JFrame tool;
-	
-	private JFrame create;
-	
-	private JFrame properties;
-	
-	private JFrame simulator;
-		
-	private MapPanel grid;
-	 
-	private TypeCreatorGraphicsPanel createPane;
-	
-	private ToolsGraphicsPanel toolsPane;
-	
-	private PropertyGraphicsPanel propertiesPane; 
-	
-	private SimulatorPanel simulatorPane;
-	 
-	private JButton processMap;
-	
-	private Boolean pressed = false;
-	
-	private Color gridColor;
-	
-	private String path = File.separator+"tmp";
-	private JFileChooser loadFile = new JFileChooser(new File(path));
-	private File imgFile;
-	 
-	
-	/*
-	 * Colors
-	 * */
-	public static final Color black = new Color(0, 0, 0);
-	public static final Color grayblack = new Color(50, 50, 50);
-	public static final Color white = new Color(255, 255, 255);
-	public static final Color blue = new Color(114, 159, 207);
-	public static final Color green = new Color(138, 226, 52);
-	public static final Color orange = new Color(252, 175, 62);
-	public static final Color purple = new Color(173, 127, 168);
-	public static final Color yellow = new Color(252, 233, 79);
-	
-	/*
-	 * Dimensiones
-	 * 
-	 * */
 	
 	Dimension principalDim = new Dimension (800,50);
 	Dimension createDim = new Dimension (250,200);
@@ -78,268 +34,205 @@ public class MaeocsMappingApplication extends JFrame {
 	Dimension toolsDim = new Dimension (800,150);
 	Dimension simulatorDim = new Dimension(250, 670);
 	Dimension mapDim;
-
-	private State state;
 	
-	private MaeocsMappingApplication (){
-		super("MAEOCS Mapping Application");
+	/**
+	 * Standard creator for the General Menu Bar
+	 */
+	public MaeocsMappingApplication(){
+		
 		this.setSize(principalDim);
-		this.setLocation(10, 10);
-		this.setBackground(black);
-		this.setForeground(white);
+		this.setLocation(Theme.menuBarLocation);
+		this.setBackground(Theme.background);
+		this.setForeground(Theme.foreground);
 		this.setMaximumSize(principalDim);
 		this.setMinimumSize(principalDim);
-		this.interfaceGenerator();
 		this.setResizable(false);
 		this.setVisible(true);
-	}
-	
-	public void interfaceGenerator (){
+		selectedState = new State();
 		
-		/*
-		 * create the menu
-		 * 
-		 * */
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Creates a menubar for a JFrame
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setBackground(white);
-        menuBar.repaint();
-        // Add the menubar to the frame
-        setJMenuBar(menuBar);
-        
-        // Define and add two drop down menu to the menubar
-        JMenu fileMenu = new JMenu("File");
-        fileMenu.setForeground(black);
-        fileMenu.setBackground(white);
-        
-        JMenu editMenu = new JMenu("Edit");
-        editMenu.setForeground(black);
-        editMenu.setBackground(white);
-        
-        JMenu createMenu = new JMenu("Create");
-        editMenu.setForeground(black);
-        editMenu.setBackground(white);
-        
-        JMenu viewMenu = new JMenu("View");
-        editMenu.setForeground(black);
-        editMenu.setBackground(white);
-        
-        menuBar.add(fileMenu);
+	    
+	    menuBar = new JMenuBar();
+	    
+	    menuBar.setBackground(Theme.background);
+	    menuBar.repaint();
+	    
+	    // Add the menubar to the frame
+	    setJMenuBar(menuBar);
+	    
+	    // Define and add two drop down menu to the menubar
+	    JMenu fileMenu = new JMenu("File");
+	    fileMenu.setForeground(Theme.foreground);
+	    fileMenu.setBackground(Theme.background);
+	    
+	    JMenu editMenu = new JMenu("Edit");
+	    editMenu.setForeground(Theme.foreground);
+	    editMenu.setBackground(Theme.background);
+	    
+	    JMenu createMenu = new JMenu("Create");
+	    editMenu.setForeground(Theme.foreground);
+	    editMenu.setBackground(Theme.background);
+	    
+	    JMenu viewMenu = new JMenu("View");
+	    editMenu.setForeground(Theme.foreground);
+	    editMenu.setBackground(Theme.background);
+	    
+	    menuBar.add(fileMenu);
         menuBar.add(editMenu);
         menuBar.add(createMenu);
         menuBar.add(viewMenu);
         
         // Create and add simple menu item to one of the drop down menu
-        JMenuItem newAction = new JMenuItem("New");
-        newAction.setForeground(black);
-        newAction.setBackground(white);
-        JMenuItem openAction = new JMenuItem("OpenImage");
-        openAction.setForeground(black);
-        openAction.setBackground(white);
+        final JMenuItem newAction = new JMenuItem("New");
+        newAction.setForeground(Theme.foreground);
+        newAction.setBackground(Theme.background);
+
+        final JMenuItem editAction = new JMenuItem("Edit Size");
+        editAction.setForeground(Theme.blockedForeground);
+        editAction.setBackground(Theme.background);
+        editAction.setEnabled(false);
+
+        final JMenuItem openImageAction = new JMenuItem("OpenImage");
+        openImageAction.setForeground(Theme.blockedForeground);
+        openImageAction.setBackground(Theme.background);
+        openImageAction.setEnabled(false);
+        
+        
         JMenuItem exitAction = new JMenuItem("Exit");
-        exitAction.setForeground(black);
-        exitAction.setBackground(white);
+        exitAction.setForeground(Theme.foreground);
+        exitAction.setBackground(Theme.background);
+        
         JMenuItem cutAction = new JMenuItem("Cut");
-        cutAction.setForeground(black);
-        cutAction.setBackground(white);
+        cutAction.setForeground(Theme.foreground);
+        cutAction.setBackground(Theme.background);
+        
         JMenuItem copyAction = new JMenuItem("Copy");
-        copyAction.setForeground(black);
-        copyAction.setBackground(white);
+        copyAction.setForeground(Theme.foreground);
+        copyAction.setBackground(Theme.background);
+        
         JMenuItem pasteAction = new JMenuItem("Paste");
-        pasteAction.setForeground(black);
-        pasteAction.setBackground(white);
+        pasteAction.setForeground(Theme.foreground);
+        pasteAction.setBackground(Theme.background);
         
         //add the items to the menu item
         
         fileMenu.add(newAction);
-        fileMenu.add(openAction);
+        fileMenu.add(editAction);
+        fileMenu.add(openImageAction);
         fileMenu.addSeparator();
         fileMenu.add(exitAction);
         editMenu.add(cutAction);
         editMenu.add(copyAction);
         editMenu.add(pasteAction);
-		
-        this.setJMenuBar(menuBar);
         
-        //creating the panels
-        this.state = new State();
-
-        createPane = new TypeCreatorGraphicsPanel();
-        createPane.setBackground(white);
-        createPane.setMaximumSize(createDim);
-        createPane.setMinimumSize(createDim);
-        createPane.setLayout(new GridLayout(1,4));
-        
-        propertiesPane = new PropertyGraphicsPanel();
-        
-        toolsPane = new ToolsGraphicsPanel();
-        toolsPane.setSize(createDim);        
-        
-        
-        
-        create = new JFrame("CREATE");
-        mapa = new JFrame ("MAPA");
-        tool = new JFrame ("TOOLS");
-        properties = new JFrame ("PROPERTIES");
-        simulator = new JFrame ("SIMULATOR");
-        //set action listeners
-        
-        openAction.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				loadFile.showOpenDialog(principal);
-				imgFile = loadFile.getSelectedFile();
-				
-			}
-		});
-
+       
         newAction.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				final DimensionsWindow sizeWindow = new DimensionsWindow(principal);
+			public void actionPerformed(ActionEvent arg0) {
+				selected = new MapWindow(selectedState);
+				new DimensionsWindow(selected);
 				
-				sizeWindow.setOkActionListener(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						
-						
-						if(sizeWindow.getWidhtSize()>100&& sizeWindow.getHeightSize()>100&&sizeWindow.getGrind()>10){
-							
-							grid = MapPanel.getInstance(sizeWindow.getWidhtSize(),
-							sizeWindow.getHeightSize(), sizeWindow.getGrind(), state);
-							
-							simulatorPane = new SimulatorPanel(sizeWindow.getWidhtSize()/10,
-									sizeWindow.getHeightSize()/10, sizeWindow.getGrind());
-							
-							mapDim = new Dimension (sizeWindow.getWidhtSize()+8,sizeWindow.getHeightSize()+32);
-							
-							create.setLocation(660, 60);
-							create.getContentPane().setBackground(white);
-							create.setForeground(black);
-							create.setMaximumSize(createDim);
-							create.setMinimumSize(createDim);
-							create.setResizable(false);
-							create.setBackground(white);
-							create.getContentPane().add(createPane);
-							create.setEnabled(true);
-					        
-							
-					        mapa.setLocation(10, 100);
-					        mapa.getContentPane().setBackground(white);
-					        mapa.setForeground(black);
-					        mapa.setBackground(white);
-					        mapa.getContentPane().add(grid);
-					        mapa.getContentPane().setBackground(black);
-					        mapa.setSize(mapDim);
-					        mapa.setResizable(false);
-					        mapa.setEnabled(true);
-							
-							simulator.setSize(simulatorDim);
-							simulator.getContentPane().setBackground(white);
-							simulator.setResizable(false);
-							simulator.add(simulatorPane);
-							simulator.setVisible(true);
-					        
-					        tool.setLocation(665, 100);
-					        tool.setBackground(white);
-					        tool.setForeground(black);
-					        tool.setMaximumSize(toolsDim);
-					        tool.setMinimumSize(toolsDim);
-					        tool.setResizable(false);
-					        tool.setBackground(white);
-					        tool.getContentPane().add(toolsPane);
-					        
-					        properties.setLocation(10, 665);
-					        properties.setBackground(white);
-					        properties.setForeground(black);
-					        properties.setMaximumSize(propertiesDim);
-					        properties.setMinimumSize(propertiesDim);
-					        properties.setResizable(false);
-					        properties.setBackground(white);
-					        properties.getContentPane().add(propertiesPane);
-					        
-					        createPane.setRoadActionListener(new ActionListener() {
-								
-								@Override
-								public void actionPerformed(ActionEvent arg0) {
-									state.setStateType(SelectedState.ROAD);									
-								}
-							});
-					        
-					        createPane.setNuloActionListener(new ActionListener() {
-								
-								@Override
-								public void actionPerformed(ActionEvent arg0) {
-									state.setStateType(SelectedState.NULL);									
-								}
-							});
-
-							createPane.setPointActionListener(new ActionListener() {
-								
-								@Override
-								public void actionPerformed(ActionEvent arg0) {
-									state.setStateType(SelectedState.POINT);									
-								}
-							});
-					        
-					        propertiesPane.setColorBtAction(new ActionListener() {
-								
-								@Override
-								public void actionPerformed(ActionEvent arg0) {
-								    gridColor
-								      = JColorChooser.showDialog(propertiesPane,
-								                                 "Choose Section Map Color",
-								                                 getBackground());
-								    if (gridColor != null){
-								    	propertiesPane.setLabelColor(gridColor);
-								    	state.setActualColor(gridColor);
-								    }
-									
-								}
-							});
-					        
-					        simulatorPane.setSimulateAction(new ActionListener() {
-								
-								@Override
-								public void actionPerformed(ActionEvent e) {
-									for (int k = 0; k < 8; k++) {
-										simulatorPane.paintAPoint(20, k+3);
-									}
-									for (int k = 0; k < 7; k++) {
-										simulatorPane.paintAPoint(20-k, 11);
-									}
-								}
-							});
-					        
-					        tool.setVisible(true);
-					        mapa.setVisible(true);
-					        create.setVisible(true);
-					        properties.setVisible(true);		        
-							java.awt.Image img = new ImageIcon(imgFile.getAbsolutePath()).getImage();
-							grid.paintBackground(img);
-							simulatorPane.paintBackground(img);
-							
-							sizeWindow.dispose();
-						}
-						
-					}
-				});
+				editAction.setEnabled(true);
+				editAction.setForeground(Theme.foreground);
+				
+//				openImageAction.setEnabled(true);
+//				openImageAction.setForeground(Theme.foreground);
+				
+			}
+			
+		});
+        
+        editAction.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				new DimensionsWindow(selected);
 			}
 		});
+        
+        openImageAction.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileFilter(new FileNameExtensionFilter("png", "JPG & GIF Images", "jpg", "gif"));
+				chooser.setDialogTitle("Map Selection");
+				chooser.setAcceptAllFileFilterUsed(false);
+				chooser.showOpenDialog(parent);
+				String imgFile = chooser.getSelectedFile().getPath();
+				System.out.println(imgFile);
+				selected.setBackgroundImage(imgFile);
+				
+			}
+		});
+        
+        tools = new ToolsGraphicsPanel();
+        atributes = new AtributesPanel();
+       
+        
+        
+        tools.setSelectBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.SELECT);
+				
+			}
+		});
+        
+        tools.setRoadBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.ROAD);
+				
+			}
+		});
+        
+        tools.setLocalBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.LOCAL);
+				
+			}
+		});
+        
+        tools.setStairsBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.STAIRS);
+				
+			}
+		});
+        
+        tools.setExitBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.EXIT);
+				
+			}
+		});
+        
+        tools.setEraseBtAction(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				selectedState.setStateType(SelectedState.ERASE);
+				
+			}
+		});
+        
+        menuBar.updateUI();        
+        
 	}
-	
 	
 	public static void main(String[] args) {
-		GeneralMenuBar menu = new GeneralMenuBar();
+		MaeocsMappingApplication menu = new MaeocsMappingApplication();
 		
 	}
-
-	public void setMapEnabled(boolean b) {
-		this.mapa.setEnabled(b);
-	}
-	
 }

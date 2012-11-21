@@ -71,7 +71,7 @@ public class MapSection extends JLabel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if (node.equals(null)){
+				if (node == null){
 					
 					String name = ""+posX+","+posY;
 					node = new Node(name, new Point(posX,posY));

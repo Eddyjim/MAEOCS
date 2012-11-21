@@ -161,7 +161,7 @@ public class MapModel {
 	 */
 	public ArrayList<Node> getNeighbors(int x, int y){
 		
-		ArrayList<Node> ans = new ArrayList<>();
+		ArrayList<Node> ans = new ArrayList<Node>();
 		
 		/**
 		 * Adds the next node to the right
@@ -169,7 +169,7 @@ public class MapModel {
 		String key = ""+(x+1)+","+y;
 		Node n = map.get(key);
 	
-		if (!n.equals(null)) {
+		if (n != null) {
 			ans.add(n);
 		}
 		
@@ -179,7 +179,7 @@ public class MapModel {
 		key = ""+(x-1)+","+y;
 		n = map.get(key);
 		
-		if (!n.equals(null)) {
+		if (n != null) {
 			ans.add(n);
 		}
 		
@@ -189,7 +189,7 @@ public class MapModel {
 		key = ""+x+","+(y+1);
 		n = map.get(key);
 		
-		if (!n.equals(null)) {
+		if (n != null) {
 			ans.add(n);
 		}
 		
@@ -199,7 +199,7 @@ public class MapModel {
 		key = ""+x+","+(y-1);
 		n = map.get(key);
 		
-		if (!n.equals(null)) {
+		if (n != null) {
 			ans.add(n);
 		}
 		
