@@ -10,7 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
-
+/**
+ * This class contains all the tools available to be selected to edit the map
+ * 
+ * @author Carlos Gaitán Mora & Edward Jiménez Martínez
+ */
 public class ToolsGraphicsPanel extends JFrame {
 	private JPanel panel;
 	private State state;
@@ -32,6 +36,9 @@ public class ToolsGraphicsPanel extends JFrame {
 		
 	}
 	
+	/**
+	 * Creates and shows all the options available
+	 */
 	private void showTools(){
 		
 		select = new JButton("Select");

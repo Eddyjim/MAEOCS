@@ -1,11 +1,11 @@
 package view;
 
-import java.awt.Color;
-
-import javax.swing.AbstractButton;
-
-import model.Observer;
-
+/**
+ * This class is used to know the actual option selected by the user
+ * 
+ * @author Carlos Gaitán Mora & Edward Jiménez Martínez
+ *
+ */
 public class State {
  	 
 	private SelectedState type;

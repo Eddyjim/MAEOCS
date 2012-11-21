@@ -2,11 +2,12 @@ package view;
 
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.Point;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 import javax.swing.ImageIcon;
@@ -17,11 +18,19 @@ import javax.swing.border.LineBorder;
 import model.MapModel;
 import model.Node;
 
+/**
+ * This class is used at every square made in the panel's grid,
+ * it contains all the actions performed over every cell 
+ * 
+ * @author Carlos Gaitán Mora & Edward Jiménez Martínez
+ *
+ */
+@SuppressWarnings("serial")
 public class MapSection extends JLabel{
  
 	private State state;
 	
-	//protected Label label;
+	private MapModel model;
 	
 	private PointType type;
 		
@@ -29,39 +38,62 @@ public class MapSection extends JLabel{
 	
 	private Node node;
 
-	//private JLabel empyLabel;
+	private int posX;
 	
-	private int posI;
+	private int posY;
 	
-	private int posJ;
-	
-	public MapSection (State state, int i, int j, MapModel model){
+	public MapSection (State state, int x, int y, MapModel model){
 		
 		super();
-		//this.label = new Label("", Label.CENTER);
-		//this.empyLabel = new JLabel();
+		
 		Border border = LineBorder.createGrayLineBorder();
 		this.setVisible(true);
 		setBorder(border);
 		setLayout(new GridLayout(1,1));
 		setOpaque(true);
 		
+		this.model = model;
+		
 		this.state = state;
 		this.setActionListener();
 		this.type = PointType.NULL;
-		this.posI = i;
-		this.posJ = j;
+		this.posX = x;
+		this.posY = y;
 		
 	}
 	
 	
 	private void setActionListener(){
 		
-		final MapSection thisMapSection = this;
+		//final MapSection thisMapSection = this;
 		
 		addMouseListener( new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				if (node.equals(null)){
+					
+					String name = ""+posX+","+posY;
+					node = new Node(name, new Point(posX,posY));
+					model.addNode(name, node);
+					
+				}
+				
+				/**
+				 * Find all the adjacent nodes that have not been added
+				 */
+				ArrayList<Node> connections = model.getNotConnectedNeighbors(node);
+				Iterator<Node> i = connections.iterator();
+				
+				/**
+				 * Adds all the adjacent nodes that have not been added
+				 */
+				while (i.hasNext()) {
+					Node n = i.next();
+					if (!n.equals(null))
+						n.addConnection(node.getName(), node);
+						node.addConnection(n.getName(), n);
+				}
 				
 				switch (state.getType()) {
 				
@@ -73,8 +105,6 @@ public class MapSection extends JLabel{
 						
 						type = PointType.ROAD;
 						setBackground(Theme.roadColor);
-						node = new Node(""+posI+","+posJ, new Point(posI,posJ));
-						
 						
 					break;
 						
@@ -82,10 +112,7 @@ public class MapSection extends JLabel{
 						
 						type = PointType.LOCAL;
 						setBackground(Theme.localColor);
-						//label.setBackground(Theme.localColor);
 						
-						//add(label);
-					
 					break;
 					
 					case STAIRS:
@@ -105,7 +132,10 @@ public class MapSection extends JLabel{
 					case ERASE:
 					
 						type = PointType.NULL;
-						setBackground(Theme.background);
+						setBackground(null);
+						model.remove(node);
+						node = null;
+						
 				
 					break;
 					
@@ -132,59 +162,6 @@ public class MapSection extends JLabel{
 				;
 			}
 		});
-		
-//		label.addMouseListener(new MouseListener() {
-//			
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				switch (state.getType()) {
-//				
-//				case SELECT:
-//					break;
-//				
-//				case ROAD:
-//					
-//					type = PointType.ROAD;
-//					label.setBackground(Theme.roadColor);
-//					break;
-//					
-//				case LOCAL:
-//					
-//					type = PointType.LOCAL;
-//					label.setBackground(Theme.localColor);
-//					break;
-//				
-//					
-//				default:
-//					break;
-//			
-//				}
-//			}
-//			
-//			@Override
-//			public void mouseReleased(MouseEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void mousePressed(MouseEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}			
-//		});
 	}
 
 

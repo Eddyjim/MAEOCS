@@ -14,14 +14,28 @@ import javax.swing.JPanel;
 import model.MapModel;
 
 
+/**
+ * This class is used to contain the grid that simulates the map grille
+ * 
+ * @author Carlos Gaitán Mora && Edward Jiménez Martínez
+ */
 @SuppressWarnings("serial")
 public class MapPanel extends JPanel{
 
-	 private int width=0;
-	 private int height=0;
+	/**
+	 * Is the width of the panel
+	 */
+	private int width=0;
 	 
-	 private MapModel model;
-	
+	/**
+	 * Is the height of the panel
+	 */
+	private int height=0;
+	 
+	/**
+	 * Is the map model used to for calculations and other values
+	 */
+	private MapModel model;
 
     /**
      * Selected state
@@ -59,12 +73,19 @@ public class MapPanel extends JPanel{
     	model = new MapModel();
     }
     
+    /**
+     * This method allows to resize the panel
+     * @param widthX is an integer that contains the value of the new width
+     * @param heightY is an integer that contains the value of the new height
+     * @param gridSize is an integer that contains the number of cells that the 
+     * grid will have
+     */
     @SuppressWarnings("static-access")
-	public void resize(int widthX, int heightY, int TamGrid) {
+	public void resize(int widthX, int heightY, int gridSize) {
     	
     	this.width = widthX;
     	this.height = heightY;
-    	this.gridSize = TamGrid;
+    	this.gridSize = gridSize;
     	
     	this.setMinimumSize(new Dimension(widthX, heightY));
     	this.setMaximumSize(new Dimension(widthX, heightY));
@@ -90,15 +111,18 @@ public class MapPanel extends JPanel{
 	 @Override
 	 public void paint(Graphics g) {
 	 
-	  // Pintamos la imagen de fondo...
+	  // Paint the background picture
 	  if(mainBackGroundImg != null) {
 	   g.drawImage(mainBackGroundImg, 0, 0, null);
 	  }
-	  // Y pintamos el resto de cosas que pueda tener el panel
+	  
 	  super.paint(g);
 	 
 	 }
     
+	/**
+	 * This method creates a new grid with the new size
+	 */
     private void createGrid(){
     	this.mapSections = new MapSection[gridSize][gridSize];
     	

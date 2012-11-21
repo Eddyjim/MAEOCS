@@ -8,7 +8,10 @@ import javax.swing.JFrame;
 
 import model.MapModel;
 
-
+/**
+ * This class is used to show a new window that will contain the map to edit
+ * @author Carlos Gaitán Mora && Edward Jiménez Martínez
+ */
 @SuppressWarnings("serial")
 public class MapWindow extends JFrame{
 	

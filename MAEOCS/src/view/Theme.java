@@ -8,7 +8,7 @@ import java.awt.Point;
 /**
  * This class allows to control globally all interface values
  * 
- * @author Carlos Gait‡n && Edward JimŽnez
+ * @author Carlos Gaitán Mora & Edward Jiménez Martínez
  *
  */
 public class Theme {
