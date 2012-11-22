@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-import javax.swing.ImageIcon;
+//import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import model.Local;
 import model.MapModel;
 import model.Node;
 
@@ -30,11 +31,13 @@ public class MapSection extends JLabel{
  
 	private State state;
 	
+	private LocalAtributesManager atributesPanelManager;
+	
 	private MapModel model;
 	
 	private PointType type;
 		
-	private ImageIcon icon;
+//	private ImageIcon icon;
 	
 	private Node node;
 
@@ -42,7 +45,7 @@ public class MapSection extends JLabel{
 	
 	private int posY;
 	
-	public MapSection (State state, int x, int y, MapModel model){
+	public MapSection (State state, LocalAtributesManager panel, int x, int y, MapModel model){
 		
 		super();
 		
@@ -54,6 +57,7 @@ public class MapSection extends JLabel{
 		
 		this.model = model;
 		
+		this.atributesPanelManager = panel;
 		this.state = state;
 		this.setActionListener();
 		this.type = PointType.NULL;
@@ -65,22 +69,19 @@ public class MapSection extends JLabel{
 	
 	private void setActionListener(){
 		
-		//final MapSection thisMapSection = this;
+//		final MapSection thisMapSection = this;
 		
 		addMouseListener( new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				
 				
 				if (node == null){
 					
 					String name = ""+posX+","+posY;
 					node = new Node(name, new Point(posX,posY));
 					model.addNode(name, node);
-					
 				}
-				
+					
 				/**
 				 * Find all the adjacent nodes that have not been added
 				 */
@@ -93,11 +94,13 @@ public class MapSection extends JLabel{
 				while (i.hasNext()) {
 					Node n = i.next();
 					if (!n.equals(null))
-						n.addConnection(node.getName(), node);
-						node.addConnection(n.getName(), n);
+						n.addConnection(node.getId(), node);
+						node.addConnection(n.getId(), n);
 				}
 				
 				setOpaque(true);
+				
+				atributesPanelManager.selectNode(node);
 				
 				switch (state.getType()) {
 				
@@ -108,7 +111,7 @@ public class MapSection extends JLabel{
 					case ROAD:
 						
 						if(!type.equals(PointType.ROAD)){
-							type = PointType.ROAD;
+							
 							setBackground(Theme.roadColor);
 						}
 						
@@ -116,34 +119,37 @@ public class MapSection extends JLabel{
 						
 					case LOCAL:
 						
+						node.setLocal(new Local());
 						type = PointType.LOCAL;
 						setBackground(Theme.localColor);
+						atributesPanelManager.enablePanel();
+						atributesPanelManager.updatePanel();
 						
-					break;
+						break;
 					
 					case STAIRS:
-						
+						@
 						type = PointType.STAIRS;
 						setBackground(Theme.stairsColor);
 						
-					break;
+						break;
 					
 					case EXIT:
 						
 						type = PointType.EXIT;
 						setBackground(Theme.exitColor);
 					
-					break;
+						break;
 					
 					case ERASE:
 					
 						type = PointType.NULL;
 						setBackground(null);
 						model.remove(node);
+						atributesPanelManager.selectNode(null);
 						node = null;
 						
-				
-					break;
+						break;
 					
 				}
 			}

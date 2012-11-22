@@ -42,14 +42,14 @@ public class MapModel {
 		roads = new HashMap<String, ArrayList<String>>();
 		
 		ArrayList<String> road = new ArrayList<String>();
-		road.add(pointA.getName());
+		road.add(pointA.getId());
 
-		roads.put(pointA.getName(), road);
+		roads.put(pointA.getId(), road);
 		
 		/**
 		 * Calculates the roads until the desired point comes out
 		 */
-		while (!roads.containsKey(pointB.getName())){
+		while (!roads.containsKey(pointB.getId())){
 						
 			HashMap<String, ArrayList<String>> choices = getChoices(roads);
 			String selected = bestChoice(choices,pointB);
@@ -116,7 +116,7 @@ public class MapModel {
 			
 			if (expert+entry.getValue().size()<min){
 				min = expert+entry.getValue().size();
-				best = n.getName();
+				best = n.getId();
 			}
 		}
 		return best;
@@ -221,7 +221,7 @@ public class MapModel {
 			i.next().eraseConnection(node);
 		}
 		
-		map.remove(node.getName());
+		map.remove(node.getId());
 		
 	}
 
@@ -237,7 +237,7 @@ public class MapModel {
 		
 		while (i.hasNext()) {
 			Node n = i.next();
-			if(node.isConnectedTo(n.getName())){
+			if(node.isConnectedTo(n.getId())){
 				connenctions.remove(n);
 			}
 		}

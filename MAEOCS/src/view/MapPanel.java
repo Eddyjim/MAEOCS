@@ -49,6 +49,11 @@ public class MapPanel extends JPanel{
     private State state;
     
     /**
+     * Selected node
+     */
+    private LocalAtributesManager localAtributesManager;
+    
+    /**
      * Section gird
      */
     private MapSection[][] mapSections;
@@ -61,7 +66,7 @@ public class MapPanel extends JPanel{
     /**
      * Grid Size
      */
-    static int gridSize=0;
+    private int gridSize;
     
     /**
      * Back label
@@ -73,8 +78,8 @@ public class MapPanel extends JPanel{
      */
     static Color bgColor = Theme.background;
     
-    public MapPanel(State state) {
-    	
+    public MapPanel(State state, LocalAtributesManager selectedNode) {
+    	this.localAtributesManager = selectedNode;
     	this.state = state;
     	model = new MapModel();
     }
@@ -86,7 +91,7 @@ public class MapPanel extends JPanel{
      * @param gridSize is an integer that contains the number of cells that the 
      * grid will have
      */
-    @SuppressWarnings("static-access")
+    
 	public void resize(int widthX, int heightY, int gridSize) {
     	
     	this.width = widthX;
@@ -135,7 +140,7 @@ public class MapPanel extends JPanel{
     	
     	for (int i = 0; i < gridSize; i++) {
 			for (int j = 0; j < gridSize; j++) {
-				mapSections[i][j]= new MapSection(state, i, j, model);
+				mapSections[i][j]= new MapSection(state,localAtributesManager, i, j, model);
 				backGroundlLabel.add(mapSections[i][j].getLabel());
 			}
 		}

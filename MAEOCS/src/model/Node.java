@@ -17,7 +17,12 @@ public class Node{
 	 * x,y in which x is the position in the horizontal axis and y the position in 
 	 * the vertical axis
 	 */
-	private String name;
+	private String id;
+	
+	/**
+	 * Contains the information if the node is a local
+	 */
+	private Local local;
 	
 	/**
 	 * Its a flag to see if the node has been visited in the search of the roads
@@ -33,24 +38,24 @@ public class Node{
 	 * Contains all the connections that a node may have
 	 */
 	private HashMap<String, Node> connections = new HashMap<String, Node>();
-	
+
 	/**
 	 * Creator of the class
 	 * 
-	 * @param name is the String that identifies the node
+	 * @param id is the String that identifies the node
 	 * @param position is the position that the node will have
 	 */
-	public Node(String name, Point position){
-		this.name = name;
+	public Node(String id, Point position){
+		this.id = id;
 		this.position = position;
 	}
 	
 	/**
-	 * It's a method to get the name of the node
-	 * @return is a String that contains the value returned
+	 * It's a method to get the node's id
+	 * @return is a String that contains the node's id
 	 */
-	public String getName(){
-		return name;
+	public String getId(){
+		return id;
 	}
 	
 	/**
@@ -118,7 +123,7 @@ public class Node{
 	 * @param node is the connection that is going to be erased
 	 */
 	public void eraseConnection(Node node) {
-		connections.remove(node.getName());
+		connections.remove(node.getId());
 	}
 	
 	/**
@@ -128,5 +133,19 @@ public class Node{
 	 */
 	public boolean isConnectedTo(String node){
 		return connections.containsKey(node);
+	}
+
+	/**
+	 * This method get the local information in a node
+	 * @return a Local with all the information stored in this node
+	 */
+	public Local getLocal() {
+
+		return local;
+		
+	}
+	
+	public void setLocal(Local local){
+		this.local = local;
 	}
 }

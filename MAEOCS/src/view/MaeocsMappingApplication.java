@@ -11,11 +11,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import model.Node;
+
 
 /**
- * 
- * @author Eddyjim
- *	This class is the main menu of the interface for the application
+ * This class is the main menu of the interface for the application
+ * @author Carlos Gaitan Mora & Edward Jimenez Martinez
  */
 @SuppressWarnings("serial")
 public class MaeocsMappingApplication extends JFrame{
@@ -26,6 +27,7 @@ public class MaeocsMappingApplication extends JFrame{
 	private MapWindow selected;
 	private AtributesPanel atributes;
 	private State selectedState;
+	private LocalAtributesManager selectedNode;
 	
 	
 	Dimension principalDim = new Dimension (800,50);
@@ -49,6 +51,7 @@ public class MaeocsMappingApplication extends JFrame{
 		this.setResizable(false);
 		this.setVisible(true);
 		selectedState = new State();
+		selectedNode = new LocalAtributesManager();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    
@@ -57,10 +60,14 @@ public class MaeocsMappingApplication extends JFrame{
 	    menuBar.setBackground(Theme.background);
 	    menuBar.repaint();
 	    
-	    // Add the menubar to the frame
+	    /*
+	     * Add the menu bar to the frame
+	     */
 	    setJMenuBar(menuBar);
 	    
-	    // Define and add two drop down menu to the menubar
+	    /* 
+	     * Define and add two drop down menu to the menu bar
+	     */
 	    JMenu fileMenu = new JMenu("File");
 	    fileMenu.setForeground(Theme.foreground);
 	    fileMenu.setBackground(Theme.background);
@@ -82,7 +89,9 @@ public class MaeocsMappingApplication extends JFrame{
         menuBar.add(createMenu);
         menuBar.add(viewMenu);
         
-        // Create and add simple menu item to one of the drop down menu
+        /*
+         *  Create and add simple menu item to one of the drop down menu
+         */
         final JMenuItem newAction = new JMenuItem("New");
         newAction.setForeground(Theme.foreground);
         newAction.setBackground(Theme.background);
@@ -114,7 +123,9 @@ public class MaeocsMappingApplication extends JFrame{
         pasteAction.setForeground(Theme.foreground);
         pasteAction.setBackground(Theme.background);
         
-        //add the items to the menu item
+        /*
+         * add the items to the menu item
+         */
         
         fileMenu.add(newAction);
         fileMenu.add(editAction);
@@ -125,12 +136,11 @@ public class MaeocsMappingApplication extends JFrame{
         editMenu.add(copyAction);
         editMenu.add(pasteAction);
         
-       
         newAction.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				selected = new MapWindow(selectedState);
+				selected = new MapWindow(selectedState, selectedNode);
 				new DimensionsWindow(selected);
 				
 				editAction.setEnabled(true);
@@ -170,10 +180,9 @@ public class MaeocsMappingApplication extends JFrame{
 		});
         
         tools = new ToolsGraphicsPanel();
-        atributes = new AtributesPanel();
+        atributes = new AtributesPanel(selectedNode);
+        selectedNode.addPanel(atributes);
        
-        
-        
         tools.setSelectBtAction(new ActionListener() {
 			
 			@Override
@@ -197,7 +206,7 @@ public class MaeocsMappingApplication extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectedState.setStateType(SelectedState.LOCAL);
-				
+
 			}
 		});
         
@@ -232,6 +241,7 @@ public class MaeocsMappingApplication extends JFrame{
         
 	}
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		MaeocsMappingApplication menu = new MaeocsMappingApplication();
 		

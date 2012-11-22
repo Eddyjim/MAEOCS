@@ -1,12 +1,9 @@
 package view;
 
 import java.awt.Dimension;
-import java.io.File;
-import java.nio.channels.FileChannel.MapMode;
-
 import javax.swing.JFrame;
 
-import model.MapModel;
+import model.Node;
 
 /**
  * This class is used to show a new window that will contain the map to edit
@@ -18,16 +15,15 @@ public class MapWindow extends JFrame{
 	private MapPanel map;
 	private Dimension mapDimension;
 	private DimensionsWindow dimensionWindow;
-	private String imgFile;
 	
 	
-	public MapWindow(State state) {
+	public MapWindow(State state, LocalAtributesManager selectedNode) {
 		 setLocation(Theme.mapWindowLocation);
 	     getContentPane().setBackground(Theme.background);
 	     setForeground(Theme.foreground);
 	     setBackground(Theme.background);
 	     getContentPane().setBackground(Theme.black);
-	     map = new MapPanel(state);
+	     map = new MapPanel(state,selectedNode);
 	     this.add(map);
 	     setEnabled(true);
 	     setVisible(true);
@@ -53,8 +49,6 @@ public class MapWindow extends JFrame{
 	}
 
 	public void setBackgroundImage(String imgFile2) {
-		
-		this.imgFile = imgFile2;
 		
 		map.setBackground(imgFile2);
 		
