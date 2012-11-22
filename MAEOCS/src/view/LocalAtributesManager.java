@@ -14,9 +14,6 @@ public class LocalAtributesManager {
 	}
 	
 	public void selectNode(Node node) {
-		if (node==null) {
-			System.out.println("nulo");
-		}
 		this.node = node;
 		
 	}

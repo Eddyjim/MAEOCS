@@ -128,7 +128,7 @@ public class MapSection extends JLabel{
 						break;
 					
 					case STAIRS:
-						@
+						
 						type = PointType.STAIRS;
 						setBackground(Theme.stairsColor);
 						

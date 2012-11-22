@@ -42,7 +42,8 @@ public class AtributesPanel extends JFrame {
 	/**
 	 * Is the comboBox to select the category
 	 */
-	private JComboBox<String> cbCategory;
+	@SuppressWarnings("rawtypes")
+	private JComboBox cbCategory;
 	
 	/**
 	 * Its the label that says "local Number"
@@ -68,8 +69,10 @@ public class AtributesPanel extends JFrame {
 	 */
 	private JPanel panel;
 	
+	@SuppressWarnings("unused")
 	private JButton btApply;
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AtributesPanel(LocalAtributesManager node){
 		
 		this.setTitle("Atributes");
@@ -79,6 +82,7 @@ public class AtributesPanel extends JFrame {
 		panel = new JPanel();
 		this.add(panel);
 		panel.setLayout(new GridLayout(4,2));
+		this.node = node;
 		
 		/*
 		 * Create the components
@@ -91,7 +95,7 @@ public class AtributesPanel extends JFrame {
 		txId = new JTextField();
 		txLocalNumber = new JTextField();
 		txLocalName = new JTextField();
-		cbCategory = new JComboBox<String>();
+		cbCategory = new JComboBox();
 		
 		btApply = new JButton("Apply");
 		
@@ -151,21 +155,23 @@ public class AtributesPanel extends JFrame {
 		txLocalName.setText(local.getName());
 		txLocalNumber.setText(local.getLocalNumber());
 		
-		switch (local.getCategory()) {
-		case Restroom:
-			cbCategory.setSelectedIndex(0);
-			break;
-
-		case Restaurant:
-			cbCategory.setSelectedIndex(1);
-			break;
+		if(local.getCategory() != null){
+			switch (local.getCategory()) {
+			case Restroom:
+				cbCategory.setSelectedIndex(0);
+				break;
+	
+			case Restaurant:
+				cbCategory.setSelectedIndex(1);
+				break;
+				
+			case Shopping:
+				cbCategory.setSelectedIndex(2);
+				break;
 			
-		case Shopping:
-			cbCategory.setSelectedIndex(2);
-			break;
-		
-		default:
-			break;
+			default:
+				break;
+			}
 		}
 	}
 }
