@@ -105,50 +105,66 @@ public class MapSection extends JLabel{
 				switch (state.getType()) {
 				
 					case SELECT:
-						
+						if(!type.equals(PointType.NULL)){
+							atributesPanelManager.enablePanel();
+							atributesPanelManager.updatePanel();
+						}
 						break;
 					
 					case ROAD:
 						
 						if(!type.equals(PointType.ROAD)){
-							
+							if (type.equals(PointType.LOCAL))
+								node.setLocal(null);
 							setBackground(Theme.roadColor);
+							type = PointType.ROAD;
 						}
 						
-					break;
+						break;
 						
 					case LOCAL:
 						
-						node.setLocal(new Local());
-						type = PointType.LOCAL;
-						setBackground(Theme.localColor);
-						atributesPanelManager.enablePanel();
-						atributesPanelManager.updatePanel();
+						if(!type.equals(PointType.LOCAL)){
+							node.setLocal(new Local());
+							type = PointType.LOCAL;
+							setBackground(Theme.localColor);
+							atributesPanelManager.enablePanel();
+							atributesPanelManager.updatePanel();
+						}
 						
 						break;
 					
 					case STAIRS:
 						
-						type = PointType.STAIRS;
-						setBackground(Theme.stairsColor);
-						
+						if(!type.equals(PointType.STAIRS)){
+							if (type.equals(PointType.LOCAL))
+								node.setLocal(null);
+							type = PointType.STAIRS;
+							setBackground(Theme.stairsColor);
+						}
 						break;
 					
 					case EXIT:
 						
-						type = PointType.EXIT;
-						setBackground(Theme.exitColor);
-					
+						if(!type.equals(PointType.EXIT)){
+							if (type.equals(PointType.LOCAL))
+								node.setLocal(null);
+							type = PointType.EXIT;
+							setBackground(Theme.exitColor);
+						}
+						
 						break;
 					
 					case ERASE:
 					
-						type = PointType.NULL;
-						setBackground(null);
-						model.remove(node);
-						atributesPanelManager.selectNode(null);
-						node = null;
-						
+						if(!type.equals(PointType.NULL)){
+							type = PointType.NULL;
+							setBackground(null);
+							setOpaque(false);
+							model.remove(node);
+							atributesPanelManager.selectNode(null);
+							node = null;
+						}
 						break;
 					
 				}

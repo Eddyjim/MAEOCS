@@ -81,7 +81,7 @@ public class AtributesPanel extends JFrame {
 		setLocation(Theme.atributesPanelLocation);
 		panel = new JPanel();
 		this.add(panel);
-		panel.setLayout(new GridLayout(4,2));
+		panel.setLayout(new GridLayout(5,2));
 		this.node = node;
 		
 		/*
@@ -98,6 +98,7 @@ public class AtributesPanel extends JFrame {
 		cbCategory = new JComboBox();
 		
 		btApply = new JButton("Apply");
+		
 		
 		/*
 		 * Set the controls and backgrounds
@@ -123,6 +124,8 @@ public class AtributesPanel extends JFrame {
 
 		txId.setEnabled(false);
 		
+		disableEdition();
+		
 		/*
 		 * Add the components to the panel
 		 */
@@ -134,9 +137,10 @@ public class AtributesPanel extends JFrame {
 		panel.add(txLocalName);
 		panel.add(lbCategory);
 		panel.add(cbCategory);
+		panel.add(btApply);
 		
 		this.setVisible(true);
-		setEnabled(false);
+		
 	
 	}
 	
@@ -145,33 +149,56 @@ public class AtributesPanel extends JFrame {
 	 */
 	public void showValues() {
 		
-		if (node == null) {
-			System.out.println("nulo");
-		}
-
 		txId.setText(node.getSelectedNode().getId());
-		
 		Local local = node.getSelectedNode().getLocal();
-		txLocalName.setText(local.getName());
-		txLocalNumber.setText(local.getLocalNumber());
 		
-		if(local.getCategory() != null){
-			switch (local.getCategory()) {
-			case Restroom:
-				cbCategory.setSelectedIndex(0);
-				break;
-	
-			case Restaurant:
-				cbCategory.setSelectedIndex(1);
-				break;
-				
-			case Shopping:
-				cbCategory.setSelectedIndex(2);
-				break;
+		if (local != null){
+			txLocalName.setText(local.getName());
+			txLocalNumber.setText(local.getLocalNumber());
 			
-			default:
-				break;
+			if(local.getCategory() != null){
+				switch (local.getCategory()) {
+				case Restroom:
+					cbCategory.setSelectedIndex(0);
+					break;
+		
+				case Restaurant:
+					cbCategory.setSelectedIndex(1);
+					break;
+					
+				case Shopping:
+					cbCategory.setSelectedIndex(2);
+					break;
+				
+				default:
+					break;
+				}
 			}
 		}
+		else{
+			disableEdition();
+		}
+	}
+
+	/**
+	 * This methods disables all the fields that allow to edit a Local value
+	 */
+	private void disableEdition() {
+		
+		txLocalName.setEnabled(false);
+		txLocalNumber.setEnabled(false);
+		cbCategory.setEnabled(false);
+		
+	}
+
+	/**
+	 * This methods enables all the fields that allow to edit a Local value
+	 */
+	public void enableEdition() {
+		
+		txLocalName.setEnabled(true);
+		txLocalNumber.setEnabled(true);
+		cbCategory.setEnabled(true);
+		
 	}
 }

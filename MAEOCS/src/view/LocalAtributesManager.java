@@ -33,7 +33,7 @@ public class LocalAtributesManager {
 	}
 	
 	public void enablePanel(){
-		panel.setEnabled(true);
+		panel.enableEdition();
 	}
 
 }

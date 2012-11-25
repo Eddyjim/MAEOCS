@@ -102,7 +102,7 @@ public class MapPanel extends JPanel{
     	this.setMaximumSize(new Dimension(widthX, heightY));
     	this.setSize(new Dimension(widthX, heightY));
 
-    	backGroundlLabel.setLayout(new GridLayout(gridSize, gridSize));
+    	backGroundlLabel.setLayout(new GridLayout(heightY/gridSize, widthX/gridSize));
     	this.setLayout(new GridLayout(1, 1));
         createGrid();
         this.add(backGroundlLabel);
@@ -136,10 +136,16 @@ public class MapPanel extends JPanel{
 	 * This method creates a new grid with the new size
 	 */
     private void createGrid(){
-    	this.mapSections = new MapSection[gridSize][gridSize];
+    	 
+    	int w= width/gridSize;
+    	int h = height/gridSize;
     	
-    	for (int i = 0; i < gridSize; i++) {
-			for (int j = 0; j < gridSize; j++) {
+    	System.out.println(""+w+","+h);
+    	
+    	this.mapSections = new MapSection[w][h];
+    	
+    	for (int j = 0; j < h; j++) {
+			for (int i = 0; i < w; i++) {
 				mapSections[i][j]= new MapSection(state,localAtributesManager, i, j, model);
 				backGroundlLabel.add(mapSections[i][j].getLabel());
 			}

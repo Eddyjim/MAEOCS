@@ -166,41 +166,41 @@ public class MapModel {
 		/**
 		 * Adds the next node to the right
 		 */
-		String key = ""+(x+1)+","+y;
-		Node n = map.get(key);
-	
-		if (n != null) {
-			ans.add(n);
+		int x1 = x+1;
+		String key = ""+x1+","+y;
+		
+		if(map.containsKey(key)){
+			ans.add( map.get(key));
 		}
 		
 		/**
 		 * Adds the next node to the left
 		 */
-		key = ""+(x-1)+","+y;
-		n = map.get(key);
-		
-		if (n != null) {
-			ans.add(n);
+		x1=x-1;
+		key = ""+x1+","+y;
+
+		if(map.containsKey(key)){
+			ans.add( map.get(key));
 		}
 		
 		/**
 		 * Adds the next node above
 		 */
-		key = ""+x+","+(y+1);
-		n = map.get(key);
+		x1=y+1;
+		key = ""+x+","+x1;
 		
-		if (n != null) {
-			ans.add(n);
+		if(map.containsKey(key)){
+			ans.add( map.get(key));
 		}
 		
 		/**
 		 * Adds the next node bellow
 		 */
-		key = ""+x+","+(y-1);
-		n = map.get(key);
-		
-		if (n != null) {
-			ans.add(n);
+		x1=y-1;
+		key = ""+x+","+x1;
+
+		if(map.containsKey(key)){
+			ans.add( map.get(key));
 		}
 		
 		return ans;
@@ -231,8 +231,8 @@ public class MapModel {
 	 * @return a list of nodes that are not connected yet with the base node
 	 */
 	public ArrayList<Node> getNotConnectedNeighbors(Node node) {
-		ArrayList<Node> connenctions = getNeighbors(node.getPosition().x, node.getPosition().y);
 		
+		ArrayList<Node> connenctions = getNeighbors(node.getPosition().x, node.getPosition().y);
 		Iterator<Node> i = connenctions.iterator();
 		
 		while (i.hasNext()) {

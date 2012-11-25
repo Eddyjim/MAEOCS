@@ -34,7 +34,7 @@ public class MapWindow extends JFrame{
 		 
 	    map.resize(width,height, gridSize);
 	    
-	    mapDimension = new Dimension (width+8,height+32);
+	    mapDimension = new Dimension (width+gridSize,height+gridSize);
 	    setSize(mapDimension);
 	    setResizable(false);
 	    setEnabled(true);

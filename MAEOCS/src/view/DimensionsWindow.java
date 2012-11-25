@@ -92,10 +92,9 @@ public class DimensionsWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				map.newSize(Integer.parseInt(
-						txWidth.getText()), 
-						Integer.parseInt(txWidth.getText()), 
-						Integer.parseInt(txGrindSize.getText()));
+				map.newSize(Integer.parseInt(txWidth.getText()), 
+							Integer.parseInt(txHeight.getText()), 
+							Integer.parseInt(txGrindSize.getText()));
 				setVisible(false);
 			}
 		});
