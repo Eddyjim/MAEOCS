@@ -145,7 +145,12 @@ public class Node{
 		
 	}
 	
+	/**
+	 * This method sets a local for the actual node
+	 * @param local is the local that is going to be the node's local
+	 */
 	public void setLocal(Local local){
 		this.local = local;
 	}
+	
 }

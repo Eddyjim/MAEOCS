@@ -77,9 +77,9 @@ public class MapSection extends JLabel{
 				
 				if (node == null){
 					
-					String name = ""+posX+","+posY;
-					node = new Node(name, new Point(posX,posY));
-					model.addNode(name, node);
+					String id = ""+posX+","+posY;
+					node = new Node(id, new Point(posX,posY));
+					model.addNode(node);
 				}
 					
 				/**

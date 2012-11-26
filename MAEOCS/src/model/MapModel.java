@@ -1,11 +1,9 @@
 package model;
 
-import java.rmi.ConnectIOException;
 import java.util.HashMap;
 
-import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
@@ -19,13 +17,16 @@ import java.util.Map.Entry;
 public class MapModel {
 	
 	private static HashMap<String, Node> map;
+	private static Hashtable<String, String> localsDictionary;
 	
 	public MapModel(){
 		map = new HashMap<String, Node>();
+		localsDictionary = new Hashtable<String, String>();
 	}
 	
-	public void addNode(String name, Node node){
-		map.put(name, node);
+	public void addNode(Node node){
+		
+		map.put(node.getId(), node);
 	}
 	
 	/**
@@ -130,7 +131,7 @@ public class MapModel {
 	 */
 	private static void cleanRoads(HashMap<String, ArrayList<String>> roads) {
 		
-		HashMap<String,ArrayList<String>> conections = new HashMap<String, ArrayList<String>>();
+//		HashMap<String,ArrayList<String>> conections = new HashMap<String, ArrayList<String>>();
 		
 		for (Entry<String, ArrayList<String>> entry : roads.entrySet()) {
 			
@@ -139,7 +140,7 @@ public class MapModel {
 			
 			boolean usable = false;
 			
-			while (i.hasNext()) {
+			while (i.hasNext() && !usable) {
 				String s = i.next();
 				if (!map.get(s).isVisited()){
 					usable = true; 	
@@ -245,5 +246,12 @@ public class MapModel {
 		return connenctions;
 	}
 	
+	/**
+	 * This method adds a combination between local name and node id for future requirements
+	 * 
+	 */
+	public void addLocalToDictionary(String id, String name){
+		localsDictionary.put(name, id);
+	}
 }
 	

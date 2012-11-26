@@ -11,8 +11,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import model.Node;
-
 
 /**
  * This class is the main menu of the interface for the application
@@ -136,6 +134,9 @@ public class MaeocsMappingApplication extends JFrame{
         editMenu.add(copyAction);
         editMenu.add(pasteAction);
         
+        /*
+         * Sets the "New" button action
+         */
         newAction.addActionListener(new ActionListener() {
 			
 			@Override
@@ -153,6 +154,10 @@ public class MaeocsMappingApplication extends JFrame{
 			
 		});
         
+        
+        /*
+         * Sets the "Edit" button action
+         */
         editAction.addActionListener(new ActionListener() {
 			
 			@Override
@@ -162,6 +167,9 @@ public class MaeocsMappingApplication extends JFrame{
 			}
 		});
         
+        /*
+         * Sets the "Open Image" button action
+         */
         openImageAction.addActionListener(new ActionListener() {
 			
 			@Override
