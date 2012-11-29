@@ -73,7 +73,7 @@ public class MapSection extends JLabel{
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				atributesPanelManager.disableEdition();
 				if (node == null){
 					
 					String id = ""+posX+","+posY;

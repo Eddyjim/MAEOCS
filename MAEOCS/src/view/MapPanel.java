@@ -12,12 +12,17 @@ import java.awt.Shape;
 import java.awt.image.ImageObserver;
 import java.net.URL;
 import java.text.AttributedCharacterIterator;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map.Entry;
 
+import javax.naming.directory.DirContext;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.MapModel;
+import model.RoadsDirectory;
 
 
 /**
@@ -42,7 +47,12 @@ public class MapPanel extends JPanel{
 	 * Is the map model used to for calculations and other values
 	 */
 	private MapModel model;
-
+	
+	/**
+	 * Its the roads' directory to save the outcoming roads
+	 */
+	private RoadsDirectory roads;
+	
     /**
      * Selected state
      */
@@ -82,6 +92,7 @@ public class MapPanel extends JPanel{
     	this.localAtributesManager = selectedNode;
     	this.state = state;
     	model = new MapModel();
+    	roads = new RoadsDirectory();
     }
     
     /**
@@ -142,6 +153,22 @@ public class MapPanel extends JPanel{
 	public void paintBackground(Image img) {
 		backGroundlLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height, 1)));
 		backGroundlLabel.setSize(width,height);
+	}
+	
+	public void compileMap(){
+		Hashtable<String, String> locals =  model.getDirectory();
+		
+		for(Entry<String, String> entry : locals.entrySet()){
+			for (Entry<String, String> entry2 : locals.entrySet()) {
+				String n1 = entry.getValue();
+				String n2 = entry.getKey();
+				if(n2!=n1){
+					ArrayList<String> road =model.aStar(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)));
+					roads.addRoad(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)),roads);
+				}
+			}
+		}
+		
 	}
 }
  

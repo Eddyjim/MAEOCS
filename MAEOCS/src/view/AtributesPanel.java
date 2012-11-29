@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.Category;
 import model.Local;
 
 /**
@@ -69,7 +72,6 @@ public class AtributesPanel extends JFrame {
 	 */
 	private JPanel panel;
 	
-	@SuppressWarnings("unused")
 	private JButton btApply;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -115,14 +117,19 @@ public class AtributesPanel extends JFrame {
 		cbCategory.setBackground(Theme.background);
 		cbCategory.setForeground(Theme.foreground);
 		
+		btApply.setBackground(Theme.background);
+		btApply.setForeground(Theme.foreground);
+		
 		/*
 		 * Add the categories to the comboBox
 		 */
-		cbCategory.addItem("Restroom"); 	//Index 0
-		cbCategory.addItem("Restaurant");	//Index 1
-		cbCategory.addItem("Shoping");		//Index 2
+		cbCategory.addItem(Category.Restroom); 	//Index 0
+		cbCategory.addItem(Category.Restaurant);	//Index 1
+		cbCategory.addItem(Category.Shopping);		//Index 2
 
 		txId.setEnabled(false);
+		
+		setBtApplyListener();
 		
 		disableEdition();
 		
@@ -141,7 +148,17 @@ public class AtributesPanel extends JFrame {
 		
 		this.setVisible(true);
 		
+	}
 	
+	public void setBtApplyListener(){
+		btApply.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				node.updateLocal(txLocalName.getText(),txLocalNumber.getText(),(Category) cbCategory.getSelectedItem());
+				
+			}
+		});
 	}
 	
 	/**
@@ -174,6 +191,7 @@ public class AtributesPanel extends JFrame {
 					break;
 				}
 			}
+			
 		}
 		else{
 			disableEdition();
@@ -183,11 +201,12 @@ public class AtributesPanel extends JFrame {
 	/**
 	 * This methods disables all the fields that allow to edit a Local value
 	 */
-	private void disableEdition() {
+	public void disableEdition() {
 		
 		txLocalName.setEnabled(false);
 		txLocalNumber.setEnabled(false);
 		cbCategory.setEnabled(false);
+		btApply.setEnabled(false);
 		
 	}
 
@@ -199,6 +218,6 @@ public class AtributesPanel extends JFrame {
 		txLocalName.setEnabled(true);
 		txLocalNumber.setEnabled(true);
 		cbCategory.setEnabled(true);
-		
+		btApply.setEnabled(true);
 	}
 }

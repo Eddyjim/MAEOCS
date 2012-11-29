@@ -1,5 +1,6 @@
 package view;
 
+import model.Category;
 import model.Node;
 
 public class LocalAtributesManager {
@@ -23,9 +24,7 @@ public class LocalAtributesManager {
 	}
 
 	public void addPanel(AtributesPanel panel) {
-		
 		this.panel = panel;
-		
 	}
 	
 	public void updatePanel(){
@@ -34,6 +33,17 @@ public class LocalAtributesManager {
 	
 	public void enablePanel(){
 		panel.enableEdition();
+	}
+
+	public void updateLocal(String localName, String localNumber, Category category) {
+		node.getLocal().setName(localName);
+		node.getLocal().setLocalNumber(localNumber);
+		node.getLocal().setCategory(category);
+	}
+
+	public void disableEdition() {
+		panel.disableEdition();
+		
 	}
 
 }

@@ -11,6 +11,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import model.RoadsDirectory;
+
 
 /**
  * This class is the main menu of the interface for the application
@@ -48,6 +50,7 @@ public class MaeocsMappingApplication extends JFrame{
 		this.setMinimumSize(principalDim);
 		this.setResizable(false);
 		this.setVisible(true);
+
 		selectedState = new State();
 		selectedNode = new LocalAtributesManager();
 		
@@ -104,6 +107,10 @@ public class MaeocsMappingApplication extends JFrame{
         openImageAction.setBackground(Theme.background);
         openImageAction.setEnabled(false);
         
+        final JMenuItem compileMap = new JMenuItem("Compile Map");
+        openImageAction.setForeground(Theme.blockedForeground);
+        openImageAction.setBackground(Theme.background);
+        
         
         JMenuItem exitAction = new JMenuItem("Exit");
         exitAction.setForeground(Theme.foreground);
@@ -128,6 +135,7 @@ public class MaeocsMappingApplication extends JFrame{
         fileMenu.add(newAction);
         fileMenu.add(editAction);
         fileMenu.add(openImageAction);
+        fileMenu.add(compileMap);
         fileMenu.addSeparator();
         fileMenu.add(exitAction);
         editMenu.add(cutAction);
@@ -186,6 +194,16 @@ public class MaeocsMappingApplication extends JFrame{
 				
 			}
 		});
+        
+        compileMap.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				selected.compileMap();
+			}
+		});
+        
+        
         
         tools = new ToolsGraphicsPanel();
         atributes = new AtributesPanel(selectedNode);

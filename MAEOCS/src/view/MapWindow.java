@@ -3,6 +3,8 @@ package view;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
+import com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter;
+
 import model.Node;
 
 /**
@@ -52,5 +54,9 @@ public class MapWindow extends JFrame{
 		
 		map.setBackground(imgFile2);
 		
+	}
+
+	public void compileMap() {
+		map.compileMap();
 	}
 }

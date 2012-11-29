@@ -41,4 +41,17 @@ public class Local {
 		return category;
 	}
 
+	public void setName(String localName) {
+		this.name = localName;
+	}
+
+	public void setLocalNumber(String localNumber) {
+		this.localNumber = localNumber;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+		
+	}
+
 }

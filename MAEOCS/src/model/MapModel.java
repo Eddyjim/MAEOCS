@@ -259,5 +259,13 @@ public class MapModel {
 	public void removeFromLocalDictionary(String name){
 		localsDictionary.remove(name);
 	}
+
+	public Hashtable<String, String> getDirectory() {
+		return localsDictionary;
+	}
+
+	public Node getNode(String key) {
+		return map.get(key);
+	}
 }
 	
