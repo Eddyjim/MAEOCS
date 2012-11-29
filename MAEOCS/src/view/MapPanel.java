@@ -110,28 +110,6 @@ public class MapPanel extends JPanel{
         this.setOpaque(true);
     }
 
-    public ImageIcon createImage(String path) {
-	  URL imgURL = getClass().getResource(path);
-	     if (imgURL != null) {
-	         return new ImageIcon(imgURL);
-	     } else {
-	         System.err.println("Couldn't find files: " + path);
-	         return null;
-	     }
-	 }
-    	 
-	 @Override
-	 public void paint(Graphics g) {
-	 
-	  // Paint the background picture
-	  if(mainBackGroundImg != null) {
-	   g.drawImage(mainBackGroundImg, 0, 0, null);
-	  }
-	  
-	  super.paint(g);
-	 
-	 }
-    
 	/**
 	 * This method creates a new grid with the new size
 	 */
@@ -139,8 +117,6 @@ public class MapPanel extends JPanel{
     	 
     	int w= width/gridSize;
     	int h = height/gridSize;
-    	
-    	System.out.println(""+w+","+h);
     	
     	this.mapSections = new MapSection[w][h];
     	

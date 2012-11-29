@@ -69,9 +69,8 @@ public class MapSection extends JLabel{
 	
 	private void setActionListener(){
 		
-//		final MapSection thisMapSection = this;
-		
 		addMouseListener( new MouseListener() {
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -91,12 +90,14 @@ public class MapSection extends JLabel{
 				/**
 				 * Adds all the adjacent nodes that have not been added in the model
 				 */
-				while (i.hasNext()) {
-					Node n = i.next();
-					if (!n.equals(null))
-						n.addConnection(node.getId(), node);
-						node.addConnection(n.getId(), n);
-				}
+					while (i.hasNext()) {
+						Node n = i.next();
+						if (!n.equals(null)){
+							n.addConnection(node.getId(), node);
+							node.addConnection(n.getId(), n);
+						}
+					}	
+				
 				
 				setOpaque(true);
 				
@@ -158,10 +159,13 @@ public class MapSection extends JLabel{
 					case ERASE:
 					
 						if(!type.equals(PointType.NULL)){
-							type = PointType.NULL;
+							
 							setBackground(null);
 							setOpaque(false);
 							model.remove(node);
+							if (type.equals(PointType.LOCAL))
+								model.removeFromLocalDictionary(node.getLocal().getName());
+							type = PointType.NULL;
 							atributesPanelManager.selectNode(null);
 							node = null;
 						}

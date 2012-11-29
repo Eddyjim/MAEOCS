@@ -167,18 +167,28 @@ public class MapModel {
 		/**
 		 * Adds the next node to the right
 		 */
-		int x1 = x+1;
-		String key = ""+x1+","+y;
+		int alt = x+1;
+		String key = ""+alt+","+y;
+		
+		if(map.containsKey(key)){
+			ans.add(map.get(key));
+		}
+		
+		/**
+		 * Adds the next node to the left
+		 */
+		alt=x-1;
+		key = ""+alt+","+y;
 		
 		if(map.containsKey(key)){
 			ans.add( map.get(key));
 		}
 		
 		/**
-		 * Adds the next node to the left
+		 * Adds the next node below
 		 */
-		x1=x-1;
-		key = ""+x1+","+y;
+		alt=y+1;
+		key = ""+x+","+alt;
 
 		if(map.containsKey(key)){
 			ans.add( map.get(key));
@@ -187,18 +197,8 @@ public class MapModel {
 		/**
 		 * Adds the next node above
 		 */
-		x1=y+1;
-		key = ""+x+","+x1;
-		
-		if(map.containsKey(key)){
-			ans.add( map.get(key));
-		}
-		
-		/**
-		 * Adds the next node bellow
-		 */
-		x1=y-1;
-		key = ""+x+","+x1;
+		alt=y-1;
+		key = ""+x+","+alt;
 
 		if(map.containsKey(key)){
 			ans.add( map.get(key));
@@ -234,16 +234,18 @@ public class MapModel {
 	public ArrayList<Node> getNotConnectedNeighbors(Node node) {
 		
 		ArrayList<Node> connenctions = getNeighbors(node.getPosition().x, node.getPosition().y);
-		Iterator<Node> i = connenctions.iterator();
+		ArrayList<Node> newConnections = new ArrayList<Node>();
+		int i = 0;
 		
-		while (i.hasNext()) {
-			Node n = i.next();
+		while (i < connenctions.size()) {
+			Node n = connenctions.get(i);
 			if(node.isConnectedTo(n.getId())){
-				connenctions.remove(n);
+				newConnections.add(n);
 			}
+			i++;
 		}
 		
-		return connenctions;
+		return newConnections;
 	}
 	
 	/**
@@ -252,6 +254,10 @@ public class MapModel {
 	 */
 	public void addLocalToDictionary(String id, String name){
 		localsDictionary.put(name, id);
+	}
+	
+	public void removeFromLocalDictionary(String name){
+		localsDictionary.remove(name);
 	}
 }
 	
