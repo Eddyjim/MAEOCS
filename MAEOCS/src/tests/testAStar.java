@@ -77,7 +77,7 @@ public class testAStar {
 	}
 	
 	public void initiate(){
-		
+			
 		n1.addConnection(n2.getId(), n2);
 		n1.addConnection(n4.getId(), n4);
 		

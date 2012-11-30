@@ -16,6 +16,7 @@
 \newcommand{\eciu}{\textsf{Escuela Colombiana de Ingeniería}}
 \newcommand{\Rlb}{\textsf{Rodrigo López B.}}
 \newcommand{\andr}{\texttt{Android~}}
+\newcommand{\gp}{\texttt{GPS~}}
 
 \begin{document}
 
@@ -40,15 +41,52 @@ Android, Java, GPS.
 
 \section{Introducción}
 
-\IEEEPARstart{H}{}oy en día es fácil evidenciar cómo los planteles públicos y privados van en crecimiento, ampliando sus zonas en incluso dispersadoras en diferentes puntos de un mismo sector, por ello las personas que son nuevas en estos ambientes, o que poseen mala memoria,  alguna discapacidad cognitiva, o tenga problemas para comunicarse a otros, lo cual les impide ubicarse de una forma fácil y se ven afectadas cuando pierden el tiempo mientras miran mapas que son poco claros. 
+\IEEEPARstart{H}{}oy en día es fácil evidenciar cómo los planteles públicos y privados van en crecimiento, ampliando sus
+zonas en incluso dispersadoras en diferentes puntos de un mismo sector, por ello las personas que son nuevas en estos
+ambientes, o que poseen mala memoria, alguna discapacidad cognitiva, o tenga problemas para comunicarse a otros, lo cual les
+impide ubicarse de una forma fácil y se ven afectadas cuando pierden el tiempo mientras miran mapas que son poco claros.
 
-Teniendo en cuenta que en esta era tecnológica, los dispositivos móviles cuentan con una capacidad de procesamiento que día a día aumenta. Las limitaciones que se tenía para resolver problemas de la vida cotidiana a través de un computador se hacen cada vez mas pequeñas. El crecimiento en tecnología a impulsado un nuevo modelo de desarrollo de aplicaciones para dispositivos móviles. Se han desarrollado frameworks y arquitecturas que facilitan el desarrollo e interacción con distintas tecnologías. 
+Teniendo en cuenta que en esta era tecnológica, los dispositivos móviles cuentan con una capacidad de procesamiento que día
+a día aumenta. Las limitaciones que se tenía para resolver problemas de la vida cotidiana a través de un computador se hacen
+cada vez menos. El crecimiento en tecnología a impulsado un nuevo modelo de desarrollo de aplicaciones para
+dispositivos móviles. Se han desarrollado frameworks y arquitecturas que facilitan el desarrollo e interacción con distintas
+tecnologías y estas permiten llevar las ventajas de la computación a la palma de la mano, permitiendo realizar procecimientos y
+calculos de casi cualquier complejidad en este tipo de
+dispositivos, dando solucíon a problemáticas de muchas índoles.
 
-En este documento se describe el desarrollo de una aplicación para dispositivos con \andr que permite orientar a una persona a su destino dentro de un sitio cerrado donde un GPS convencional no pueda hacerlo. La aplicación requiere un archivo que contenga el mapa del sitio, para el cual se plantea el desarrollo de una aplicación que permita la creación de un mapa que pueda usarse en la aplicación móvil. También se describe la metodología que se utiliza para encontrar los caminos que muestra la aplicación. Y se mostrarán los resultados obtenidos tanto a nivel técnico de las aplicaciones, como de los resultados funcionales de la aplicación. 
+Como se mencionaba anteriormente, la orientación es un problema que a través de la tecnología movil ya venido siendo tratado.
+Actualmente se puede una persona puede saber su posición
+geográfica usando un dispositivo que utilize \gp y seleccionando un destino se puede solicitar una ruta trazada que indique como
+llegar de un punto a otro. No obstante este tipo de
+orientación solo funciona actualmente en espacios abiertos y rutas de transito, dejando de lado lugares que pueden llegar a
+desorientar a las personas que transitan en estos sitios.
+
+\section{Planteamiento de la solución}
+Para dar solución a esta problemática hay muchas posibles soluciones, hablando de la arquitectura de la solución que se desea usar;
+pero el problema de trazar rutas entre dos caminos
+si se puede llegar a tratar de una manera general para cualquier solución. Partiendo del hecho que calcular una ruta entre todas las
+conexiones puede representase en modelos
+abstractos de grafos, que ya han sido parte de investigaciones para solucion de problemas.
+
+La teoría de grafos ha dado como resultado de investigaciones una serie de algoritmos que responden el problema de busqueda de
+caminos, algoritmos que han sido diseñados para dar
+solución a distintas estructuras de grafos y a su caracterización. Dentro de los algoritmos se encuentran distintas de estrategias
+para tratar el problema, lo cual hace a algunos de
+estos más efectivos en problemas específicos. Tambíen se han diseñado algoritmos que usan patrones expertos para agilizar la toma de
+desiciones
+
+La teoría de grafos 
 
 \section{Conclusiones}
-Ya que \andr es actualmente el sistema operativo para dispositivos moviles mas usado en el mundo, ofrece una ventaja hablando del numero de usuarios potenciales para una aplicación y el objetivo de la aplicación es ayudar a las personas a ubicarse en lugares de dificil orientación, hace que el proyecto tenga su foco en la parte social. Esperando producir un mayor impacto se espera alcanzar la mayor cantidad de personas y por esto que \andr es la plataforma adecuada para hacerlo.
-El desarrollo de la aplicación permitío la creación de guias para aprendizaje y desarrollo de aplicaciones en el mismo sistema, beneficiando no solo a los usuarios de la aplicación sino a su vez a futuros desarrolladores. Durante la investigación para dar solución del problema de los caminos cortos, se optó por usar un algoritmo de busqueda conocido por su eficiencia, esto permite que la aplicación se pueda usar en la mayoría de dispositivos, sin necesidad de tener que usar dispositivos de última tecnologia, y así poder alcanzar mayor cantidad de usuarios.
+Ya que \andr es actualmente el sistema operativo para dispositivos moviles mas usado en el mundo, ofrece una ventaja
+hablando del numero de usuarios potenciales para una aplicación y el objetivo de la aplicación es ayudar a las personas a
+ubicarse en lugares de dificil orientación, hace que el proyecto tenga su foco en la parte social. Esperando producir un
+mayor impacto se espera alcanzar la mayor cantidad de personas y por esto que \andr es la plataforma adecuada para hacerlo.
+El desarrollo de la aplicación permitío la creación de guias para aprendizaje y desarrollo de aplicaciones en el mismo
+sistema, beneficiando no solo a los usuarios de la aplicación sino a su vez a futuros desarrolladores. Durante la
+investigación para dar solución del problema de los caminos cortos, se optó por usar un algoritmo de busqueda conocido por
+su eficiencia, esto permite que la aplicación se pueda usar en la mayoría de dispositivos, sin necesidad de tener que usar
+dispositivos de última tecnologia, y así poder alcanzar mayor cantidad de usuarios.
 
 
 \renewcommand{\refname}{Referencias}
