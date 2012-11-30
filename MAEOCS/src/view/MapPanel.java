@@ -20,6 +20,8 @@ import javax.naming.directory.DirContext;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import model.MapModel;
 import model.RoadsDirectory;
@@ -92,6 +94,7 @@ public class MapPanel extends JPanel{
     	this.localAtributesManager = selectedNode;
     	this.state = state;
     	model = new MapModel();
+    	selectedNode.setModel(model);
     	roads = new RoadsDirectory();
     }
     
@@ -156,16 +159,17 @@ public class MapPanel extends JPanel{
 	}
 	
 	public void compileMap(){
+		
 		Hashtable<String, String> locals =  model.getDirectory();
 		
 		for(Entry<String, String> entry : locals.entrySet()){
 			for (Entry<String, String> entry2 : locals.entrySet()) {
 			
 				String n1 = entry.getValue();
-				String n2 = entry.getKey();
-				if(n2!=n1){
-					ArrayList<String> road = model.aStar(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)));
-					roads.addRoad(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)),road);
+				String n2 = entry2.getValue();
+				if(n2 != n1){
+					ArrayList<String> road = model.aStar(model.getNode(n1),model.getNode(n2));
+					roads.addRoad(model.getNode(n1),model.getNode(n2),road);
 				}
 				
 			}
@@ -180,12 +184,20 @@ public class MapPanel extends JPanel{
 		int w = width/gridSize;
 		JLabel gridArray[][] = new JLabel[w][h];
 		
-		grid.setIcon(new ImageIcon(mainBackGroundImg));
+		if(mainBackGroundImg!= null){
+			grid.setIcon(new ImageIcon(mainBackGroundImg));
+			
+		}
+		
 		grid.setLayout(new GridLayout(h,w));
 		
 		for (int j = 0; j < h; j++) {
 			for (int i = 0; i < w; i++) {
 				JLabel label = new JLabel();
+				label.setBorder(LineBorder.createGrayLineBorder());
+				label.setLayout(new GridLayout(1,1));
+				label.setVisible(true);
+				label.setOpaque(false);
 				gridArray[i][j] = label;
 				switch (mapSections[i][j].getPointType()) {
 				case NULL:
@@ -193,18 +205,22 @@ public class MapPanel extends JPanel{
 					break;
 				case ROAD:
 					label.setBackground(Theme.roadColor);
+					label.setOpaque(true);
 					break;
 
 				case LOCAL:
 					label.setBackground(Theme.localColor);
+					label.setOpaque(true);
 					break;
 
 				case STAIRS:
 					label.setBackground(Theme.stairsColor);
+					label.setOpaque(true);
 					break;
 
 				case EXIT:
 					label.setBackground(Theme.exitColor);
+					label.setOpaque(true);
 					break;
 					
 				default:
@@ -213,7 +229,7 @@ public class MapPanel extends JPanel{
 			}
 		}
 		
-		SimulatorPanel simulation = new SimulatorPanel(width,height,grid,gridArray,model.getDirectory(), roads);
+		SimulatorPanel simulation = new SimulatorPanel(width,height,gridSize,grid,gridArray,model.getDirectory(), roads);
 		
 		simulation.setVisible(true);
 	}

@@ -171,7 +171,7 @@ public class MaeocsMappingApplication extends JFrame{
 				openImageAction.setForeground(Theme.foreground);
 				
 				compileMapAction.setEnabled(true);
-				editAction.setForeground(Theme.foreground);
+				compileMapAction.setForeground(Theme.foreground);
 				
 				showSimulatorAction.setEnabled(true);
 				showSimulatorAction.setForeground(Theme.foreground);
@@ -223,7 +223,7 @@ public class MaeocsMappingApplication extends JFrame{
 			}
 		});
         
-        viewMenu.addActionListener(new ActionListener() {
+        showSimulatorAction.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

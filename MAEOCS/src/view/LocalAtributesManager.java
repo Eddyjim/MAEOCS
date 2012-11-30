@@ -1,6 +1,10 @@
 package view;
 
+import java.nio.channels.FileChannel.MapMode;
+import java.util.Dictionary;
+
 import model.Category;
+import model.MapModel;
 import model.Node;
 
 public class LocalAtributesManager {
@@ -8,6 +12,8 @@ public class LocalAtributesManager {
 	private Node node;
 	
 	private AtributesPanel panel;
+	
+	private MapModel model;
 	
 	public LocalAtributesManager(){
 		node = null;
@@ -39,11 +45,16 @@ public class LocalAtributesManager {
 		node.getLocal().setName(localName);
 		node.getLocal().setLocalNumber(localNumber);
 		node.getLocal().setCategory(category);
+		model.addLocalToDictionary(node.getId(),localName);
 	}
 
 	public void disableEdition() {
 		panel.disableEdition();
 		
+	}
+
+	public void setModel(MapModel model) {
+		this.model = model;		
 	}
 
 }

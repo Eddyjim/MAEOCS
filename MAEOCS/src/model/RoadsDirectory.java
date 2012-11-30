@@ -6,6 +6,10 @@ import java.util.HashMap;
 public class RoadsDirectory {
 	
 	private HashMap<String, HashMap<String, ArrayList<String>>> directory;
+	
+	public RoadsDirectory(){
+		directory = new HashMap<String, HashMap<String,ArrayList<String>>>();
+	}
 
 	public void addRoad(Node node, Node node2, ArrayList<String> road) {
 		String key1 = node.getLocal().getName();

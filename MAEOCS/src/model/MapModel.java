@@ -43,6 +43,7 @@ public class MapModel {
 		roads = new HashMap<String, ArrayList<String>>();
 		
 		ArrayList<String> road = new ArrayList<String>();
+		
 		road.add(pointA.getId());
 
 		roads.put(pointA.getId(), road);
@@ -54,7 +55,7 @@ public class MapModel {
 						
 			HashMap<String, ArrayList<String>> choices = getChoices(roads);
 			String selected = bestChoice(choices,pointB);
-			
+			System.out.println(selected+"mejor");
 			map.get(selected).visit();
 			cleanRoads(roads);
 			roads.put(selected, choices.get(selected));
@@ -78,6 +79,7 @@ public class MapModel {
 		for (Entry<String, ArrayList<String>> entry : roads.entrySet()) {
 			
 			Node n = map.get(entry.getKey());
+			
 			Iterator<String> i = n.getConnectionsList().iterator();
 			
 			
@@ -87,6 +89,7 @@ public class MapModel {
 			while (i.hasNext()) {
 				String s = i.next();
 				if (!map.get(s).isVisited()){
+					System.out.println(n.getId()+"sin visitar");
 					ArrayList<String> visited = new ArrayList<String>();
 					visited.addAll(entry.getValue());
 					visited.add(s);
@@ -239,7 +242,7 @@ public class MapModel {
 		
 		while (i < connenctions.size()) {
 			Node n = connenctions.get(i);
-			if(node.isConnectedTo(n.getId())){
+			if(!node.isConnectedTo(n.getId())){
 				newConnections.add(n);
 			}
 			i++;
@@ -253,6 +256,7 @@ public class MapModel {
 	 * 
 	 */
 	public void addLocalToDictionary(String id, String name){
+		System.out.println("Adding "+ name);
 		localsDictionary.put(name, id);
 	}
 	

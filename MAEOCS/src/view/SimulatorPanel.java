@@ -27,13 +27,13 @@ public class SimulatorPanel extends JFrame {
 	private int height;
 	
 	
-	public SimulatorPanel (int width, int height,JLabel grid, JLabel[][] gridArray, Hashtable<String, String> directory, RoadsDirectory roads){
+	public SimulatorPanel (int width, int height,int gridSize, JLabel grid, JLabel[][] gridArray, Hashtable<String, String> directory, RoadsDirectory roads){
 		
 		super();
 		this.roads = roads;
 		this.simulatorGrid = gridArray;
-		this.width = width;
-		this.height = height;
+		this.width = width/gridSize;
+		this.height = height/gridSize;
 		
 		JFrame choicesFrame = new JFrame();
 		final JComboBox pointA = new JComboBox();
@@ -91,6 +91,7 @@ public class SimulatorPanel extends JFrame {
 		for (int j = 0; j < height; j++) {
 			for (int i = 0; i < width; i++) {
 				simulatorGrid[i][j].setBackground(Theme.background);
+				
 			}
 		}
 		

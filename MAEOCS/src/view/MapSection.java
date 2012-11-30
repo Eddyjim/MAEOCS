@@ -94,6 +94,7 @@ public class MapSection extends JLabel{
 						Node n = i.next();
 						if (!n.equals(null)){
 							n.addConnection(node.getId(), node);
+							System.out.println(node.getId());
 							node.addConnection(n.getId(), n);
 						}
 					}	
