@@ -91,7 +91,7 @@ public class MaeocsMappingApplication extends JFrame{
         menuBar.add(viewMenu);
         
         /*
-         *  Create and add simple menu item to one of the drop down menu
+         *  Create and add simple menu items to the drop down menu
          */
         final JMenuItem newAction = new JMenuItem("New");
         newAction.setForeground(Theme.foreground);
@@ -107,9 +107,10 @@ public class MaeocsMappingApplication extends JFrame{
         openImageAction.setBackground(Theme.background);
         openImageAction.setEnabled(false);
         
-        final JMenuItem compileMap = new JMenuItem("Compile Map");
-        openImageAction.setForeground(Theme.blockedForeground);
-        openImageAction.setBackground(Theme.background);
+        final JMenuItem compileMapAction = new JMenuItem("Compile Map");
+        compileMapAction.setForeground(Theme.blockedForeground);
+        compileMapAction.setBackground(Theme.background);
+        compileMapAction.setEnabled(false);
         
         
         JMenuItem exitAction = new JMenuItem("Exit");
@@ -128,6 +129,11 @@ public class MaeocsMappingApplication extends JFrame{
         pasteAction.setForeground(Theme.foreground);
         pasteAction.setBackground(Theme.background);
         
+        final JMenuItem showSimulatorAction = new JMenuItem("Sumulator");
+        showSimulatorAction.setForeground(Theme.blockedForeground);
+        showSimulatorAction.setBackground(Theme.background);
+        showSimulatorAction.setEnabled(false);
+        
         /*
          * add the items to the menu item
          */
@@ -135,12 +141,15 @@ public class MaeocsMappingApplication extends JFrame{
         fileMenu.add(newAction);
         fileMenu.add(editAction);
         fileMenu.add(openImageAction);
-        fileMenu.add(compileMap);
+        fileMenu.add(compileMapAction);
         fileMenu.addSeparator();
         fileMenu.add(exitAction);
+        
         editMenu.add(cutAction);
         editMenu.add(copyAction);
         editMenu.add(pasteAction);
+        
+        viewMenu.add(showSimulatorAction);
         
         /*
          * Sets the "New" button action
@@ -152,16 +161,24 @@ public class MaeocsMappingApplication extends JFrame{
 				selected = new MapWindow(selectedState, selectedNode);
 				new DimensionsWindow(selected);
 				
+				/*
+				 * Enable edit size and compile map 
+				 */
 				editAction.setEnabled(true);
 				editAction.setForeground(Theme.foreground);
 				
 				openImageAction.setEnabled(true);
 				openImageAction.setForeground(Theme.foreground);
 				
+				compileMapAction.setEnabled(true);
+				editAction.setForeground(Theme.foreground);
+				
+				showSimulatorAction.setEnabled(true);
+				showSimulatorAction.setForeground(Theme.foreground);
+				
 			}
 			
 		});
-        
         
         /*
          * Sets the "Edit" button action
@@ -195,7 +212,10 @@ public class MaeocsMappingApplication extends JFrame{
 			}
 		});
         
-        compileMap.addActionListener(new ActionListener() {
+        /*
+         * Sets the "Compile Map" button action
+         */
+        compileMapAction.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -203,7 +223,13 @@ public class MaeocsMappingApplication extends JFrame{
 			}
 		});
         
-        
+        viewMenu.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				selected.startSimulation();
+			}
+		});
         
         tools = new ToolsGraphicsPanel();
         atributes = new AtributesPanel(selectedNode);
@@ -214,7 +240,6 @@ public class MaeocsMappingApplication extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectedState.setStateType(SelectedState.SELECT);
-				
 			}
 		});
         
@@ -223,7 +248,6 @@ public class MaeocsMappingApplication extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectedState.setStateType(SelectedState.ROAD);
-				
 			}
 		});
         
@@ -232,7 +256,6 @@ public class MaeocsMappingApplication extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectedState.setStateType(SelectedState.LOCAL);
-
 			}
 		});
         
@@ -241,7 +264,6 @@ public class MaeocsMappingApplication extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectedState.setStateType(SelectedState.STAIRS);
-				
 			}
 		});
         
@@ -250,7 +272,6 @@ public class MaeocsMappingApplication extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectedState.setStateType(SelectedState.EXIT);
-				
 			}
 		});
         
@@ -259,7 +280,6 @@ public class MaeocsMappingApplication extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectedState.setStateType(SelectedState.ERASE);
-				
 			}
 		});
         

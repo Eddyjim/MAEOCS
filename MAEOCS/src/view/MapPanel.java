@@ -160,15 +160,62 @@ public class MapPanel extends JPanel{
 		
 		for(Entry<String, String> entry : locals.entrySet()){
 			for (Entry<String, String> entry2 : locals.entrySet()) {
+			
 				String n1 = entry.getValue();
 				String n2 = entry.getKey();
 				if(n2!=n1){
-					ArrayList<String> road =model.aStar(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)));
+					ArrayList<String> road = model.aStar(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)));
 					roads.addRoad(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)),road);
+				}
+				
+			}
+		}
+		
+	}
+
+	public void startSimulation() {
+		
+		JLabel grid = new JLabel();
+		int h = height/gridSize;
+		int w = width/gridSize;
+		JLabel gridArray[][] = new JLabel[w][h];
+		
+		grid.setIcon(new ImageIcon(mainBackGroundImg));
+		grid.setLayout(new GridLayout(h,w));
+		
+		for (int j = 0; j < h; j++) {
+			for (int i = 0; i < w; i++) {
+				JLabel label = new JLabel();
+				gridArray[i][j] = label;
+				switch (mapSections[i][j].getPointType()) {
+				case NULL:
+					label.setBackground(Theme.background);
+					break;
+				case ROAD:
+					label.setBackground(Theme.roadColor);
+					break;
+
+				case LOCAL:
+					label.setBackground(Theme.localColor);
+					break;
+
+				case STAIRS:
+					label.setBackground(Theme.stairsColor);
+					break;
+
+				case EXIT:
+					label.setBackground(Theme.exitColor);
+					break;
+					
+				default:
+					break;
 				}
 			}
 		}
 		
+		SimulatorPanel simulation = new SimulatorPanel(width,height,grid,gridArray,model.getDirectory(), roads);
+		
+		simulation.setVisible(true);
 	}
 }
  

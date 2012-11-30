@@ -36,7 +36,7 @@ public class MapModel {
 	 * @param pointA is the first point used for reference in the algorithm
 	 * @param pointB is the second point used for reference in the algorithm
 	 */
-	public static ArrayList<String> aStar(Node pointA, Node pointB){
+	public ArrayList<String> aStar(Node pointA, Node pointB){
 		
 		HashMap<String, ArrayList<String>> roads;
 		

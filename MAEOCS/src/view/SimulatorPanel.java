@@ -1,93 +1,99 @@
 package view;
 
-import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Label;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
 
-public class SimulatorPanel extends JPanel {
+import model.RoadsDirectory;
+
+@SuppressWarnings("serial")
+public class SimulatorPanel extends JFrame {
 	
-	private JTextField origin;
-	private JTextField destiny;
 	private JLabel[][] simulatorGrid;
-	private JLabel simulatorWindow;
-	private JButton simulate;
 	
-	private int height;
+	@SuppressWarnings("unused")
+	private JLabel grid;
+	private RoadsDirectory roads;
+	
 	private int width;
-	private int grid;
+	private int height;
 	
 	
-	public SimulatorPanel (int width, int height, int grid){
+	public SimulatorPanel (int width, int height,JLabel grid, JLabel[][] gridArray, Hashtable<String, String> directory, RoadsDirectory roads){
+		
 		super();
-		
-		this.height = height;
+		this.roads = roads;
+		this.simulatorGrid = gridArray;
 		this.width = width;
+		this.height = height;
+		
+		JFrame choicesFrame = new JFrame();
+		final JComboBox pointA = new JComboBox();
+		final JComboBox pointB = new JComboBox();
+		JButton showRoadButton = new JButton("Road");
+		
+		choicesFrame.setLayout(new GridLayout(3,1));
+		choicesFrame.add(pointA);
+		choicesFrame.add(pointB);
+		choicesFrame.add(showRoadButton);
+		
+		choicesFrame.setVisible(true);
+		
+		choicesFrame.setLocation(Theme.choicesLocation);
+		
+		for (java.util.Map.Entry<String, String> entry : directory.entrySet()) {
+			pointA.addItem(entry.getKey());
+			pointB.addItem(entry.getKey());
+		}
+		
+		showRoadButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cleanSimulation();
+				paintRoad((String)pointA.getSelectedItem(), (String)pointB.getSelectedItem());
+				
+			}
+
+		});
+		
 		this.grid = grid;
+		this.setSize(width,height);
+		this.add(grid);
+		this.setResizable(false);
+		this.setLocation(Theme.simulationFrameLocation);
 		
-		this.setLayout(new GridLayout(4, 1));
-		
-		origin = new JTextField();
-		destiny = new JTextField();
-		simulatorGrid = new JLabel[width][height];
-		simulatorWindow = new JLabel();
-		simulate = new JButton("Simulate");
-		createSimulatorWindow();
-		this.add(simulatorWindow);
-		this.add(origin);
-		this.add(destiny);
-		this.add(simulate);
 	}
+	
+	public void paintRoad(String localA, String localB) {
+		
+		ArrayList<String> road = roads.getRoad(localA, localB);
+		
+		Iterator<String> i = road.iterator();
+		while (i.hasNext()) {
+			String n[] = ((String) i.next()).split(",");
+			simulatorGrid[Integer.parseInt(n[0])][Integer.parseInt(n[1])].setBackground(Theme.simulationRoadColor);
+		}
+		
+		
+	}
+	
+	private void cleanSimulation() {
 
-	private void createSimulatorWindow() {
-		
-		simulatorWindow.setLayout(new GridLayout (grid, grid));
-		
-		
-		simulatorWindow.setSize(width,height);
-		
-		for (int i = 0; i < grid; i++) {
-			for (int j = 0; j < grid; j++) {
-				simulatorGrid[i][j] = new JLabel ();
-				simulatorGrid[i][j].setLayout(new GridLayout(1,1));
-				simulatorWindow.add(simulatorGrid[i][j]);
+		for (int j = 0; j < height; j++) {
+			for (int i = 0; i < width; i++) {
+				simulatorGrid[i][j].setBackground(Theme.background);
 			}
 		}
 		
 	}
-	
-	public void setSimulateAction(ActionListener ls){
-		simulate.addActionListener(ls);
-	}
-	
-	public void paintAPoint (int i, int j){
-		Label label = new Label();
-		label.setBackground(Color.GREEN);
-		System.out.println("toy pintando: "+i+" "+j);
-		simulatorGrid[i][j].setText("o");
-		simulatorGrid[i][j].add(label);
-	}
-	
-	public void clearWindow (){
-		for (int i = 0; i < grid; i++) {
-			for (int j = 0; j < grid; j++) {
-				simulatorGrid[i][j].setText("");
-				simulatorGrid[i][j].removeAll();
-			}
-		}
-	}
 
-	public void paintBackground(Image img) {
-		simulatorWindow.setIcon(new ImageIcon(img.getScaledInstance(
-				simulatorWindow.getSize().width, simulatorWindow.getSize().height, 1)));
-	}
-	
 }

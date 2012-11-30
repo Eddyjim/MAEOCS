@@ -40,6 +40,7 @@ public class MapWindow extends JFrame{
 	    setSize(mapDimension);
 	    setResizable(false);
 	    setEnabled(true);
+	    
 	}
 	
 	public void setDimensionWindow(DimensionsWindow dimensionWindow){
@@ -58,5 +59,9 @@ public class MapWindow extends JFrame{
 
 	public void compileMap() {
 		map.compileMap();
+	}
+
+	public void startSimulation() {
+		map.startSimulation();
 	}
 }

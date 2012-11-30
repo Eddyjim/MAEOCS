@@ -196,7 +196,10 @@ public class MapSection extends JLabel{
 		});
 	}
 
-
+	public PointType getPointType(){
+		return type;
+	}
+	
 	public Component getLabel() {
 		return this;
 	}
