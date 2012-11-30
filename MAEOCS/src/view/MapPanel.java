@@ -164,7 +164,7 @@ public class MapPanel extends JPanel{
 				String n2 = entry.getKey();
 				if(n2!=n1){
 					ArrayList<String> road =model.aStar(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)));
-					roads.addRoad(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)),roads);
+					roads.addRoad(model.getNode(locals.get(n1)),model.getNode(locals.get(n2)),road);
 				}
 			}
 		}
