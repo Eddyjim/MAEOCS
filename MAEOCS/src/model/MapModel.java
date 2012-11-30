@@ -55,14 +55,14 @@ public class MapModel {
 						
 			HashMap<String, ArrayList<String>> choices = getChoices(roads);
 			String selected = bestChoice(choices,pointB);
-			System.out.println(selected+"mejor");
+			if(!roads.containsKey(pointB.getId()))
+				cleanRoads(roads);
 			map.get(selected).visit();
-			cleanRoads(roads);
 			roads.put(selected, choices.get(selected));
 			
 		}
 		
-		return roads.get(pointB);
+		return roads.get(pointB.getId());
 	}
 	
 	/**
@@ -89,7 +89,6 @@ public class MapModel {
 			while (i.hasNext()) {
 				String s = i.next();
 				if (!map.get(s).isVisited()){
-					System.out.println(n.getId()+"sin visitar");
 					ArrayList<String> visited = new ArrayList<String>();
 					visited.addAll(entry.getValue());
 					visited.add(s);
