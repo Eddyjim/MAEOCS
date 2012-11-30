@@ -169,8 +169,11 @@ public class MapPanel extends JPanel{
 				String n2 = entry2.getValue();
 				if(n2 != n1){
 					ArrayList<String> road = model.aStar(model.getNode(n1),model.getNode(n2));
+					if(road == null)
+						System.out.println("camino vacio");
 					roads.addRoad(model.getNode(n1),model.getNode(n2),road);
 				}
+				model.reset();
 				
 			}
 		}
@@ -184,24 +187,26 @@ public class MapPanel extends JPanel{
 		int w = width/gridSize;
 		JLabel gridArray[][] = new JLabel[w][h];
 		
-		if(mainBackGroundImg!= null){
-			grid.setIcon(new ImageIcon(mainBackGroundImg));
-			
-		}
+		
 		
 		grid.setLayout(new GridLayout(h,w));
 		
+		JLabel label;
 		for (int j = 0; j < h; j++) {
 			for (int i = 0; i < w; i++) {
-				JLabel label = new JLabel();
-				label.setBorder(LineBorder.createGrayLineBorder());
+				
+				label = new JLabel();
 				label.setLayout(new GridLayout(1,1));
-				label.setVisible(true);
-				label.setOpaque(false);
+				Border border = LineBorder.createGrayLineBorder();
+				label.setBorder(border);
+				
+//				label.setEnabled(true);
+//				label.setVisible(true);
+//				label.setOpaque(false);
 				gridArray[i][j] = label;
 				switch (mapSections[i][j].getPointType()) {
 				case NULL:
-					label.setBackground(Theme.background);
+					label.setBackground(null);
 					break;
 				case ROAD:
 					label.setBackground(Theme.roadColor);
@@ -223,12 +228,15 @@ public class MapPanel extends JPanel{
 					label.setOpaque(true);
 					break;
 					
-				default:
-					break;
 				}
+				
 			}
 		}
 		
+		if(mainBackGroundImg!= null){
+			grid.setIcon(new ImageIcon(mainBackGroundImg));
+			
+		}
 		SimulatorPanel simulation = new SimulatorPanel(width,height,gridSize,grid,gridArray,model.getDirectory(), roads);
 		
 		simulation.setVisible(true);

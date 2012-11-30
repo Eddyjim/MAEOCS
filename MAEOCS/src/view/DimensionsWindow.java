@@ -72,7 +72,6 @@ public class DimensionsWindow extends JFrame {
 		DimensionsWindow.txGrindSize.setBackground(Theme.background);
 		DimensionsWindow.txGrindSize.setForeground(Theme.foreground);
 		
-		
 		this.lbWidth.setBackground(Theme.background);
 		this.lbWidth.setForeground(Theme.foreground);
 		this.lbHeight.setBackground(Theme.background);

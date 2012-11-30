@@ -24,7 +24,7 @@ public class MapWindow extends JFrame{
 	     getContentPane().setBackground(Theme.background);
 	     setForeground(Theme.foreground);
 	     setBackground(Theme.background);
-	     getContentPane().setBackground(Theme.black);
+	     getContentPane().setBackground(Theme.background);
 	     map = new MapPanel(state,selectedNode);
 	     this.add(map);
 	     setEnabled(true);

@@ -153,4 +153,8 @@ public class Node{
 		this.local = local;
 	}
 	
+	
+	public void unVisit(){
+		visited=false;
+	}
 }

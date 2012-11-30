@@ -129,7 +129,7 @@ public class MaeocsMappingApplication extends JFrame{
         pasteAction.setForeground(Theme.foreground);
         pasteAction.setBackground(Theme.background);
         
-        final JMenuItem showSimulatorAction = new JMenuItem("Sumulator");
+        final JMenuItem showSimulatorAction = new JMenuItem("Simulator");
         showSimulatorAction.setForeground(Theme.blockedForeground);
         showSimulatorAction.setBackground(Theme.background);
         showSimulatorAction.setEnabled(false);
@@ -206,7 +206,6 @@ public class MaeocsMappingApplication extends JFrame{
 				chooser.setAcceptAllFileFilterUsed(false);
 				chooser.showOpenDialog(parent);
 				String imgFile = chooser.getSelectedFile().getPath();
-				System.out.println(imgFile);
 				selected.setBackgroundImage(imgFile);
 				
 			}

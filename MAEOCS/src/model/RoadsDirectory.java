@@ -16,7 +16,7 @@ public class RoadsDirectory {
 		String key2 = node2.getLocal().getName();
 		HashMap<String, ArrayList<String>> temp;
 		
-		if (directory.containsKey(key1)) {
+		if (!directory.containsKey(key1)) {
 			temp = new HashMap<String, ArrayList<String>>();
 			directory.put(key1, temp);
 		}
@@ -24,7 +24,7 @@ public class RoadsDirectory {
 		temp = directory.get(key1);
 		temp.put(key2, road);
 		
-		if (directory.containsKey(key2)) {
+		if (!directory.containsKey(key2)) {
 			temp = new HashMap<String, ArrayList<String>>();
 			directory.put(key2, temp);
 		}

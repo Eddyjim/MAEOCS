@@ -6,11 +6,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import model.RoadsDirectory;
 
@@ -19,8 +21,8 @@ public class SimulatorPanel extends JFrame {
 	
 	private JLabel[][] simulatorGrid;
 	
-	@SuppressWarnings("unused")
 	private JLabel grid;
+	private JPanel panel;
 	private RoadsDirectory roads;
 	
 	private int width;
@@ -31,7 +33,9 @@ public class SimulatorPanel extends JFrame {
 		
 		super();
 		this.roads = roads;
-		this.simulatorGrid = gridArray;
+		this.panel = new JPanel();
+		panel.setLayout(new GridLayout(1,1));
+		panel.setOpaque(true);
 		this.width = width/gridSize;
 		this.height = height/gridSize;
 		
@@ -49,7 +53,7 @@ public class SimulatorPanel extends JFrame {
 		
 		choicesFrame.setLocation(Theme.choicesLocation);
 		
-		for (java.util.Map.Entry<String, String> entry : directory.entrySet()) {
+		for (Entry<String, String> entry : directory.entrySet()) {
 			pointA.addItem(entry.getKey());
 			pointB.addItem(entry.getKey());
 		}
@@ -66,8 +70,10 @@ public class SimulatorPanel extends JFrame {
 		});
 		
 		this.grid = grid;
+		panel.add(this.grid);
 		this.setSize(width,height);
-		this.add(grid);
+		this.add(panel);
+		grid.setVisible(true);
 		this.setResizable(false);
 		this.setLocation(Theme.simulationFrameLocation);
 		
@@ -91,6 +97,7 @@ public class SimulatorPanel extends JFrame {
 		for (int j = 0; j < height; j++) {
 			for (int i = 0; i < width; i++) {
 				simulatorGrid[i][j].setBackground(Theme.background);
+				simulatorGrid[i][j].setOpaque(false);
 				
 			}
 		}

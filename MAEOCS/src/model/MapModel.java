@@ -255,7 +255,6 @@ public class MapModel {
 	 * 
 	 */
 	public void addLocalToDictionary(String id, String name){
-		System.out.println("Adding "+ name);
 		localsDictionary.put(name, id);
 	}
 	
@@ -269,6 +268,13 @@ public class MapModel {
 
 	public Node getNode(String key) {
 		return map.get(key);
+	}
+
+	public void reset() {
+		for(Entry<String,Node> entry : map.entrySet()){
+			entry.getValue().unVisit();
+		}
+		
 	}
 }
 	
