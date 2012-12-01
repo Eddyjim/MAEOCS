@@ -12,7 +12,7 @@
 \usepackage{cite}
 \usepackage{listings}
 
-\newcommand{\eci}{\textsf{Escuela Colombiana de Ingeniería Julio Garavito}}
+\newcommand{\eci}{\textsf{Escuela Colombiana de Ingeniería Julio Garavito~}}
 \newcommand{\eciu}{\textsf{Escuela Colombiana de Ingeniería}}
 \newcommand{\Rlb}{\textsf{Rodrigo López B.}}
 \newcommand{\andr}{\texttt{Android~}}
@@ -31,6 +31,7 @@
 \maketitle
 
 \begin{abstract}
+Esta investigación es pionera en \eci hablando a cerca de georeferenciación usando dispositivos moviles. El alcanze de la aplicación es la mejora en la calidad de vida de las personas, reduciendo tiempos y malentendidos.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -46,13 +47,7 @@ zonas en incluso dispersadoras en diferentes puntos de un mismo sector, por ello
 ambientes, o que poseen mala memoria, alguna discapacidad cognitiva, o tenga problemas para comunicarse a otros, lo cual les
 impide ubicarse de una forma fácil y se ven afectadas cuando pierden el tiempo mientras miran mapas que son poco claros.
 
-Teniendo en cuenta que en esta era tecnológica, los dispositivos móviles cuentan con una capacidad de procesamiento que día
-a día aumenta. Las limitaciones que se tenía para resolver problemas de la vida cotidiana a través de un computador se hacen
-cada vez menos. El crecimiento en tecnología a impulsado un nuevo modelo de desarrollo de aplicaciones para
-dispositivos móviles. Se han desarrollado frameworks y arquitecturas que facilitan el desarrollo e interacción con distintas
-tecnologías y estas permiten llevar las ventajas de la computación a la palma de la mano, permitiendo realizar procecimientos y
-calculos de casi cualquier complejidad en este tipo de
-dispositivos, dando solucíon a problemáticas de muchas índoles.
+Teniendo en cuenta que en esta era tecnológica, los dispositivos móviles cuentan con una capacidad de procesamiento que día a día aumenta. Las limitaciones que se tenía para resolver problemas de la vida cotidiana a través de un computador se hacen cada vez menos. El crecimiento en tecnología a impulsado un nuevo modelo de desarrollo de aplicaciones para dispositivos móviles. Se han desarrollado frameworks y arquitecturas que facilitan el desarrollo e interacción con distintas tecnologías y estas permiten llevar las ventajas de la computación a la palma de la mano, permitiendo realizar procecimientos y calculos de casi cualquier complejidad en este tipo de dispositivos, dando solucíon a problemáticas de muchas índoles.
 
 Como se mencionaba anteriormente, la orientación es un problema que a través de la tecnología movil ya venido siendo tratado.
 Actualmente se puede una persona puede saber su posición
@@ -67,42 +62,88 @@ pero el problema de trazar rutas entre dos caminos si se puede llegar a tratar d
 
 La teoría de grafos ha dado como resultado de investigaciones una serie de algoritmos que responden el problema de busqueda de caminos, algoritmos que han sido diseñados para dar solución a distintas estructuras de grafos y a su caracterización. Dentro de los algoritmos se encuentran distintas de estrategias para tratar el problema, lo cual hace a algunos de estos más efectivos en problemas específicos. Tambíen se han diseñado algoritmos que usan patrones expertos para agilizar la toma de desiciones.
 
-Para encontrar la ruta entre dos puntos ubicados en un mapa que podría contener bucles en sus caminos es necesario buscar un algoritmo que pueda avanzar de una forma ágil y que busque reducir la complejidad del calculo, reduciendo tiempo y recursos tecnológicos por la cantidad de datos que se tienen. Teniendo en cuenta estos requerimientos, se encontro un algoritmo que use un patrón experto, una heurística que reduzca la complejidad algoritmica.
+Para encontrar la ruta entre dos puntos ubicados en un mapa que podría contener bucles en sus caminos es necesario buscar un algoritmo que pueda avanzar de una forma ágil y que busque reducir la complejidad del calculo, reduciendo tiempo y recursos tecnológicos por la cantidad de datos que se tienen. Teniendo en cuenta estos requerimientos, se inició la busqueda de un algoritmo que use un patrón experto, una heurística que reduzca la complejidad algoritmica y el tiempo de respuesta.
+
+Al concluir el resultado de la investigación fue el usar la estrategia usada por "A*" o "A estrella". Un algoritmo que tiene el poder de reducir la complejidad de una solución a nivel lineal de a cuerdo a la calidad del experto que maneje; el éxito de esta estrategia esta basada en la exactitud de su patron experto, al que se le conoce como \textbf{heurística}. 
+
+La definición de una heurística es algo que de debe hacer con precaución, ya que si se hace una mala defición de esta, el algoritmo podría tener que calcular todas los posibles caminos antes de dar con la respuesta, o quizás nunca alcanzarla. Para evitar una definición erronea, se debe pensar en que tipo de problema se está tratando y que tipo de avance beneficia más. Teniendo en cuenta que el problema de ubicación que se intenta solucionar busca la menor distancia entre dos puntos en un mismo plano, problema que ha sido solucionado por la \emph{geometria euclediana}, en la que Euclides define en su primer postulado "Dados dos puntos se puede trazar una y solo una recta que los une". La longitud de la recta es la distancia que se espera re correr, por lo que se definió esta heuristica que se define como la comparación de las sumas entre la distancia anteriormente recorrida con el calculo de la longitud de la recta que une cada punto que tiene posibilidad de ser escogido. Escrito en forma algorítmica esta definición se escribió así:
+
+\lstset{language=Java, tabsize=1, showstringspaces=false}
+\begin{scriptsize}\ttfamily\begin{lstlisting}
+
+
+
+private static String bestChoice(
+HashMap<String,ArrayList<String>> choices,Node pointB){
+	double min = Double.MAX_VALUE;
+	String best = null;
+		
+	for (Entry<String, ArrayList<String>> entry : 
+		choices.entrySet()){
+		Node n = map.get(entry.getKey());
+		double expert = n.bestDistance(pointB);
+			
+		if (expert+entry.getValue().size()<min){
+			min = expert+entry.getValue().size();
+			best = n.getId();
+		}
+	}
+	return best;
+}
+\end{lstlisting}\end{scriptsize}
+
+Teniendo definida la herurística para la el algoritmo, se procede a derinir el comportamiento del algoritmo en general, el cual consta de un avanze \textbf{voraz} , comparando entre las conexiones que se han desarrollado con el avanze del algoritmo, expandiendo únicamente los nuevos caminos que se pueden formar al avanzar por la mejor opción visible, conservando los otros caminos que no han sido explorados y abandonando los caminos que llegan a su fin sin encontrar el punto esperado.
+
+\lstset{language=Java, tabsize=1, showstringspaces=true}
+\begin{scriptsize}\ttfamily\begin{lstlisting}
+	
+public ArrayList<String> aStar(Node pointA, Node pointB){
+	
+	HashMap<String, ArrayList<String>> roads;
+	roads = new HashMap<String, ArrayList<String>>();
+	ArrayList<String> road = new ArrayList<String>();
+
+	road.add(pointA.getId());
+	roads.put(pointA.getId(), road);
+		
+	/**
+	 * Calculates the roads until the desired point comes out
+	 */
+	while (!roads.containsKey(pointB.getId())){
+					
+		HashMap<String, ArrayList<String>> choices; 
+		choices = getChoices(roads);
+		String selected = bestChoice(choices,pointB);
+		if(!roads.containsKey(pointB.getId()))
+			cleanRoads(roads);
+		map.get(selected).visit();
+		roads.put(selected, choices.get(selected));
+		
+	}
+		
+	return roads.get(pointB.getId());
+}  
+\end{lstlisting}\end{scriptsize}
+Al terminar la ejecución del algoritmo, se encontrará un camino que une los dos puntos, intentando recorrer la menor distancia posible.
 
 \section{Conclusiones}
-Ya que \andr es actualmente el sistema operativo para dispositivos moviles mas usado en el mundo, ofrece una ventaja
-hablando del numero de usuarios potenciales para una aplicación y el objetivo de la aplicación es ayudar a las personas a
-ubicarse en lugares de dificil orientación, hace que el proyecto tenga su foco en la parte social. Esperando producir un
-mayor impacto se espera alcanzar la mayor cantidad de personas y por esto que \andr es la plataforma adecuada para hacerlo.
-El desarrollo de la aplicación permitío la creación de guias para aprendizaje y desarrollo de aplicaciones en el mismo
-sistema, beneficiando no solo a los usuarios de la aplicación sino a su vez a futuros desarrolladores. Durante la
-investigación para dar solución del problema de los caminos cortos, se optó por usar un algoritmo de busqueda conocido por
-su eficiencia, esto permite que la aplicación se pueda usar en la mayoría de dispositivos, sin necesidad de tener que usar
-dispositivos de última tecnologia, y así poder alcanzar mayor cantidad de usuarios.
+La investigación desarrollada llevó a la implementación de A*, algoritmo que busca desarrollar una busqueda rapida a travez de una heurística basada en geometria, ha permitido dar solución a la problemática de unir dos puntos que se encuentren en el mismo plano, permitiendo así dar un paso más hacia la orientación dentro de los lugares que no se encuentran cubiertos por los \gp actuales.
+
+Al tener acceso a equipamento tecnológico móvil que tiene la capacidad para ejecutar el algoritmo escrito, permite hacer busquedas de rutas en cualquier lugar, sin la necesidad de tener una estación de trabajo acentada. Mas bien permite a un mayor numero de usuarios beneficiarse de este tipo de aplicaciones, que tienen como meta mejorar la calidad de vida y reducir la perdida de tiempo causada por la desorientación. Ayudando no solamente a aquellos que cuentan con todas sus facultades físicas, sino a su vez audar a aquellos que tienen mayor inconveniente por tener limitaciones fisicas o mentales.
+
 
 
 \renewcommand{\refname}{Referencias}
 \begin{thebibliography}{50}
-\bibitem{And} Android Developers Official Website.\\
-\begin{scriptsize}  \verb|http://developer.android.com/guide/basics/what-is-android.html|\end{scriptsize}
-\bibitem{WikiAnd}
-\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Android_(operating_system)|\end{scriptsize}
-\bibitem{WikiOp}
-\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Open_Handset_Alliance|\end{scriptsize}
-\bibitem{dalvik}
-\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/Dalvik_(software)|\end{scriptsize}
-\bibitem{deve}
-\begin{scriptsize}  \verb|http://thedevelopersinfo.com/2009/11/17/using-assets-in-android/|\end{scriptsize}
-\bibitem{dalvikvm}
-\begin{scriptsize}  \verb|http://www.dalvikvm.com/|\end{scriptsize}
-\bibitem{soa}
-\begin{scriptsize}  \verb|http://developer.android.com/reference/android/util/Log.html| \end{scriptsize}`
-\begin{scriptsize}Android in Action, Second Edition, W. Frank Ableson, Robi Sen, Chris King, Manning \end{scriptsize}
+\bibitem{Teoria} Teoría de Grafos.\\
+\begin{scriptsize}  \verb|http://es.wikipedia.org/wiki/Teoría_de_grafos|\end{scriptsize}
+\bibitem{WikiA*}
+\begin{scriptsize}  \verb|http://en.wikipedia.org/wiki/A*_search_algorithm|\end{scriptsize}
+\bibitem{WikiGe}
+\begin{scriptsize}  \verb|http://es.wikipedia.org/wiki/Geometría_euclídea|\end{scriptsize}
 \bibitem{beginAnd}
-\begin{scriptsize}Beginning Android 2, Mark L. Murphy, Apress \end{scriptsize}
-\bibitem{andCook}
-\begin{scriptsize}The Android Developer's Cookbook Building Applications with the Android SDK, James Steele, Nelson To, 
-Addison-Wesley \end{scriptsize}
+\begin{scriptsize}Graph Theory, Keijo Ruohonen \end{scriptsize}
+
 
 \end{thebibliography}
 
