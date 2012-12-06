@@ -96,7 +96,7 @@ public class SimulatorPanel extends JFrame {
 
 		for (int j = 0; j < height; j++) {
 			for (int i = 0; i < width; i++) {
-				simulatorGrid[i][j].setBackground(Theme.background);
+				simulatorGrid[i][j].setBackground(null);
 				simulatorGrid[i][j].setOpaque(false);
 				
 			}

@@ -30,7 +30,7 @@ import model.RoadsDirectory;
 /**
  * This class is used to contain the grid that simulates the map grille
  * 
- * @author Carlos Gaitán Mora && Edward Jiménez Martínez
+ * @author Carlos Gaitan Mora & Edward Jimenez Martinez
  */
 @SuppressWarnings("serial")
 public class MapPanel extends JPanel{
@@ -90,6 +90,11 @@ public class MapPanel extends JPanel{
      */
     static Color bgColor = Theme.background;
     
+    /**
+     * This method creates a new MapPanel, with all the necessary data 
+     * @param state is the actual state that is selected
+     * @param selectedNode is the selected node on the map
+     */
     public MapPanel(State state, LocalAtributesManager selectedNode) {
     	this.localAtributesManager = selectedNode;
     	this.state = state;
@@ -142,6 +147,10 @@ public class MapPanel extends JPanel{
 		}
     }
 
+    /**
+     * This method allows to set a new background on the map
+     * @param imgFile is the new image that is going to be settled
+     */
 	public void setBackground(String imgFile) {
 		ImageIcon icon = new ImageIcon(imgFile);
 		
@@ -153,6 +162,10 @@ public class MapPanel extends JPanel{
 		
 	}
 
+	/**
+	 * This method allows to paint the background
+	 * @param img 
+	 */
 	public void paintBackground(Image img) {
 		backGroundlLabel.setIcon(new ImageIcon(img.getScaledInstance(width, height, 1)));
 		backGroundlLabel.setSize(width,height);
@@ -196,13 +209,11 @@ public class MapPanel extends JPanel{
 			for (int i = 0; i < w; i++) {
 				
 				label = new JLabel();
+				grid.add(label);
 				label.setLayout(new GridLayout(1,1));
 				Border border = LineBorder.createGrayLineBorder();
 				label.setBorder(border);
 				
-//				label.setEnabled(true);
-//				label.setVisible(true);
-//				label.setOpaque(false);
 				gridArray[i][j] = label;
 				switch (mapSections[i][j].getPointType()) {
 				case NULL:
@@ -237,6 +248,7 @@ public class MapPanel extends JPanel{
 			grid.setIcon(new ImageIcon(mainBackGroundImg));
 			
 		}
+		grid.setSize(width,height);
 		SimulatorPanel simulation = new SimulatorPanel(width,height,gridSize,grid,gridArray,model.getDirectory(), roads);
 		
 		simulation.setVisible(true);

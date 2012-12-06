@@ -119,7 +119,7 @@ public class Node{
 	}
 	
 	/**
-	 * A method that allows to erase a connection from the node
+	 * This method allows to erase a connection from the node
 	 * @param node is the connection that is going to be erased
 	 */
 	public void eraseConnection(Node node) {
@@ -153,7 +153,9 @@ public class Node{
 		this.local = local;
 	}
 	
-	
+	/**
+	 * This method sets the node to an unvisited state
+	 */
 	public void unVisit(){
 		visited=false;
 	}

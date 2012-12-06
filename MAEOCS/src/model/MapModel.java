@@ -14,7 +14,9 @@ import java.util.Map.Entry;
  * @author Carlos Gaitán Mora && Edward Jiménez Martínez
  *
  */
-public class MapModel {
+
+
+public class MapModel{
 	
 	private static HashMap<String, Node> map;
 	private static Hashtable<String, String> localsDictionary;
@@ -132,8 +134,6 @@ public class MapModel {
 	 * @param roads
 	 */
 	private static void cleanRoads(HashMap<String, ArrayList<String>> roads) {
-		
-//		HashMap<String,ArrayList<String>> conections = new HashMap<String, ArrayList<String>>();
 		
 		for (Entry<String, ArrayList<String>> entry : roads.entrySet()) {
 			

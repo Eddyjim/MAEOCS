@@ -1,9 +1,16 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RoadsDirectory {
+
+public class RoadsDirectory implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4336516856872480761L;
 	
 	private HashMap<String, HashMap<String, ArrayList<String>>> directory;
 	
