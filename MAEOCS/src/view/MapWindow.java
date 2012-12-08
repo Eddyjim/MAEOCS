@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Dimension;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 
 import com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter;
@@ -63,5 +65,10 @@ public class MapWindow extends JFrame{
 
 	public void startSimulation() {
 		map.startSimulation();
+	}
+
+	public void saveFile(String saveFile) throws IOException {
+		map.saveMap(saveFile);
+		
 	}
 }

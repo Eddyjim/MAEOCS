@@ -2,26 +2,26 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.image.ImageObserver;
-import java.net.URL;
-import java.text.AttributedCharacterIterator;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map.Entry;
 
-import javax.naming.directory.DirContext;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+
+import persistency.Saveable;
 
 import model.MapModel;
 import model.RoadsDirectory;
@@ -171,6 +171,9 @@ public class MapPanel extends JPanel{
 		backGroundlLabel.setSize(width,height);
 	}
 	
+	/**
+	 * Calculates all possible combination of roads between all the Locals in the map
+	 */
 	public void compileMap(){
 		
 		Hashtable<String, String> locals =  model.getDirectory();
@@ -193,6 +196,10 @@ public class MapPanel extends JPanel{
 		
 	}
 
+	/**
+	 * Creates a new grid that has only plane JLabels to show the map and no 
+	 * logic under them, and call a new frame to create a simulation panel
+	 */
 	public void startSimulation() {
 		
 		JLabel grid = new JLabel();
@@ -252,6 +259,57 @@ public class MapPanel extends JPanel{
 		SimulatorPanel simulation = new SimulatorPanel(width,height,gridSize,grid,gridArray,model.getDirectory(), roads);
 		
 		simulation.setVisible(true);
+	}
+
+	/**
+	 * This method allows to create a Save-able object that is going to be saved
+	 * @param saveFile is the path of the file that is going to be used
+	 * @throws IOException in case of an error during the file writing
+	 */
+	public void saveMap(String saveFile) throws IOException {
+		
+		Saveable save = new Saveable(mainBackGroundImg,model,roads,width,height,gridSize);
+		
+		File file = new File(saveFile);
+		FileOutputStream os = null;
+		try {
+			os = new FileOutputStream(file);
+			new ObjectOutputStream(os).writeObject(save);
+		} catch (FileNotFoundException e) {
+			throw new IOException("Error writing file");
+		}
+		finally{
+			os.close();
+		}
+		
+		
+		
+	}
+	
+	/**
+	 * This method allows to create a Save-able object that is going to be saved
+	 * @param saveFile is the path of the file that is going to be used
+	 * @throws IOException in case of an error during the file writing
+	 * @throws ClassNotFoundException 
+	 */
+	public void loadMap(String saveFile) throws IOException, ClassNotFoundException {
+		
+		Saveable save = null;
+		File file = new File(saveFile);
+		FileInputStream is = null;
+		try {
+			is = new FileInputStream(file);
+			save = (Saveable) new ObjectInputStream(is).readObject();
+		} catch (FileNotFoundException e) {
+			throw new IOException("Error writing file");
+		}
+		finally{
+			is.close();
+		}
+		if (save!= null){
+			this.model = save.getModel();
+		}
+		
 	}
 }
  

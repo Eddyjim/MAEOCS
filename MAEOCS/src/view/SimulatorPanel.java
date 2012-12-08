@@ -38,6 +38,7 @@ public class SimulatorPanel extends JFrame {
 		panel.setOpaque(true);
 		this.width = width/gridSize;
 		this.height = height/gridSize;
+		simulatorGrid = gridArray;
 		
 		JFrame choicesFrame = new JFrame();
 		final JComboBox pointA = new JComboBox();
@@ -87,6 +88,7 @@ public class SimulatorPanel extends JFrame {
 		while (i.hasNext()) {
 			String n[] = ((String) i.next()).split(",");
 			simulatorGrid[Integer.parseInt(n[0])][Integer.parseInt(n[1])].setBackground(Theme.simulationRoadColor);
+			simulatorGrid[Integer.parseInt(n[0])][Integer.parseInt(n[1])].setOpaque(true);
 		}
 		
 		
@@ -96,7 +98,7 @@ public class SimulatorPanel extends JFrame {
 
 		for (int j = 0; j < height; j++) {
 			for (int i = 0; i < width; i++) {
-				simulatorGrid[i][j].setBackground(null);
+				simulatorGrid[i][j].setBackground(Theme.background);
 				simulatorGrid[i][j].setOpaque(false);
 				
 			}

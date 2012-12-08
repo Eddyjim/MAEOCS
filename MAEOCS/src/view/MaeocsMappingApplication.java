@@ -3,6 +3,7 @@ package view;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -10,9 +11,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import model.RoadsDirectory;
-
 
 /**
  * This class is the main menu of the interface for the application
@@ -97,6 +95,11 @@ public class MaeocsMappingApplication extends JFrame{
         newAction.setForeground(Theme.foreground);
         newAction.setBackground(Theme.background);
 
+        final JMenuItem saveAction = new JMenuItem("Save");
+        saveAction.setForeground(Theme.blockedBackground);
+        saveAction.setBackground(Theme.background);
+        saveAction.setEnabled(false);
+        
         final JMenuItem editAction = new JMenuItem("Edit Size");
         editAction.setForeground(Theme.blockedForeground);
         editAction.setBackground(Theme.background);
@@ -139,6 +142,7 @@ public class MaeocsMappingApplication extends JFrame{
          */
         
         fileMenu.add(newAction);
+        fileMenu.add(saveAction);
         fileMenu.add(editAction);
         fileMenu.add(openImageAction);
         fileMenu.add(compileMapAction);
@@ -167,6 +171,9 @@ public class MaeocsMappingApplication extends JFrame{
 				editAction.setEnabled(true);
 				editAction.setForeground(Theme.foreground);
 				
+				saveAction.setEnabled(true);
+				saveAction.setForeground(Theme.foreground);
+				
 				openImageAction.setEnabled(true);
 				openImageAction.setForeground(Theme.foreground);
 				
@@ -178,6 +185,31 @@ public class MaeocsMappingApplication extends JFrame{
 				
 			}
 			
+		});
+
+        /*
+         * Sets the "Save" button action
+         */
+        saveAction.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileFilter(new FileNameExtensionFilter("mcs"));
+				chooser.setDialogTitle("Save Map");
+				chooser.setAcceptAllFileFilterUsed(false);
+				chooser.showOpenDialog(parent);
+				String saveFile = chooser.getSelectedFile().getPath();
+				if(!saveFile.contains(".mcs")){
+					saveFile.concat(".mcs");
+				}
+				try {
+					selected.saveFile(saveFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		});
         
         /*
