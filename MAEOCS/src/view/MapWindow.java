@@ -34,6 +34,19 @@ public class MapWindow extends JFrame{
 	     
 	}
 	
+	public MapWindow(State selectedState, LocalAtributesManager selectedNode,
+		String saveFile) throws IOException, ClassNotFoundException {
+		setLocation(Theme.mapWindowLocation);
+		getContentPane().setBackground(Theme.background);
+		setForeground(Theme.foreground);
+		setBackground(Theme.background);
+	    getContentPane().setBackground(Theme.background);
+	    map = new MapPanel(selectedState,selectedNode, saveFile);
+	    this.add(map);
+	    setEnabled(true);
+	    setVisible(true);
+	}
+
 	public void newSize(int width, int height, int gridSize){
 		 
 	    map.resize(width,height, gridSize);

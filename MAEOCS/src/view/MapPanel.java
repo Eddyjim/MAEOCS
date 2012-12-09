@@ -103,7 +103,16 @@ public class MapPanel extends JPanel{
     	roads = new RoadsDirectory();
     }
     
-    /**
+    public MapPanel(State selectedState, LocalAtributesManager selectedNode,
+    		String saveFile) throws IOException, ClassNotFoundException {
+    		this.localAtributesManager = selectedNode;
+    		this.state = selectedState;
+    		loadMap(saveFile);
+    		selectedNode.setModel(model);
+    		redo();
+	}
+
+	/**
      * This method allows to resize the panel
      * @param widthX is an integer that contains the value of the new width
      * @param heightY is an integer that contains the value of the new height
@@ -128,6 +137,21 @@ public class MapPanel extends JPanel{
         this.setVisible(true);
         this.setOpaque(true);
     }
+	
+	public void redo() {
+    	
+    	
+    	this.setMinimumSize(new Dimension(width, height));
+    	this.setMaximumSize(new Dimension(width, height));
+    	this.setSize(new Dimension(width, height));
+
+    	backGroundlLabel.setLayout(new GridLayout(height/gridSize, width/gridSize));
+    	this.setLayout(new GridLayout(1, 1));
+        loadGrid();
+        this.add(backGroundlLabel);
+        this.setVisible(true);
+        this.setOpaque(true);
+    }
 
 	/**
 	 * This method creates a new grid with the new size
@@ -143,6 +167,28 @@ public class MapPanel extends JPanel{
 			for (int i = 0; i < w; i++) {
 				mapSections[i][j]= new MapSection(state,localAtributesManager, i, j, model);
 				backGroundlLabel.add(mapSections[i][j].getLabel());
+			}
+		}
+    }
+    
+    /**
+     * 
+     */
+    private void loadGrid(){
+   	 
+    	int w= width/gridSize;
+    	int h = height/gridSize;
+    	
+    	this.mapSections = new MapSection[w][h];
+    	
+    	for (int j = 0; j < h; j++) {
+			for (int i = 0; i < w; i++) {
+				mapSections[i][j]= new MapSection(state,localAtributesManager, i, j, model);
+				if(model.containsNode(""+i+","+j)){
+					mapSections[i][j].setNode(model.getNode(""+i+","+j));
+				}
+				backGroundlLabel.add(mapSections[i][j].getLabel());
+				
 			}
 		}
     }

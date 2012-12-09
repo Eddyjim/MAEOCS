@@ -3,6 +3,7 @@ package view;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
@@ -11,6 +12,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import persistency.MCSFileFilter;
 
 /**
  * This class is the main menu of the interface for the application
@@ -94,7 +97,12 @@ public class MaeocsMappingApplication extends JFrame{
         final JMenuItem newAction = new JMenuItem("New");
         newAction.setForeground(Theme.foreground);
         newAction.setBackground(Theme.background);
+        
+        final JMenuItem loadAction = new JMenuItem("Load");
+        loadAction.setForeground(Theme.foreground);
+        loadAction.setBackground(Theme.background);
 
+        
         final JMenuItem saveAction = new JMenuItem("Save");
         saveAction.setForeground(Theme.blockedBackground);
         saveAction.setBackground(Theme.background);
@@ -142,6 +150,7 @@ public class MaeocsMappingApplication extends JFrame{
          */
         
         fileMenu.add(newAction);
+        fileMenu.add(loadAction);
         fileMenu.add(saveAction);
         fileMenu.add(editAction);
         fileMenu.add(openImageAction);
@@ -188,6 +197,34 @@ public class MaeocsMappingApplication extends JFrame{
 		});
 
         /*
+         * Sets the "Load" button action
+         */
+        loadAction.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileFilter(new MCSFileFilter());
+				chooser.setDialogTitle("Load Map");
+				chooser.setAcceptAllFileFilterUsed(false);
+				chooser.showOpenDialog(parent);
+				chooser.setFileHidingEnabled(true);
+				chooser.setSelectedFile(new File("example.mcs"));
+				String saveFile = chooser.getSelectedFile().getPath();
+				
+				try {
+					selected = new MapWindow(selectedState, selectedNode, saveFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
+        
+        /*
          * Sets the "Save" button action
          */
         saveAction.addActionListener(new ActionListener() {
@@ -196,7 +233,7 @@ public class MaeocsMappingApplication extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				
 				JFileChooser chooser = new JFileChooser();
-				chooser.setFileFilter(new FileNameExtensionFilter("mcs"));
+				chooser.setFileFilter(new MCSFileFilter());
 				chooser.setDialogTitle("Save Map");
 				chooser.setAcceptAllFileFilterUsed(false);
 				chooser.showOpenDialog(parent);

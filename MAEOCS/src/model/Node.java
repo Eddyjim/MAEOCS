@@ -5,11 +5,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import view.PointType;
+
 /**
  * This class contains the data an all the values needed for a node in the map
  * 
  * @author Carlos Gaitán Mora & Edward Jiménez Martínez
  */	
+/**
+ * @author Eddyjim
+ *
+ */
 public class Node{
 	
 	/**
@@ -33,6 +39,8 @@ public class Node{
 	 * Contains the position of the node in a java.awt.Point
 	 */
 	private java.awt.Point position;
+	
+	private PointType type;
 	
 	/**
 	 * Contains all the connections that a node may have
@@ -158,5 +166,13 @@ public class Node{
 	 */
 	public void unVisit(){
 		visited=false;
+	}
+
+	public PointType getType() {
+		return type;
+	}
+
+	public void setType(PointType type) {
+		this.type = type;
 	}
 }

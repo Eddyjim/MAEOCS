@@ -204,4 +204,34 @@ public class MapSection extends JLabel{
 		return this;
 	}
 	
+	public void setNode(Node node){
+		this.node = node;
+		
+		switch (node.getType()) {
+		case ROAD:
+			this.type = PointType.ROAD;
+			setBackground(Theme.roadColor);
+			setOpaque(true);
+			break;
+		case EXIT:
+			this.type = PointType.EXIT;
+			setBackground(Theme.exitColor);
+			setOpaque(true);
+			break;
+		case LOCAL:
+			this.type = PointType.LOCAL;
+			setBackground(Theme.localColor);
+			setOpaque(true);
+			break;
+		case STAIRS:
+			this.type = PointType.STAIRS;
+			setBackground(Theme.stairsColor);
+			setOpaque(true);
+			break;
+		default:
+			break;
+		
+		}
+	}
+	
 }

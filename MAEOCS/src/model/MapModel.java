@@ -270,6 +270,10 @@ public class MapModel{
 		return map.get(key);
 	}
 
+	public boolean containsNode(String key){
+		return map.containsKey(key);
+	}
+	
 	public void reset() {
 		for(Entry<String,Node> entry : map.entrySet()){
 			entry.getValue().unVisit();
