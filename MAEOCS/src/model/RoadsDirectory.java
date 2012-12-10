@@ -18,9 +18,9 @@ public class RoadsDirectory implements Serializable{
 		directory = new HashMap<String, HashMap<String,ArrayList<String>>>();
 	}
 
-	public void addRoad(Node node, Node node2, ArrayList<String> road) {
-		String key1 = node.getLocal().getName();
-		String key2 = node2.getLocal().getName();
+	public void addRoad(String node, String node2, ArrayList<String> road) {
+		String key1 = node;
+		String key2 = node2;
 		HashMap<String, ArrayList<String>> temp;
 		
 		if (!directory.containsKey(key1)) {

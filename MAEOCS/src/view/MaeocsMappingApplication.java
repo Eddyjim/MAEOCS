@@ -108,6 +108,11 @@ public class MaeocsMappingApplication extends JFrame{
         saveAction.setBackground(Theme.background);
         saveAction.setEnabled(false);
         
+        final JMenuItem exportAction = new JMenuItem("Export");
+        exportAction.setForeground(Theme.blockedBackground);
+        exportAction.setBackground(Theme.background);
+        exportAction.setEnabled(false);
+        
         final JMenuItem editAction = new JMenuItem("Edit Size");
         editAction.setForeground(Theme.blockedForeground);
         editAction.setBackground(Theme.background);
@@ -152,6 +157,7 @@ public class MaeocsMappingApplication extends JFrame{
         fileMenu.add(newAction);
         fileMenu.add(loadAction);
         fileMenu.add(saveAction);
+        fileMenu.add(exportAction);
         fileMenu.add(editAction);
         fileMenu.add(openImageAction);
         fileMenu.add(compileMapAction);
@@ -243,6 +249,31 @@ public class MaeocsMappingApplication extends JFrame{
 				}
 				try {
 					selected.saveFile(saveFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+        
+        /*
+         * Sets the "Export" button action
+         */
+        saveAction.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JFileChooser chooser = new JFileChooser();
+				chooser.setFileFilter(new MCSFileFilter());
+				chooser.setDialogTitle("Export Map");
+				chooser.setAcceptAllFileFilterUsed(false);
+				chooser.showOpenDialog(parent);
+				String saveFile = chooser.getSelectedFile().getPath();
+				if(!saveFile.contains(".mmcs")){
+					saveFile.concat(".mmcs");
+				}
+				try {
+					selected.exportFile(saveFile);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

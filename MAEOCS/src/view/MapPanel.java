@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import persistency.Exportable;
 import persistency.Saveable;
 
 import model.MapModel;
@@ -233,7 +234,7 @@ public class MapPanel extends JPanel{
 					ArrayList<String> road = model.aStar(model.getNode(n1),model.getNode(n2));
 					if(road == null)
 						System.out.println("camino vacio");
-					roads.addRoad(model.getNode(n1),model.getNode(n2),road);
+					roads.addRoad(n1,n2,road);
 				}
 				model.reset();
 				
@@ -327,9 +328,6 @@ public class MapPanel extends JPanel{
 		finally{
 			os.close();
 		}
-		
-		
-		
 	}
 	
 	/**
@@ -356,6 +354,28 @@ public class MapPanel extends JPanel{
 			this.model = save.getModel();
 		}
 		
+	}
+
+	/**
+	 * This method allows to create a Exportable object that is going to be saved
+	 * @param saveFile is the path of the file that is going to be used
+	 * @throws IOException in case of an error during the file writing
+	 */
+	public void exportMap(String saveFile) throws IOException {
+
+		Exportable save = new Exportable(mainBackGroundImg, model.getDirectory(), roads, width, height, width/gridSize, height/gridSize);
+		
+		File file = new File(saveFile);
+		FileOutputStream os = null;
+		try {
+			os = new FileOutputStream(file);
+			new ObjectOutputStream(os).writeObject(save);
+		} catch (FileNotFoundException e) {
+			throw new IOException("Error writing file");
+		}
+		finally{
+			os.close();
+		}
 	}
 }
  

@@ -84,4 +84,9 @@ public class MapWindow extends JFrame{
 		map.saveMap(saveFile);
 		
 	}
+
+	public void exportFile(String saveFile) throws IOException {
+		map.exportMap(saveFile);
+		
+	}
 }
