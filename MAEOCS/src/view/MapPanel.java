@@ -22,6 +22,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import persistency.Exportable;
+import persistency.ImageConverter;
 import persistency.Saveable;
 
 import model.MapModel;
@@ -363,7 +364,8 @@ public class MapPanel extends JPanel{
 	 */
 	public void exportMap(String saveFile) throws IOException {
 
-		Exportable save = new Exportable(mainBackGroundImg, model.getDirectory(), roads, width, height, width/gridSize, height/gridSize);
+		Exportable save = new Exportable(ImageConverter.convertToBytes(mainBackGroundImg),
+				model.getDirectory(), roads, width, height, width/gridSize, height/gridSize);
 		
 		File file = new File(saveFile);
 		FileOutputStream os = null;

@@ -30,10 +30,10 @@ public class Exportable implements Serializable{
 	private int xCells;
 	private int yCells;
 	
-	public Exportable(Image image,Hashtable<String, String> localsDictionary,
+	public Exportable(byte[] image,Hashtable<String, String> localsDictionary,
 			RoadsDirectory roads, int width, int height, int xCells, int yCels ){
 		
-		this.image = ImageConverter.convertToBytes(image);
+		this.image = image;
 		this.localsDictionary = localsDictionary;
 		this.roads = roads;
 		this.width = width;
