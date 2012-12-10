@@ -189,6 +189,9 @@ public class MaeocsMappingApplication extends JFrame{
 				saveAction.setEnabled(true);
 				saveAction.setForeground(Theme.foreground);
 				
+				exportAction.setEnabled(true);
+				exportAction.setForeground(Theme.foreground);
+				
 				openImageAction.setEnabled(true);
 				openImageAction.setForeground(Theme.foreground);
 				

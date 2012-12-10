@@ -235,7 +235,7 @@ public class MapPanel extends JPanel{
 					ArrayList<String> road = model.aStar(model.getNode(n1),model.getNode(n2));
 					if(road == null)
 						System.out.println("camino vacio");
-					roads.addRoad(n1,n2,road);
+					roads.addRoad(model.getNode(n1).getLocal().getName(),model.getNode(n2).getLocal().getName(),road);
 				}
 				model.reset();
 				

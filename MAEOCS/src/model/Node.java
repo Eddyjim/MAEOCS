@@ -168,10 +168,18 @@ public class Node{
 		visited=false;
 	}
 
+	/**
+	 * This method allows to know the node's type
+	 * @return a PointType assigned to the node
+	 */
 	public PointType getType() {
 		return type;
 	}
 
+	/**
+	 * This method allows to set a PoinType to the node
+	 * @param type that is going to be assigned to the node
+	 */
 	public void setType(PointType type) {
 		this.type = type;
 	}

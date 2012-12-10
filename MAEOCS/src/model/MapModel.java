@@ -258,27 +258,47 @@ public class MapModel{
 		localsDictionary.put(name, id);
 	}
 	
+	/**
+	 * This method removes a combination between local name and node id in the dictionary
+	 * 
+	 */
 	public void removeFromLocalDictionary(String name){
 		localsDictionary.remove(name);
 	}
 
+	/**
+	 * This method allows to return the localsDictionary in case of being needed
+	 * @return a HashTable that represents the local's dictionary
+	 */
 	public Hashtable<String, String> getDirectory() {
 		return localsDictionary;
 	}
 
+	/**
+	 * This method allows to get an specific node of the map
+	 * @param key is a string that contains the unique key for the node
+	 * @return the required Node
+	 */
 	public Node getNode(String key) {
 		return map.get(key);
 	}
 
+	/**
+	 * This method allows to know if the map contains an specific node
+	 * @param key is a string that contains the unique key for the node
+	 * @return true if the node is contained and false if not
+	 */
 	public boolean containsNode(String key){
 		return map.containsKey(key);
 	}
 	
+	/**
+	 * This method returns all the nodes in the map to an unvisited status
+	 */
 	public void reset() {
 		for(Entry<String,Node> entry : map.entrySet()){
 			entry.getValue().unVisit();
 		}
-		
 	}
 }
 	
