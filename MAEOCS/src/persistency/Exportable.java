@@ -1,33 +1,32 @@
 package persistency;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.Hashtable;
-
-import javax.imageio.ImageIO;
-
-import sun.java2d.pipe.BufferedBufImgOps;
-
 import model.RoadsDirectory;
 
+@SuppressWarnings("unused")
 public class Exportable implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3213930124871683109L;
+	
 	/**
 	 * 
 	 */
 	private byte[] image;
+	
 	private Hashtable<String, String> localsDictionary;
+	
 	private RoadsDirectory roads;
+	
 	private int width;
+	
 	private int height;
+	
 	private int xCells;
+	
 	private int yCells;
 	
 	public Exportable(byte[] image,Hashtable<String, String> localsDictionary,
