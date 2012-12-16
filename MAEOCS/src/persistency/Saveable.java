@@ -7,9 +7,9 @@ import model.MapModel;
 import model.RoadsDirectory;
 
 /**
+ * This  class contains all the data that contains a map
  * 
  * @author Carlos Gaitan Mora & Edward Jimenez Martinez
- *
  */
 public class Saveable implements Serializable{
 	

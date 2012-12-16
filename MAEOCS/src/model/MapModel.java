@@ -14,8 +14,6 @@ import java.util.Map.Entry;
  * @author Carlos Gaitán Mora && Edward Jiménez Martínez
  *
  */
-
-
 public class MapModel{
 	
 	private static HashMap<String, Node> map;
