@@ -1,0 +1,41 @@
+\BOOKMARK [-1][-]{part.1}{I El mundo m\363vil y Android}{}% 1
+\BOOKMARK [0][-]{chapter.1}{\277Por qu\351 una aplicaci\363n m\363vil?}{part.1}% 2
+\BOOKMARK [1][-]{section.1.1}{El mundo m\363vil}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{La historia del mundo m\363vil}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.3}{Los grandes de hoy en d\355a}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.4}{El mercado m\363vil}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{\277Por Qu\351 Una Aplicaci\363n en Android?}{part.1}% 7
+\BOOKMARK [1][-]{section.2.1}{La historia de Android}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{Ventajas y desventajas de Android}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.3}{Android en el mundo}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.4}{Android en el mercado m\363vil}{chapter.2}% 11
+\BOOKMARK [0][-]{chapter.3}{Consejos \372tiles}{part.1}% 12
+\BOOKMARK [1][-]{section.3.1}{Provectos m\363viles}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.2}{Wireframes}{chapter.3}% 14
+\BOOKMARK [-1][-]{part.2}{II Conociendo Android}{}% 15
+\BOOKMARK [0][-]{chapter.4}{Prepar\341ndolo todo}{part.2}% 16
+\BOOKMARK [1][-]{section.4.1}{El SDK de Android}{chapter.4}% 17
+\BOOKMARK [0][-]{chapter.5}{Mi primera actividad}{part.2}% 18
+\BOOKMARK [1][-]{section.5.1}{Creando un proyecto Android}{chapter.5}% 19
+\BOOKMARK [1][-]{section.5.2}{Hola mundo y el simulador de Android}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.3}{Botones, textos y otros}{chapter.5}% 21
+\BOOKMARK [0][-]{chapter.6}{Varias actividades una sola aplicaci\363n}{part.2}% 22
+\BOOKMARK [1][-]{section.6.1}{Intent y la secuencia de actividades}{chapter.6}% 23
+\BOOKMARK [1][-]{section.6.2}{Layout orden en el caos}{chapter.6}% 24
+\BOOKMARK [1][-]{section.6.3}{Vistas y m\341s vistas}{chapter.6}% 25
+\BOOKMARK [1][-]{section.6.4}{Fechas y contactos}{chapter.6}% 26
+\BOOKMARK [1][-]{section.6.5}{Tabs, men\372s y preferencias}{chapter.6}% 27
+\BOOKMARK [0][-]{chapter.7}{C\363digo avanzado}{part.2}% 28
+\BOOKMARK [1][-]{section.7.1}{SQLite y archivos planos}{chapter.7}% 29
+\BOOKMARK [1][-]{section.7.2}{Cambios de orientaci\363n}{chapter.7}% 30
+\BOOKMARK [1][-]{section.7.3}{Estilos e imagen}{chapter.7}% 31
+\BOOKMARK [1][-]{section.7.4}{Permisos y conexiones}{chapter.7}% 32
+\BOOKMARK [0][-]{chapter.8}{Sensores}{part.2}% 33
+\BOOKMARK [1][-]{section.8.1}{Rotaci\363n y br\372julas}{chapter.8}% 34
+\BOOKMARK [1][-]{section.8.2}{GPS}{chapter.8}% 35
+\BOOKMARK [1][-]{section.8.3}{Archivos}{chapter.8}% 36
+\BOOKMARK [-1][-]{part.3}{III Interacci\363n con Android}{}% 37
+\BOOKMARK [0][-]{chapter.9}{Java y Android}{part.3}% 38
+\BOOKMARK [1][-]{section.9.1}{Aplicaciones Java de Escritorio}{chapter.9}% 39
+\BOOKMARK [1][-]{section.9.2}{Tipos de datos compartidos}{chapter.9}% 40
+\BOOKMARK [1][-]{section.9.3}{Exportaci\363n y conexi\363n}{chapter.9}% 41

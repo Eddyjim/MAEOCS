@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MAEOCS</string>
+    <string name="menu_settings">Settings</string>
+    <string name="main_welcome">Bienvenido a MAEOCS</string>
+    <string name="title_maintitle">MAEOCS ubicándote en cualquier lugar</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_help_window">HelpWindow</string>
+    <string name="title_activity_map_consulting_window">MapConsultingWindow</string>
+    <string name="title_activity_map_window">MapWindow</string>
+    <string name="title_activity_gpsmap_window">GPSMapWindow</string>
+    <string name="title_activity_map_selector_window">MapSelectorWindow</string>
+    <string name="title_activity_bluetooth_map_window">BluetoothMapWindow</string>
+
+</resources>

@@ -1,0 +1,42 @@
+\select@language {spanish}
+\contentsline {part}{I\hspace {1em}El mundo m\IeC {\'o}vil y Android}{1}{part.1}
+\contentsline {chapter}{\numberline {1}\IeC {\textquestiondown }Por qu\IeC {\'e} una aplicaci\IeC {\'o}n m\IeC {\'o}vil?}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}El mundo m\IeC {\'o}vil}{4}{section.1.1}
+\contentsline {section}{\numberline {1.2}La historia del mundo m\IeC {\'o}vil}{6}{section.1.2}
+\contentsline {section}{\numberline {1.3}Los grandes de hoy en d\IeC {\'\i }a}{7}{section.1.3}
+\contentsline {section}{\numberline {1.4}El mercado m\IeC {\'o}vil}{10}{section.1.4}
+\contentsline {chapter}{\numberline {2}\IeC {\textquestiondown }Por Qu\IeC {\'e} Una Aplicaci\IeC {\'o}n en Android?}{11}{chapter.2}
+\contentsline {section}{\numberline {2.1}La historia de Android}{12}{section.2.1}
+\contentsline {section}{\numberline {2.2}Ventajas y desventajas de Android}{12}{section.2.2}
+\contentsline {section}{\numberline {2.3}Android en el mundo}{12}{section.2.3}
+\contentsline {section}{\numberline {2.4}Android en el mercado m\IeC {\'o}vil}{12}{section.2.4}
+\contentsline {chapter}{\numberline {3}Consejos \IeC {\'u}tiles}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Provectos m\IeC {\'o}viles}{13}{section.3.1}
+\contentsline {section}{\numberline {3.2}Wireframes}{13}{section.3.2}
+\contentsline {part}{II\hspace {1em}Conociendo Android}{15}{part.2}
+\contentsline {chapter}{\numberline {4}Prepar\IeC {\'a}ndolo todo}{17}{chapter.4}
+\contentsline {section}{\numberline {4.1}El SDK de Android}{18}{section.4.1}
+\contentsline {chapter}{\numberline {5}Mi primera actividad}{23}{chapter.5}
+\contentsline {section}{\numberline {5.1}Creando un proyecto Android}{24}{section.5.1}
+\contentsline {section}{\numberline {5.2}Hola mundo y el simulador de Android}{29}{section.5.2}
+\contentsline {section}{\numberline {5.3}Botones, textos y otros}{31}{section.5.3}
+\contentsline {chapter}{\numberline {6}Varias actividades una sola aplicaci\IeC {\'o}n}{33}{chapter.6}
+\contentsline {section}{\numberline {6.1}Intent y la secuencia de actividades}{33}{section.6.1}
+\contentsline {section}{\numberline {6.2}Layout orden en el caos}{33}{section.6.2}
+\contentsline {section}{\numberline {6.3}Vistas y m\IeC {\'a}s vistas}{33}{section.6.3}
+\contentsline {section}{\numberline {6.4}Fechas y contactos}{34}{section.6.4}
+\contentsline {section}{\numberline {6.5}Tabs, men\IeC {\'u}s y preferencias}{34}{section.6.5}
+\contentsline {chapter}{\numberline {7}C\IeC {\'o}digo avanzado}{35}{chapter.7}
+\contentsline {section}{\numberline {7.1}SQLite y archivos planos}{35}{section.7.1}
+\contentsline {section}{\numberline {7.2}Cambios de orientaci\IeC {\'o}n}{35}{section.7.2}
+\contentsline {section}{\numberline {7.3}Estilos e imagen}{35}{section.7.3}
+\contentsline {section}{\numberline {7.4}Permisos y conexiones}{35}{section.7.4}
+\contentsline {chapter}{\numberline {8}Sensores}{37}{chapter.8}
+\contentsline {section}{\numberline {8.1}Rotaci\IeC {\'o}n y br\IeC {\'u}julas}{37}{section.8.1}
+\contentsline {section}{\numberline {8.2}GPS}{37}{section.8.2}
+\contentsline {section}{\numberline {8.3}Archivos}{37}{section.8.3}
+\contentsline {part}{III\hspace {1em}Interacci\IeC {\'o}n con Android}{39}{part.3}
+\contentsline {chapter}{\numberline {9}Java y Android}{41}{chapter.9}
+\contentsline {section}{\numberline {9.1}Aplicaciones Java de Escritorio}{41}{section.9.1}
+\contentsline {section}{\numberline {9.2}Tipos de datos compartidos}{41}{section.9.2}
+\contentsline {section}{\numberline {9.3}Exportaci\IeC {\'o}n y conexi\IeC {\'o}n}{41}{section.9.3}

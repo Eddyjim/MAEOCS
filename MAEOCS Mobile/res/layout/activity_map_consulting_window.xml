@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MapConsultingWindow" >
+
+    <LinearLayout
+        android:id="@+id/ll_ConsultingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:text="Ubicación actual (donde estoy)" />
+
+        <EditText
+            android:id="@+id/et_ConsultingUbicacionActual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="218dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="fill_horizontal"
+            android:text="Ubicación destino (a donde quiero ir)" />
+
+        <EditText
+            android:id="@+id/et_ConsultingUbicacionDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="23dp"
+            android:ems="10" />
+
+        <Button
+            android:id="@+id/bt_ConsultingOrientarme"
+            style="@style/ButtonText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="69dp"
+            android:background="@drawable/maeocs_button"
+            android:text="Orientarme" />
+
+        <Button
+            android:id="@+id/bt_ConsultingUbicarme"
+            style="@style/ButtonText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/maeocs_button"
+            android:text="Ubicarme con GPS" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tx_ConsultingMapaSeleccionado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Mapa: Mapa Santa Fe"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

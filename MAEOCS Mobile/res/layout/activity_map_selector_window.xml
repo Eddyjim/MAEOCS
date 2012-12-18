@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MapSelectorWindow" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="Seleccione un mapa"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tx_SelectorTextoMapa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_SelectorSpinnerMap"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:text="Mapa: Mapa Santa Fe" />
+
+    <Spinner
+        android:id="@+id/sp_SelectorSpinnerMap"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="33dp"
+        android:background="@drawable/maeocs_button" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tx_SelectorTextoMapa"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="97dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/bt_SelectorCargarMapa"
+            style="@style/ButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="83dp"
+            android:background="@drawable/maeocs_button"
+            android:text="Cargar Mapa" />
+    </LinearLayout>
+
+</RelativeLayout>
