@@ -1,7 +1,14 @@
 package model;
 
-public class Local {
+import java.io.Serializable;
+
+public class Local implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1061293656156006625L;
+
 	/**
 	 * String that contains the local number given by the organization
 	 */

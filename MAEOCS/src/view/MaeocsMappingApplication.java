@@ -202,7 +202,6 @@ public class MaeocsMappingApplication extends JFrame{
 				showSimulatorAction.setForeground(Theme.foreground);
 				
 			}
-			
 		});
 
         /*
@@ -219,8 +218,11 @@ public class MaeocsMappingApplication extends JFrame{
 				chooser.setAcceptAllFileFilterUsed(false);
 				chooser.showOpenDialog(parent);
 				chooser.setFileHidingEnabled(true);
-				chooser.setSelectedFile(new File("example.mcs"));
-				String saveFile = chooser.getSelectedFile().getPath();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				        "MAEOCS", "mcs");
+				chooser.setFileFilter(filter);
+				String saveFile = chooser.getSelectedFile().getAbsolutePath();
+				System.out.println(saveFile);
 				
 				try {
 					selected = new MapWindow(selectedState, selectedNode, saveFile);
@@ -228,6 +230,29 @@ public class MaeocsMappingApplication extends JFrame{
 					e.printStackTrace();
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
+				} finally {
+					/*
+					 * Enable edit size and compile map 
+					 */
+					editAction.setEnabled(true);
+					editAction.setForeground(Theme.foreground);
+					
+					saveAction.setEnabled(true);
+					saveAction.setForeground(Theme.foreground);
+					
+					exportAction.setEnabled(true);
+					exportAction.setForeground(Theme.foreground);
+					
+					openImageAction.setEnabled(true);
+					openImageAction.setForeground(Theme.foreground);
+					
+					compileMapAction.setEnabled(true);
+					compileMapAction.setForeground(Theme.foreground);
+					
+					showSimulatorAction.setEnabled(true);
+					showSimulatorAction.setForeground(Theme.foreground);
+					
+					
 				}
 				
 			}
@@ -245,7 +270,7 @@ public class MaeocsMappingApplication extends JFrame{
 				chooser.setFileFilter(new MCSFileFilter());
 				chooser.setDialogTitle("Save Map");
 				chooser.setAcceptAllFileFilterUsed(false);
-				chooser.showOpenDialog(parent);
+				chooser.showSaveDialog(parent);
 				String saveFile = chooser.getSelectedFile().getPath();
 				if(!saveFile.contains(".mcs")){
 					saveFile.concat(".mcs");
@@ -261,7 +286,7 @@ public class MaeocsMappingApplication extends JFrame{
         /*
          * Sets the "Export" button action
          */
-        saveAction.addActionListener(new ActionListener() {
+        exportAction.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -270,7 +295,7 @@ public class MaeocsMappingApplication extends JFrame{
 				chooser.setFileFilter(new MCSFileFilter());
 				chooser.setDialogTitle("Export Map");
 				chooser.setAcceptAllFileFilterUsed(false);
-				chooser.showOpenDialog(parent);
+				chooser.showSaveDialog(parent);
 				String saveFile = chooser.getSelectedFile().getPath();
 				if(!saveFile.contains(".mmcs")){
 					saveFile.concat(".mmcs");

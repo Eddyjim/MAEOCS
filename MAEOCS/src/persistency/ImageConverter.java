@@ -11,6 +11,10 @@ import java.util.ArrayList;
 
 public class ImageConverter extends Component{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6091742257510001768L;
 	private MediaTracker mediaTracker;
 	private Image image;
 	

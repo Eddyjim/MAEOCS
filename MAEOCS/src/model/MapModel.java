@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import java.util.ArrayList;
@@ -14,8 +15,10 @@ import java.util.Map.Entry;
  * @author Carlos Gaitán Mora && Edward Jiménez Martínez
  *
  */
-public class MapModel{
+public class MapModel implements Serializable{
 	
+
+	private static final long serialVersionUID = 1L;
 	private static HashMap<String, Node> map;
 	private static Hashtable<String, String> localsDictionary;
 	
@@ -287,6 +290,7 @@ public class MapModel{
 	 * @return true if the node is contained and false if not
 	 */
 	public boolean containsNode(String key){
+		System.out.println(map==null);
 		return map.containsKey(key);
 	}
 	
@@ -297,6 +301,23 @@ public class MapModel{
 		for(Entry<String,Node> entry : map.entrySet()){
 			entry.getValue().unVisit();
 		}
+	}
+	
+	public HashMap<String, Node> getMap() {
+		return map;
+	}
+	
+	public Hashtable<String, String> getLocalsDictionary() {
+		return localsDictionary;
+	}
+	
+	public void setLocalsDictionary(
+			Hashtable<String, String> localsDictionary) {
+		MapModel.localsDictionary = localsDictionary;
+	}
+	
+	public void setMap(HashMap<String, Node> map) {
+		MapModel.map = map;
 	}
 }
 	

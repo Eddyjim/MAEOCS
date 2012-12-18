@@ -2,8 +2,13 @@ package persistency;
 
 import java.awt.Image;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Hashtable;
+
+import javax.swing.ImageIcon;
 
 import model.MapModel;
+import model.Node;
 import model.RoadsDirectory;
 
 /**
@@ -17,31 +22,37 @@ public class Saveable implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 623782177068146958L;
-	private Image image;
+	private ImageIcon image;
 	private MapModel model;
 	private RoadsDirectory roads;
 	private int width;
 	private int height;
 	private int grindSize;
+	private HashMap<String, Node> map;
+	private Hashtable<String, String> localsDictionary;
 	
 	public Saveable(Image image, MapModel model, RoadsDirectory roads, int width, int height, int grindSize) {
-		this.image = image;
+		this.image = new ImageIcon(image);
 		this.model = model;
 		this.roads = roads;
 		this.width = width;
 		this.height = height;
 		this.grindSize = grindSize;
+		this.map = (HashMap<String, Node>) model.getMap().clone();
+		this.localsDictionary = (Hashtable<String, String>) model.getLocalsDictionary().clone();
 	}
 
 	public Image getImage() {
-		return image;
+		return image.getImage();
 	}
 
 	public void setImage(Image image) {
-		this.image = image;
+		this.image = new ImageIcon(image);
 	}
 
 	public MapModel getModel() {
+		model.setLocalsDictionary(localsDictionary);
+		model.setMap(map);
 		return model;
 	}
 

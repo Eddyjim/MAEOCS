@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -16,8 +17,13 @@ import view.PointType;
  * @author Eddyjim
  *
  */
-public class Node{
+public class Node implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3826797273281554795L;
+
 	/**
 	 * String that contains the name of the node, the name is given by a notation
 	 * x,y in which x is the position in the horizontal axis and y the position in 

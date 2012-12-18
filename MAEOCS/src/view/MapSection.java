@@ -6,6 +6,7 @@ import java.awt.Point;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -27,7 +28,7 @@ import model.Node;
  *
  */
 @SuppressWarnings("serial")
-public class MapSection extends JLabel{
+public class MapSection extends JLabel implements Serializable{
  
 	private State state;
 	
@@ -119,6 +120,7 @@ public class MapSection extends JLabel{
 								node.setLocal(null);
 							setBackground(Theme.roadColor);
 							type = PointType.ROAD;
+							node.setType(type);
 						}
 						
 						break;
@@ -128,6 +130,7 @@ public class MapSection extends JLabel{
 						if(!type.equals(PointType.LOCAL)){
 							node.setLocal(new Local());
 							type = PointType.LOCAL;
+							node.setType(type);
 							setBackground(Theme.localColor);
 							atributesPanelManager.enablePanel();
 							atributesPanelManager.updatePanel();
@@ -141,6 +144,7 @@ public class MapSection extends JLabel{
 							if (type.equals(PointType.LOCAL))
 								node.setLocal(null);
 							type = PointType.STAIRS;
+							node.setType(type);
 							setBackground(Theme.stairsColor);
 						}
 						break;
@@ -151,6 +155,7 @@ public class MapSection extends JLabel{
 							if (type.equals(PointType.LOCAL))
 								node.setLocal(null);
 							type = PointType.EXIT;
+							node.setType(type);
 							setBackground(Theme.exitColor);
 						}
 						
@@ -166,6 +171,7 @@ public class MapSection extends JLabel{
 							if (type.equals(PointType.LOCAL))
 								model.removeFromLocalDictionary(node.getLocal().getName());
 							type = PointType.NULL;
+							node.setType(type);
 							atributesPanelManager.selectNode(null);
 							node = null;
 						}
@@ -206,7 +212,8 @@ public class MapSection extends JLabel{
 	
 	public void setNode(Node node){
 		this.node = node;
-		
+		System.out.println(node==null);
+		System.out.println(node.getType()==null);
 		switch (node.getType()) {
 		case ROAD:
 			this.type = PointType.ROAD;

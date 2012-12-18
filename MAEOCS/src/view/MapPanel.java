@@ -187,6 +187,7 @@ public class MapPanel extends JPanel{
 			for (int i = 0; i < w; i++) {
 				mapSections[i][j]= new MapSection(state,localAtributesManager, i, j, model);
 				if(model.containsNode(""+i+","+j)){
+					System.out.println(model.getNode(""+i+","+j).getId());
 					mapSections[i][j].setNode(model.getNode(""+i+","+j));
 				}
 				backGroundlLabel.add(mapSections[i][j].getLabel());
@@ -345,14 +346,21 @@ public class MapPanel extends JPanel{
 		try {
 			is = new FileInputStream(file);
 			save = (Saveable) new ObjectInputStream(is).readObject();
+			System.out.println(save.toString()+" "+save.getGrindSize());
 		} catch (FileNotFoundException e) {
-			throw new IOException("Error writing file");
+			throw new IOException("Error loading file");
 		}
 		finally{
 			is.close();
 		}
 		if (save!= null){
 			this.model = save.getModel();
+			this.height = save.getHeight();
+			this.width = save.getWidth();
+			this.gridSize = save.getGrindSize();
+			System.out.println(model.toString());
+			
+			//System.out.println(this.model.getNode("buuu").getId());
 		}
 		
 	}
