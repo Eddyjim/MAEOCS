@@ -41,6 +41,7 @@ public class SimulatorPanel extends JFrame {
 		simulatorGrid = gridArray;
 		
 		JFrame choicesFrame = new JFrame();
+		choicesFrame.setSize(Theme.simulatorLocalSelector);
 		final JComboBox pointA = new JComboBox();
 		final JComboBox pointB = new JComboBox();
 		JButton showRoadButton = new JButton("Road");

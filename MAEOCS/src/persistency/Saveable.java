@@ -38,8 +38,8 @@ public class Saveable implements Serializable{
 		this.width = width;
 		this.height = height;
 		this.grindSize = grindSize;
-		this.map = (HashMap<String, Node>) model.getMap().clone();
-		this.localsDictionary = (Hashtable<String, String>) model.getLocalsDictionary().clone();
+		this.map = model.getMap();
+		this.localsDictionary = model.getLocalsDictionary();
 	}
 
 	public Image getImage() {

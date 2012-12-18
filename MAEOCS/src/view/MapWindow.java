@@ -5,10 +5,6 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import com.sun.corba.se.impl.encoding.CodeSetConversion.BTCConverter;
-
-import model.Node;
-
 /**
  * This class is used to show a new window that will contain the map to edit
  * @author Carlos Gaitán Mora && Edward Jiménez Martínez
@@ -67,9 +63,7 @@ public class MapWindow extends JFrame{
 	}
 
 	public void setBackgroundImage(String imgFile2) {
-		
 		map.setBackground(imgFile2);
-		
 	}
 
 	public void compileMap() {

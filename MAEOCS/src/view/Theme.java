@@ -60,6 +60,7 @@ public class Theme {
 	public static Dimension toolBarDimension = new Dimension(15,300);
 	public static Dimension toolIconDimension = new Dimension(20,10);
 	public static Dimension atributesPanelDimension = new Dimension(300,150);
+	public static Dimension simulatorLocalSelector = new Dimension(300, 300);
 	
 	
 	

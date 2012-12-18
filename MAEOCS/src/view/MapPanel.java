@@ -75,7 +75,7 @@ public class MapPanel extends JPanel{
     /**
      * Background image that contains the map
      */
-    static Image mainBackGroundImg;
+    private Image mainBackGroundImg;
     
     /**
      * Grid Size
@@ -346,7 +346,6 @@ public class MapPanel extends JPanel{
 		try {
 			is = new FileInputStream(file);
 			save = (Saveable) new ObjectInputStream(is).readObject();
-			System.out.println(save.toString()+" "+save.getGrindSize());
 		} catch (FileNotFoundException e) {
 			throw new IOException("Error loading file");
 		}
@@ -358,9 +357,16 @@ public class MapPanel extends JPanel{
 			this.height = save.getHeight();
 			this.width = save.getWidth();
 			this.gridSize = save.getGrindSize();
-			System.out.println(model.toString());
+			this.mainBackGroundImg = save.getImage();
 			
-			//System.out.println(this.model.getNode("buuu").getId());
+			resize(width, height, gridSize);
+			loadGrid();
+			
+			if(mainBackGroundImg!= null){
+				backGroundlLabel.setIcon(new ImageIcon(mainBackGroundImg.getScaledInstance(width, height, 1)));
+				backGroundlLabel.setSize(width,height);
+			}
+			
 		}
 		
 	}

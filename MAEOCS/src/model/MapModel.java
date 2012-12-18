@@ -19,7 +19,7 @@ public class MapModel implements Serializable{
 	
 
 	private static final long serialVersionUID = 1L;
-	private static HashMap<String, Node> map;
+	private  HashMap<String, Node> map;
 	private static Hashtable<String, String> localsDictionary;
 	
 	public MapModel(){
@@ -74,7 +74,7 @@ public class MapModel implements Serializable{
 	 * @param roads
 	 * @return
 	 */
-	private static HashMap<String, ArrayList<String>> getChoices(
+	private HashMap<String, ArrayList<String>> getChoices(
 			HashMap<String, ArrayList<String>> roads) {
 		
 		HashMap<String,ArrayList<String>> conections = new HashMap<String, ArrayList<String>>();
@@ -109,7 +109,7 @@ public class MapModel implements Serializable{
 	 * @param pointB
 	 * @return
 	 */
-	private static String bestChoice(HashMap<String, ArrayList<String>> choices, Node pointB) {
+	private String bestChoice(HashMap<String, ArrayList<String>> choices, Node pointB) {
 		
 		double min = Double.MAX_VALUE;
 		
@@ -134,7 +134,7 @@ public class MapModel implements Serializable{
 	 * 
 	 * @param roads
 	 */
-	private static void cleanRoads(HashMap<String, ArrayList<String>> roads) {
+	private void cleanRoads(HashMap<String, ArrayList<String>> roads) {
 		
 		for (Entry<String, ArrayList<String>> entry : roads.entrySet()) {
 			
@@ -317,7 +317,7 @@ public class MapModel implements Serializable{
 	}
 	
 	public void setMap(HashMap<String, Node> map) {
-		MapModel.map = map;
+		this.map = map;
 	}
 }
 	
