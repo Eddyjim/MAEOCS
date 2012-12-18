@@ -11,10 +11,7 @@ public class Exportable implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -3213930124871683109L;
-	
-	/**
-	 * 
-	 */
+
 	private byte[] image;
 	
 	private Hashtable<String, String> localsDictionary;
@@ -41,6 +38,4 @@ public class Exportable implements Serializable{
 		this.yCells = yCels;
 		
 	}
-	
-
 }

@@ -38,11 +38,9 @@ public class ImageConverter extends Component{
 	    {
 	
 	    }
-	    System.out.println("-1");
 	
 	    GraphicsConfiguration graphicsConfig = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
 	    BufferedImage bimage = graphicsConfig.createCompatibleImage(this.image.getWidth(null),this.image.getHeight(null));
-	    System.out.println("-2");
 	    Graphics g = bimage.getGraphics();
 	    g.drawImage(image, 0, 0, null);
 	    return bimage;
@@ -77,9 +75,11 @@ public class ImageConverter extends Component{
 	    return bytes;
 	}
 	
+	@SuppressWarnings({ "unchecked", "unused" })
 	private static int[] convertByteArrayToIntArray(byte[] bytes)
 	{
-	    ArrayList integers = new ArrayList();
+	    @SuppressWarnings("rawtypes")
+		ArrayList integers = new ArrayList();
 	    for (int index = 0; index < bytes.length; index += 4)
 	    {
 	        byte[] fourBytes = new byte[4];
@@ -100,13 +100,9 @@ public class ImageConverter extends Component{
 	
 	public static byte[] convertToBytes(Image image)
 	{
-	    System.out.println("A");
 	    ImageConverter converter = new ImageConverter(image);
-	    System.out.println("B");
 	    BufferedImage bufferedImage = converter.convert();
-	    System.out.println("C");
 	    PixelGrabber pixelGrabber = new PixelGrabber(image,0,0,bufferedImage.getWidth(),bufferedImage.getHeight(),true);
-	    System.out.println("D");
 	    try
 	    {
 	        if(pixelGrabber.grabPixels())

@@ -290,7 +290,6 @@ public class MapModel implements Serializable{
 	 * @return true if the node is contained and false if not
 	 */
 	public boolean containsNode(String key){
-		System.out.println(map==null);
 		return map.containsKey(key);
 	}
 	

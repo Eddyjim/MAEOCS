@@ -16,8 +16,13 @@ import javax.swing.JTextPane;
  * @author Carlos Gaitán Mora & Edward Jiménez Martínez
  */
 public class ToolsGraphicsPanel extends JFrame {
+	/**
+	 * This class contains all the tools available for the map's edition
+	 */
+	private static final long serialVersionUID = -5539159538499332789L;
+
 	private JPanel panel;
-	private State state;
+
 	private JButton select;
 	private JButton road;
 	private JButton local;
@@ -86,41 +91,57 @@ public class ToolsGraphicsPanel extends JFrame {
 		panel.add(exit);
 		panel.add(erase);
 
-		//this.add(helpTx);
-		//panel.add(helpTx);
-		//this.add(auxPanel);
-		
 		this.setResizable(false);
 		this.setVisible(true);
 		
 	}
 	
+	/**
+	 * Set an action listener in "Select" button
+	 * @param ls is the acctionListener to be setted
+	 */
 	public void setSelectBtAction(ActionListener ls){
 		select.addActionListener(ls);
 	}
 	
+	/**
+	 * Set an action listener in "Road" button
+	 * @param ls is the acctionListener to be setted
+	 */
 	public void setRoadBtAction(ActionListener ls){
 		road.addActionListener(ls);
 	}
 	
+	/**
+	 * Set an action listener in "Local" button
+	 * @param ls is the acctionListener to be setted
+	 */
 	public void setLocalBtAction(ActionListener ls){
 		local.addActionListener(ls);
 	}
 	
+	/**
+	 * Set an action listener in "Stairs" button
+	 * @param ls is the acctionListener to be setted
+	 */
 	public void setStairsBtAction(ActionListener ls){
 		stairs.addActionListener(ls);
 	}
 	
+	/**
+	 * Set an action listener in "Exit" button
+	 * @param ls is the acctionListener to be setted
+	 */
 	public void setExitBtAction(ActionListener ls){
 		exit.addActionListener(ls);
 	}
 	
+	/**
+	 * Set an action listener in "Erase" button
+	 * @param ls is the acctionListener to be setted
+	 */
 	public void setEraseBtAction(ActionListener ls){
 		erase.addActionListener(ls);
-	}
-	
-	public void setHelpText(ActionListener ls){
-		select.addActionListener(ls);
 	}
 }
  

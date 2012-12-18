@@ -29,12 +29,12 @@ public class Theme {
 	/**
 	 * Windows' positions
 	 */
-	public static final Point menuBarLocation = new Point(190, 0);
-	public static final Point toolBarLocation = new Point(50, 70);
-	public static final Point atributesPanelLocation = new Point(1000,70);
+	public static final Point menuBarLocation = new Point(160, 0);
+	public static final Point toolBarLocation = new Point(10, 70);
+	public static final Point atributesPanelLocation = new Point(960,70);
 	public static final Point mapWindowLocation = new Point(190,70);
 	public static final Point simulationFrameLocation = new Point(190,70);
-	public static final Point choicesLocation = new Point(1000,120);
+	public static final Point choicesLocation = new Point(960,120);
 
 	
 	/**
@@ -60,12 +60,6 @@ public class Theme {
 	public static Dimension toolBarDimension = new Dimension(15,300);
 	public static Dimension toolIconDimension = new Dimension(20,10);
 	public static Dimension atributesPanelDimension = new Dimension(300,150);
-	public static Dimension simulatorLocalSelector = new Dimension(300, 300);
-	
-	
-	
-	
-	
-	
+	public static Dimension simulatorLocalSelector = new Dimension(300, 150);
 	
 }

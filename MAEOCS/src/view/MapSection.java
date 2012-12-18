@@ -206,14 +206,17 @@ public class MapSection extends JLabel implements Serializable{
 		return type;
 	}
 	
+	public void setType(PointType type) {
+		this.type = type;
+	}
+	
 	public Component getLabel() {
 		return this;
 	}
 	
 	public void setNode(Node node){
 		this.node = node;
-		System.out.println(node==null);
-		System.out.println(node.getType()==null);
+		
 		switch (node.getType()) {
 		case ROAD:
 			this.type = PointType.ROAD;
@@ -240,5 +243,4 @@ public class MapSection extends JLabel implements Serializable{
 		
 		}
 	}
-	
 }

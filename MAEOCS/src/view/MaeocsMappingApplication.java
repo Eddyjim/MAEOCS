@@ -3,7 +3,6 @@ package view;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
@@ -222,7 +221,6 @@ public class MaeocsMappingApplication extends JFrame{
 				        "MAEOCS","mcs");
 				chooser.setFileFilter(filter);
 				String saveFile = chooser.getSelectedFile().getAbsolutePath();
-				System.out.println(saveFile);
 				
 				try {
 					selected = new MapWindow(selectedState, selectedNode, saveFile);
@@ -274,7 +272,6 @@ public class MaeocsMappingApplication extends JFrame{
 				String saveFile = chooser.getSelectedFile().getPath();
 				if(!saveFile.endsWith(".mcs")){
 					saveFile = saveFile.concat(".mcs");
-					System.out.println(saveFile);
 				}
 				try {
 					selected.saveFile(saveFile);
@@ -298,8 +295,8 @@ public class MaeocsMappingApplication extends JFrame{
 				chooser.setAcceptAllFileFilterUsed(false);
 				chooser.showSaveDialog(parent);
 				String saveFile = chooser.getSelectedFile().getPath();
-				if(!saveFile.contains(".mmcs")){
-					saveFile.concat(".mmcs");
+				if(!saveFile.endsWith(".mmcs")){
+					saveFile = saveFile.concat(".mmcs");
 				}
 				try {
 					selected.exportFile(saveFile);

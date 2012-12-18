@@ -28,7 +28,17 @@ public class SimulatorPanel extends JFrame {
 	private int width;
 	private int height;
 	
-	
+	/**
+	 * Creates a simulation window and the choices windows
+	 * @param width the width of the simulation panel
+	 * @param height the height of the simulation panel
+	 * @param gridSize the size of the cells in the simulation panel
+	 * @param grid is the actual grid to be added
+	 * @param gridArray is a 2-dimensional array that contains labels to show the roads
+	 * @param directory is a directory that contains the locals-nodesId information
+	 * @param roads a directory that contains the roads organized by locals
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public SimulatorPanel (int width, int height,int gridSize, JLabel grid, JLabel[][] gridArray, Hashtable<String, String> directory, RoadsDirectory roads){
 		
 		super();
@@ -81,6 +91,11 @@ public class SimulatorPanel extends JFrame {
 		
 	}
 	
+	/**
+	 * This method paints a road that communicates two points
+	 * @param localA is the first point
+	 * @param localB is the second point
+	 */
 	public void paintRoad(String localA, String localB) {
 		
 		ArrayList<String> road = roads.getRoad(localA, localB);
@@ -95,6 +110,9 @@ public class SimulatorPanel extends JFrame {
 		
 	}
 	
+	/**
+	 * This method cleans the simulation panel, an set it ready for a new simulation
+	 */
 	private void cleanSimulation() {
 
 		for (int j = 0; j < height; j++) {
@@ -104,7 +122,6 @@ public class SimulatorPanel extends JFrame {
 				
 			}
 		}
-		
 	}
 
 }

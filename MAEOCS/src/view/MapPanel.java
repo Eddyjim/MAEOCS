@@ -18,9 +18,6 @@ import java.util.Map.Entry;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
 import persistency.Exportable;
 import persistency.ImageConverter;
 import persistency.Saveable;
@@ -192,8 +189,8 @@ public class MapPanel extends JPanel{
 			for (int i = 0; i < w; i++) {
 				mapSections[i][j]= new MapSection(state,localAtributesManager, i, j, model);
 				if(model.containsNode(""+i+","+j)){
-					System.out.println(model.getNode(""+i+","+j).getId());
 					mapSections[i][j].setNode(model.getNode(""+i+","+j));
+					mapSections[i][j].setType(model.getNode(""+i+","+j).getType());
 				}
 				backGroundlLabel.add(mapSections[i][j].getLabel());
 				
@@ -240,7 +237,6 @@ public class MapPanel extends JPanel{
 				if(n2 != n1){
 					ArrayList<String> road = model.aStar(model.getNode(n1),model.getNode(n2));
 					if(road == null)
-						System.out.println("camino vacio");
 					roads.addRoad(model.getNode(n1).getLocal().getName(),model.getNode(n2).getLocal().getName(),road);
 				}
 				model.reset();
@@ -272,8 +268,7 @@ public class MapPanel extends JPanel{
 				label = new JLabel();
 				grid.add(label);
 				label.setLayout(new GridLayout(1,1));
-				Border border = LineBorder.createGrayLineBorder();
-				label.setBorder(border);
+				
 				
 				gridArray[i][j] = label;
 				switch (mapSections[i][j].getPointType()) {
@@ -364,7 +359,6 @@ public class MapPanel extends JPanel{
 			this.gridSize = save.getGrindSize();
 			this.mainBackGroundImg = save.getImage();
 			redo();
-
 		}
 		
 	}
@@ -390,6 +384,11 @@ public class MapPanel extends JPanel{
 		finally{
 			os.close();
 		}
+	}
+
+	public Dimension getDimensions() {
+		
+		return new Dimension(width,height);
 	}
 }
  

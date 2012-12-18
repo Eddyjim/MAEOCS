@@ -31,6 +31,15 @@ public class Saveable implements Serializable{
 	private HashMap<String, Node> map;
 	private Hashtable<String, String> localsDictionary;
 	
+	/**
+	 * Creates a class ready to be saved that contains the information in a file
+	 * @param image is the image used as background on the application
+	 * @param model contains an abstract model of the map
+	 * @param roads contains the roads already compilated
+	 * @param width contains the width of the map
+	 * @param height contains the height of the map
+	 * @param grindSize contains cells' size of the map
+	 */
 	public Saveable(Image image, MapModel model, RoadsDirectory roads, int width, int height, int grindSize) {
 		if(image != null)
 			this.image = new ImageIcon(image);
@@ -96,7 +105,4 @@ public class Saveable implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	
 }
