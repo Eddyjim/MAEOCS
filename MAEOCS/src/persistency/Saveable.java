@@ -32,7 +32,8 @@ public class Saveable implements Serializable{
 	private Hashtable<String, String> localsDictionary;
 	
 	public Saveable(Image image, MapModel model, RoadsDirectory roads, int width, int height, int grindSize) {
-		this.image = new ImageIcon(image);
+		if(image != null)
+			this.image = new ImageIcon(image);
 		this.model = model;
 		this.roads = roads;
 		this.width = width;

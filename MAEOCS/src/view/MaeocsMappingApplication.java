@@ -219,7 +219,7 @@ public class MaeocsMappingApplication extends JFrame{
 				chooser.showOpenDialog(parent);
 				chooser.setFileHidingEnabled(true);
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(
-				        "MAEOCS", "mcs");
+				        "MAEOCS");
 				chooser.setFileFilter(filter);
 				String saveFile = chooser.getSelectedFile().getAbsolutePath();
 				System.out.println(saveFile);
@@ -272,8 +272,9 @@ public class MaeocsMappingApplication extends JFrame{
 				chooser.setAcceptAllFileFilterUsed(false);
 				chooser.showSaveDialog(parent);
 				String saveFile = chooser.getSelectedFile().getPath();
-				if(!saveFile.contains(".mcs")){
-					saveFile.concat(".mcs");
+				if(!saveFile.endsWith(".mcs")){
+					saveFile = saveFile.concat(".mcs");
+					System.out.println(saveFile);
 				}
 				try {
 					selected.saveFile(saveFile);
