@@ -147,6 +147,11 @@ public class MapPanel extends JPanel{
     	this.setMaximumSize(new Dimension(width, height));
     	this.setSize(new Dimension(width, height));
 
+    	if(mainBackGroundImg!= null){
+			backGroundlLabel.setIcon(new ImageIcon(mainBackGroundImg.getScaledInstance(width, height, 1)));
+			backGroundlLabel.setSize(width,height);
+		}
+    	
     	backGroundlLabel.setLayout(new GridLayout(height/gridSize, width/gridSize));
     	this.setLayout(new GridLayout(1, 1));
         loadGrid();
@@ -358,15 +363,8 @@ public class MapPanel extends JPanel{
 			this.width = save.getWidth();
 			this.gridSize = save.getGrindSize();
 			this.mainBackGroundImg = save.getImage();
-			
-			resize(width, height, gridSize);
-			loadGrid();
-			
-			if(mainBackGroundImg!= null){
-				backGroundlLabel.setIcon(new ImageIcon(mainBackGroundImg.getScaledInstance(width, height, 1)));
-				backGroundlLabel.setSize(width,height);
-			}
-			
+			redo();
+
 		}
 		
 	}
