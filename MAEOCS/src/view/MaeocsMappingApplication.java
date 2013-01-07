@@ -28,6 +28,7 @@ public class MaeocsMappingApplication extends JFrame{
 	private AtributesPanel atributes;
 	private State selectedState;
 	private LocalAtributesManager selectedNode;
+	private DimensionsWindow dimensionWindow;
 	
 	
 	Dimension principalDim = new Dimension (800,50);
@@ -177,7 +178,7 @@ public class MaeocsMappingApplication extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				selected = new MapWindow(selectedState, selectedNode);
-				new DimensionsWindow(selected);
+				dimensionWindow = new DimensionsWindow(selected);
 				
 				/*
 				 * Enable edit size and compile map 
@@ -314,7 +315,8 @@ public class MaeocsMappingApplication extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				new DimensionsWindow(selected);
+				dimensionWindow.beVisible();
+//				new DimensionsWindow(selected);
 			}
 		});
         
