@@ -6,9 +6,10 @@
       
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
-
+\usepackage{apalike}
 
 \usepackage{hyperref}
+\usepackage{cite}
 
 \usepackage{appendix}
 \usepackage{makeidx}
@@ -24,9 +25,22 @@
 \usepackage{enumerate}
 \usepackage{glossaries}
 
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\begin{filecontents}{references.bib}
+@Url{gearth, 
+	Title={Google Earth}, 
+	Url={http://en.wikipedia.org/wiki/Google_Earth},Author={Wikipedia},
+	Urldate={9 May 2013 at 06:53}
+}
+\end{filecontents}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%Definiendo los atributos para el codigo de programacion%%
@@ -92,6 +106,8 @@
 	name={Handie Talkie},
 	description={Nombre completo \textit{Handie Talkie H12-16}, fue el primer dispositivo móvil creado para comunicar tropas en la segunda guerra mundial cuya banda de frecuencias en ese tiempo no superaban los 600 kHz.}
 }
+\newacronym{gps}{GPS}{Global Positioning System}
+\newacronym{rpg}{RPG}{Role Playing Game}
 \makeglossaries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%Inicio del Libro										  %%
@@ -103,12 +119,14 @@
 \title{\bf Mi Primera Aplicación En Android\\ MAEOCS\\ Un Ejemplo Nada Más}    % Supply information
 \author{Carlos I. Gaitán M., Edward H. Jiménez M.}              %   for the title page.
 \date{\today}                           % Use current date. 
+
 \begin{document}                        
 \frontmatter                            % only in book class 
 \maketitle                              % Print title page.
 \tableofcontents                        % Print table of contents
 \mainmatter                             % only in book class 
-
+\bibliographystyle{plain}
+\bibliography{references.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %%Parte 1, Capitulo 1%%
@@ -232,21 +250,19 @@ Aunque no profundizaremos mucho en esta sección si nos parece muy importante qu
 
 \chapter{¿Por Qué Una Aplicación en Android?}  
 \newpage
-\section{La historia de Android}
-blablablabla
-\section{Ventajas y desventajas de Android}
-blablablabla
-\section{Android en el mundo}                 
-blablablabla
-\section{Android en el mercado móvil} 
-blablablabla
+%\section{La historia de Android}
 
-\chapter{Consejos útiles}  
-blablablabla
-\section{Provectos móviles}
-blablablabla
-\section{Wireframes}                 
-blablablabla
+%\section{Ventajas y desventajas de Android}
+
+%\section{Android en el mundo}                 
+
+%\section{Android en el mercado móvil} 
+
+%\chapter{Consejos útiles}  
+
+%\section{Provectos móviles}
+
+%\section{Wireframes}                 
 
 
 \part{Conociendo Android}    
@@ -447,47 +463,45 @@ public class MainActivity extends Activity {
 }
 
 \end{lstlisting}
-\section{Botones, textos y otros}
-blablablabla
+%\section{Botones, textos y otros}
 
-\chapter{Varias actividades una sola aplicación}              
-blablablabla
-\section{Intent y la secuencia de actividades}
-blablablabla
-\section{Layout orden en el caos}
-blablablabla
-\section{Vistas y más vistas}
-blablablabla
-\section{Fechas y contactos}
-blablablabla
-\section{Tabs, menús y preferencias}
-blablablabla
+%\chapter{Varias actividades una sola aplicación}              
 
-\chapter{Código avanzado}              
-blablablabla
-\section{SQLite y archivos planos}
-blablablabla
-\section{Cambios de orientación}
-blablablabla
-\section{Estilos e imagen}
-blablablabla
-\section{Permisos y conexiones}
-blablablabla
+%\section{Intent y la secuencia de actividades}
 
-\chapter{Sensores}
-blablablabla              
-\section{Rotación y brújulas}
-blablablabla
-\section{GPS}
-blablablabla
-\section{Archivos}
-blablablabla
+%\section{Layout orden en el caos}
+
+%\section{Vistas y más vistas}
+
+%\section{Fechas y contactos}
+
+%\section{Tabs, menús y preferencias}
+
+
+%\chapter{Código avanzado}              
+
+%\section{SQLite y archivos planos}
+
+%\section{Cambios de orientación}
+
+%\section{Estilos e imagen}
+
+%\section{Permisos y conexiones}
+
+
+%\chapter{Sensores}
+
+%\section{Rotación y brújulas}
+
+%\section{GPS}
+
+%\section{Archivos}
+
 
 
 \part{Interacción con Android}  
 
-\chapter{Java y Android}
-blablablabla              
+\chapter{Java y Android}           
 \section{Aplicaciones Java de Escritorio}
 Java es un lenguaje orientado a objetos para el cual existen muchas librerias, entre las cuales se encuentran objetos de estructuras de datos controladores, etc. A la hora de hacer interfaces gráficas existen dos librerias, \emph{AWT} y \emph{SWING}, las cuales facilitan el desarrollo, pues cuentan con sets de paneles y objetos usados para implementar una interfaz interactiva.
 
@@ -543,17 +557,388 @@ public class Exportable implements Serializable{
 }
 \end{lstlisting}
 A la hora de trabajar con imagenes, android no cuenta con la libreria de \emph{AWT}  por lo que debe trabajar con un dato más primitivo, es allí donde se usa un arreglo de bytes para guardar una imagen, para luego ser transformada a un objeto que utilize Android.
-\section{Exportación y conexión}
-blablablabla                 
 
+%\section{Exportación y conexión}          
 
+\part{MAEOCS Desktop Application}
+\section{Introducción}
+Para exponer el desarrollo de la aplicación de escritorio es necesario entender el panorama general en el que MAEOCS se ha de desarrollar, entender su origen y el problema que intenta resolver. Ya que no es solo un proyecto que se inició sin un objetivo claro, sino que la plataforma completa tiene una directriz bastante especial, que no solo busca exponer el desarrollo en dos plataformas y su integración.
+\section{Contexto}
+\subsection{Planteamiento del problema}
+Hoy en día es fácil evidenciar cómo los planteles públicos y privados van en crecimiento ampliando sus zonas e incluso dispersándolas en diferentes puntos de un mismo sector; por ello, las personas que son nuevas en dichos planteles, poseen mala memoria o problemas de orientación se ven afectadas perdiéndose y quedándose varios minutos frente a un mapa en el cual no pueden ubicarse.
+Es útil plantear una solución que permita orientar a las personas en planteles de tamaños considerables; claro está de la manera más sencilla y con la menor cantidad de tecnología posible para que sea accesible a personas de todas las edades.
+\subsection{Marco Teórico}
+El tema de ubicación es un problema de la vida cotidiana para la humanidad el cual ha venido siendo tratado desde la antigüedad con mapas y brújulas e incluso la naturaleza. A este respecto, la actualidad lo primero que llama la atención son los sistemas avanzados como los \gls{gps}, fotos de mapas con satélites y aplicaciones con mapas geográficos. En el caso de los mapas no se puede pasar por alto a \cite{gearth}, una aplicación que permite observar fotos que fueron tomadas desde satélites como mapas e incluso buscar diferentes lugares señalados en éstas.\\
+Si pensamos en conocer la ubicación de ciertos lugares los mapas son una buena herramienta pero si lo que se quiere es conocer la posición exacta, dicha herramienta puede llegar a ser confusa e insuficiente dependiendo de qué tan escalado o específico sea el mapa; por ello mismo nació la tecnología del \gls{gps} la cual nos permite conocer nuestra posición exacta en un mapa de manera precisa y constante.\\\\
+Aun cuando se puede saber la posición exacta en un mapa desde algún tipo de tecnología, pocas son las aplicaciones que existen y grande es el problema cuando lo que se trata de conocer es el camino más corto entre donde se encuentra una persona y el lugar al qué esta quiere ir. Para problemas como lo es el de hallar el camino más corto entre un punto y sus múltiples opciones se han planteado varias soluciones desde el punto de vista algorítmico; algunas de estas soluciones son:\\
+\emph{Algoritmo de Dijsktra}, resuelve problemas del tipo “camino más corto” desde un vértice origen a los demás vértices del grafo.\\
+\emph{Algoritmo de Floyd - Warshall}, resuelve problemas del tipo “camino más corto” para todos los vértices.\\
+\emph{Algoritmo de Johnson}, resuelve problemas del tipo “camino más corto” para todos los vértices en grafos de baja densidad.\\\\
+Hoy en día con el crecimiento de los videojuegos y gracias al código libre que podemos encontrar fácilmente en internet para su creación (en especial los \gls{rpg}, podemos analizar y visualizar las diferentes técnicas que usan para crear e interpretar los mapas de los diferentes mundos, una de ellas es el mallado de imágenes; poniendo una imagen como fondo se crea una malla sobre esta y los edificios, puntos importantes y caminos se definen como objetos que se colocan en cada celda y así se va creando un mapa virtual fácil de reconocer para la aplicación.
+\section{Requerimientos}
+\subsection{Descripción del sistema}
+Una aplicación que le permita tener una fácil orientación en un sitio cerrado a personas con discapacidades cognitivas, de memoria o discapacidades que no les permitan comunicarse fácilmente, como por ejemplo una persona sorda, usando la menor cantidad de tecnología.
+\subsection{Visión y alcance}
+Una aplicación que le permita tener una fácil orientación en un sitio cerrado a personas con discapacidades cognitivas, de memoria o discapacidades que no les permitan comunicarse fácilmente, como por ejemplo una persona sorda.\\
+Una aplicación que le permita tener una fácil orientación en un sitio cerrado a personas con discapacidades cognitivas, de memoria o discapacidades que no les permitan comunicarse fácilmente, como por ejemplo una persona sorda. La aplicación debe ser asequible desde cualquier dispositivo móvil con sistema operativo.
+\subsection{Usuarios}
+Los usuarios potenciales para esta aplicación son:\\\\
+Personas entre los 14 – 40: jóvenes y adultos que se movilicen constantemente por Bogotá e ingresen a instituciones grandes, como centros comerciales o universidades.\\\\
+Personas con problemas comunicativos: personas sordas o mudas que no puedan preguntar o comunicarse para solicitar información de los sitios y tampoco pedir indicaciones.\\\\
+Personas con problemas cognitivos: personas que sufren problemas de memoria o de organización espacial, también puede pensarse en personas que sean muy tímidas u orgullosas para preguntar o pedir indicaciones.
+\subsection{Matriz de requerimientos}
+\begin{table}[H]
+\newcolumntype{I}{>{\raggedright\setlength\hsize{1\hsize}\arraybackslash}X}
+\newcolumntype{D}{>{\raggedright\setlength\hsize{12\hsize}\arraybackslash}X}
+\newcolumntype{C}{>{\centering\setlength\hsize{5\hsize}\arraybackslash}X}
+\scalebox{0.7}{
+\begin{tabularx}{\textwidth}{ |I|D|C|C|C|C|C| }\cline{1-7}
+  \rowcolor{gray} \multicolumn{7}{|c|}{Matriz de Requerimientos}\\ \cline{1-7}
+	%% Titulos
+	\multicolumn{1}{|c| }{\bf{Id}}
+	& \multicolumn{1}{c| }{\bf{Descripción}} 
+	& \multicolumn{1}{c| }{\bf{Fuente}}
+	& \multicolumn{1}{c| }{\bf{Prioridad}} 
+	& \multicolumn{1}{c| }{\bf{Tipo}} 
+	& \multicolumn{1}{c| }{\bf{Estado}} 
+	& \multicolumn{1}{c| }{\bf{Usuarios Involucrados}} \\ \cline{1-7}
+	%% Texto requerimientos funcionales
+	\multicolumn{7}{|c|}{Requerimientos Funcionales}\\ \cline{1-7}
+	%% Fila 1
+		\small{01} 
+		& La aplicación para elaborar el mapa, debe ser para equipos de escritorio. 
+		& Estudiantes y director 
+		& 1 & Funcional & Valido 
+		& - \\ \cline{1-7}
+	%% Fila 2
+		02 & La aplicación de escritorio debe ser multiplataforma. 
+		& Estudiantes & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Fila 3
+		03 & La aplicación de escritorio debe poder usar el plano como guía para la creación del mapa
+		& Estudiantes & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Fila 4
+		04 & La aplicación de escritorio debe permitir diferenciar entre las diferentes clases de nodos
+		& Estudiantes & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Fila 5
+		05 & La aplicación de escritorio debe permitir modificar un elemento que ya haya sido descrito
+		& Estudiantes & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Fila 6
+		06 & La aplicación  de escritorio debe permitir calcular caminos de comunicación entre los puntos.
+		& Estudiantes y director & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Fila 7
+		07 & La aplicación de escritorio debe exportar un archivo compilado, que contenga la información para poder descargar en la aplicación móvil
+		& Estudiantes & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Fila 8
+		08 & La aplicación de escritorio debe permitir guardar lo que se ha trabajado para poderlo reanudar
+		& Estudiantes y director & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Fila 9
+		09 & La aplicación de escritorio debe permitir cargar un archivo y poder continuar la edición.
+		& Estudiantes y director & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Fila 10
+		10 & La aplicación móvil debe permitir hacer consultas de caminos entre dos puntos
+		& Estudiantes y director & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Fila 11
+		11 & La aplicación móvil, debe mostrar un camino entre los dos puntos.
+		& Estudiantes y director & 1 & Funcional & Valido & - \\ \cline{1-7}
+	%% Texto requerimientos no funcionales
+		\multicolumn{7}{|c|}{Requerimientos No Funcionales}\\ \cline{1-7}
+	%% Fila 12
+		12 & Tanto la aplicación de escritorio, como la de dispositivos móviles, deben ser sencillas y fáciles de utilizar.
+		& Estudiantes y director & 1 & No Funcional & Valido & - \\ \cline{1-7}
+ \end{tabularx}}
+\end{table}
+\section{Análisis}
+\subsection{Descripción del subsistema}
+Usando la aplicación de escritorio, se importa el plano del lugar, y se describen los caminos, locales, escaleras, etc. Una vez terminada la edición, se procede a compilar el mapa, calculando los caminos entre todos los puntos.
+Se procede a exportar en un archivo, este es usado por la aplicación de Android cargando la imagen y el mapa lógico. Permitiendo hacer consultas entre los puntos.
+\subsection{Diagrama de Casos de Uso}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.54]{diagrama_casos_uso}
+  \caption{Casos de uso de usuario}
+\end{figure}
+\subsection{Diagramas de secuencia}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia1}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia2}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia3}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia4}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia5}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia6}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia7}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia8}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia9}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia10}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia11}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia12}
+\end{figure}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{secuencia13}
+\end{figure}
+\subsection{Contratos de operación}
 
+%% Contrato operación 1
+\begin{table}[H]
+\newcolumntype{T}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+\newcolumntype{D}{>{\raggedright\setlength\hsize{22\hsize}\arraybackslash}X}
+\begin{tabularx}{\textwidth}{ |T|D| }\cline{1-2}
+\bf{Nombre} & Crear Mapa \\ \cline{1-2}
+\bf{Identificador} & 001 \\ \cline{1-2}
+\bf{Responsabilidades} & Crear un mapa de acuerdo a las medidas que el usuario ingrese en una ventana. \\ \cline{1-2}
+\bf{Tipo} & Tipo de caso de uso: Usuario \\ \cline{1-2}
+\bf{Identificador} & 001 \\ \cline{1-2}
+\bf{Referencias Casos de Uso} & ~ \\ \cline{1-2}
+\bf{Referencias Requisitos} & 001 \\ \cline{1-2}
+\multicolumn{2}{|l|}{\bf{Precondiciones}} \\ \cline{1-2}
+\multicolumn{2}{|l|}{De instancia: La apliación debío haber sido iniciada.} \\ \cline{1-2}
+\multicolumn{2}{|l|}{\bf{Poscondiciones}} \\ \cline{1-2}
+\multicolumn{2}{|l|}{De instancia: Un mapa es creado de acuerdo a las medidas especificadas por el usuario.} \\ \cline{1-2}
+\multicolumn{2}{|l|}{\bf{Salidas Pantalla}} \\ \cline{1-2}
+\multicolumn{2}{|l|}{La ventana del mapa lista para ser modificada.} \\ \cline{1-2}
+\end{tabularx}
+\end{table}
+%% Contrato operación 2
+\begin{table}[H]
+\newcolumntype{T}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+\newcolumntype{D}{>{\raggedright\setlength\hsize{22\hsize}\arraybackslash}X}
+\begin{tabularx}{\textwidth}{ |T|D| }\cline{1-2}
+\bf{Nombre} & Dibujar Local \\ \cline{1-2}
+\bf{Identificador} & 002 \\ \cline{1-2}
+\bf{Responsabilidades} & Dibujar un local en una casilla \\ \cline{1-2}
+\bf{Tipo} & Tipo de caso de uso: Usuario \\ \cline{1-2}
+\bf{Identificador} & 002 \\ \cline{1-2}
+\bf{Referencias Casos de Uso} & ~ \\ \cline{1-2}
+\bf{Referencias Requisitos} & 001 \\ \cline{1-2}
+\multicolumn{2}{|l|}{\bf{Precondiciones}} \\ \cline{1-2}
+\multicolumn{2}{|l|}{De instancia: La apliación debío haber sido iniciada.} \\ \cline{1-2}
+\multicolumn{2}{|l|}{\bf{Poscondiciones}} \\ \cline{1-2}
+\multicolumn{2}{|l|}{De instancia: Un mapa es creado de acuerdo a las medidas especificadas por el usuario.} \\ \cline{1-2}
+\multicolumn{2}{|l|}{\bf{Salidas Pantalla}} \\ \cline{1-2}
+\multicolumn{2}{|l|}{La ventana del mapa lista para ser modificada.} \\ \cline{1-2}
+\end{tabularx}
+\end{table}
+
+%% Contrato operación 3
+\begin{table}[H]
+\newcolumntype{T}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+\newcolumntype{D}{>{\raggedright\setlength\hsize{22\hsize}\arraybackslash}X}
+\begin{tabularx}{\textwidth}{ |T|D| }\cline{1-2}
+\bf{Nombre} & Dibujar Local \\ \cline{1-2}
+\bf{Identificador} & 002 \\ \cline{1-2}
+\bf{Responsabilidades} & Dibujar un local en una casilla \\ \cline{1-2}
+\bf{Tipo} & Tipo de caso de uso: Usuario \\ \cline{1-2}
+\bf{Identificador} & 001 \\ \cline{1-2}
+\bf{Referencias Casos de Uso} & ~ \\ \cline{1-2}
+\bf{Referencias Requisitos} & 001 \\ \cline{1-2}
+\multicolumn{2}{|l|}{\bf{Precondiciones}} \\ \cline{1-2}
+\multicolumn{2}{|l|}{De instancia: La apliación debío haber sido iniciada.} \\ \cline{1-2}
+\multicolumn{2}{|l|}{\bf{Poscondiciones}} \\ \cline{1-2}
+\multicolumn{2}{|l|}{De instancia: Un mapa es creado de acuerdo a las medidas especificadas por el usuario.} \\ \cline{1-2}
+\multicolumn{2}{|l|}{\bf{Salidas Pantalla}} \\ \cline{1-2}
+\multicolumn{2}{|l|}{La ventana del mapa lista para ser modificada.} \\ \cline{1-2}
+\end{tabularx}
+\end{table}
+
+% Casos de uso
+\subsection{Especificación de casos de uso}
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Crear Mapa}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{001}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{New}} & Mostrar Dimension Window\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Ingresar las nuevas dimensiones para el mapa}} & Crear Map Window\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Dibujar camino}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{002}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar Road}} & Cambiar Selected State\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar MapSection a modificar}} & Crear Node en MapModel y cambiar el PointType a Road\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Dibujar Local}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{003}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar Local}} & Cambiar Selected State\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar MapSection a modificar}} & Crear Node en MapModel y cambiar el PointType a Local y crear Local\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Ingresar información del Local}} & Crear Local en el Node y agregarlo al directorio\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Dibujar Escaleras}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{004}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar Stairs}} & Cambiar Selected State\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar MapSection a modificar}} & Crear Node en MapModel y cambiar el PointType a Road\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Dibujar Salida}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{005}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar Exit}} & Cambiar Selected State\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar MapSection a modificar}} & Crear Node en MapModel y cambiar el PointType a Exit\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Borrar nodo}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{006}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar Erase}} & Cambiar Selected State\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar MapSection a modificar}} & Crear Node en MapModel y cambiar el PointType a Null\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Cambiar Tamaño del mapa}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{007}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar File-Edit Size}} & Mostrar Dimension Window\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Ingresar nuevas dimensiones}} & Mostrar nuevo MapWindow\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Compilar Mapa}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{008}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar File-Compile Map}} & Llamar aStar entre todos los nodos\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Cargar Imagen}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{009}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar File-Open Image}} & Mostrar FileChooser\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar Imagen}} & Cargar imagen en el MapPanel\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+	\newcolumntype{F}{>{\raggedright\setlength\hsize{7\hsize}\arraybackslash}X}	
+	\newcolumntype{S}{>{\raggedright\setlength\hsize{10\hsize}\arraybackslash}X}
+	\newcolumntype{T}{>{\raggedright\setlength\hsize{17\hsize}\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{ |F|S|T| }\cline{1-3}
+		Caso de Uso & \multicolumn{2}{|l|}{\bf{Mostrar Simulador}} \\ \cline{1-3}
+		Identificador & \multicolumn{2}{|l|}{\bf{010}} \\ \cline{1-3}
+		\multicolumn{3}{ |l| }{\bf{Curso Típico de Eventos}} \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Usuario}} & Sistema \\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar View-Simulator}} & Mostrar SimulationPanel\\ \cline{1-3}
+		\multicolumn{2}{ |l| }{\bf{Seleccionar los dos locales}} & Mostrar Camino entre puntos\\ \cline{1-3}
+	\end{tabularx}
+\end{table}
+
+\section{Diseño}
+
+\subsection{Diagrama de clases}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.7]{class_diagram}
+\end{figure}
+
+\subsection{Arquitectura del sistema}
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale=1]{arquitectura_sistema}
+\end{figure}
 %index
 %\newpage
 %\addcontentsline{toc}{chapter}{Index}
-%\printindex
+\printindex
 
 \newpage
 \printglossaries
-\renewcommand*{\glossaryname}{Glosario}
+\renewcommand{\glossaryname}{Glosario}
+
+\begin{thebibliography}
+\bibitem{gearth}
+\end{thebibliography}
 \end{document}                          % The required last line

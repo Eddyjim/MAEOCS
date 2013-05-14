@@ -6,37 +6,34 @@
 \contentsline {section}{\numberline {1.3}Los grandes de hoy en d\IeC {\'\i }a}{7}{section.1.3}
 \contentsline {section}{\numberline {1.4}El mercado m\IeC {\'o}vil}{10}{section.1.4}
 \contentsline {chapter}{\numberline {2}\IeC {\textquestiondown }Por Qu\IeC {\'e} Una Aplicaci\IeC {\'o}n en Android?}{11}{chapter.2}
-\contentsline {section}{\numberline {2.1}La historia de Android}{12}{section.2.1}
-\contentsline {section}{\numberline {2.2}Ventajas y desventajas de Android}{12}{section.2.2}
-\contentsline {section}{\numberline {2.3}Android en el mundo}{12}{section.2.3}
-\contentsline {section}{\numberline {2.4}Android en el mercado m\IeC {\'o}vil}{12}{section.2.4}
-\contentsline {chapter}{\numberline {3}Consejos \IeC {\'u}tiles}{13}{chapter.3}
-\contentsline {section}{\numberline {3.1}Provectos m\IeC {\'o}viles}{13}{section.3.1}
-\contentsline {section}{\numberline {3.2}Wireframes}{13}{section.3.2}
-\contentsline {part}{II\hspace {1em}Conociendo Android}{15}{part.2}
-\contentsline {chapter}{\numberline {4}Prepar\IeC {\'a}ndolo todo}{17}{chapter.4}
-\contentsline {section}{\numberline {4.1}El SDK de Android}{18}{section.4.1}
-\contentsline {chapter}{\numberline {5}Mi primera actividad}{23}{chapter.5}
-\contentsline {section}{\numberline {5.1}Creando un proyecto Android}{24}{section.5.1}
-\contentsline {section}{\numberline {5.2}Hola mundo y el simulador de Android}{29}{section.5.2}
-\contentsline {section}{\numberline {5.3}Botones, textos y otros}{31}{section.5.3}
-\contentsline {chapter}{\numberline {6}Varias actividades una sola aplicaci\IeC {\'o}n}{33}{chapter.6}
-\contentsline {section}{\numberline {6.1}Intent y la secuencia de actividades}{33}{section.6.1}
-\contentsline {section}{\numberline {6.2}Layout orden en el caos}{33}{section.6.2}
-\contentsline {section}{\numberline {6.3}Vistas y m\IeC {\'a}s vistas}{33}{section.6.3}
-\contentsline {section}{\numberline {6.4}Fechas y contactos}{34}{section.6.4}
-\contentsline {section}{\numberline {6.5}Tabs, men\IeC {\'u}s y preferencias}{34}{section.6.5}
-\contentsline {chapter}{\numberline {7}C\IeC {\'o}digo avanzado}{35}{chapter.7}
-\contentsline {section}{\numberline {7.1}SQLite y archivos planos}{35}{section.7.1}
-\contentsline {section}{\numberline {7.2}Cambios de orientaci\IeC {\'o}n}{35}{section.7.2}
-\contentsline {section}{\numberline {7.3}Estilos e imagen}{35}{section.7.3}
-\contentsline {section}{\numberline {7.4}Permisos y conexiones}{35}{section.7.4}
-\contentsline {chapter}{\numberline {8}Sensores}{37}{chapter.8}
-\contentsline {section}{\numberline {8.1}Rotaci\IeC {\'o}n y br\IeC {\'u}julas}{37}{section.8.1}
-\contentsline {section}{\numberline {8.2}GPS}{37}{section.8.2}
-\contentsline {section}{\numberline {8.3}Archivos}{37}{section.8.3}
-\contentsline {part}{III\hspace {1em}Interacci\IeC {\'o}n con Android}{39}{part.3}
-\contentsline {chapter}{\numberline {9}Java y Android}{41}{chapter.9}
-\contentsline {section}{\numberline {9.1}Aplicaciones Java de Escritorio}{41}{section.9.1}
-\contentsline {section}{\numberline {9.2}Tipos de datos compartidos}{42}{section.9.2}
-\contentsline {section}{\numberline {9.3}Exportaci\IeC {\'o}n y conexi\IeC {\'o}n}{43}{section.9.3}
+\contentsline {part}{II\hspace {1em}Conociendo Android}{13}{part.2}
+\contentsline {chapter}{\numberline {3}Prepar\IeC {\'a}ndolo todo}{15}{chapter.3}
+\contentsline {section}{\numberline {3.1}El SDK de Android}{16}{section.3.1}
+\contentsline {chapter}{\numberline {4}Mi primera actividad}{21}{chapter.4}
+\contentsline {section}{\numberline {4.1}Creando un proyecto Android}{22}{section.4.1}
+\contentsline {section}{\numberline {4.2}Hola mundo y el simulador de Android}{27}{section.4.2}
+\contentsline {part}{III\hspace {1em}Interacci\IeC {\'o}n con Android}{31}{part.3}
+\contentsline {chapter}{\numberline {5}Java y Android}{33}{chapter.5}
+\contentsline {section}{\numberline {5.1}Aplicaciones Java de Escritorio}{33}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tipos de datos compartidos}{34}{section.5.2}
+\contentsline {section}{\numberline {5.3}Exportaci\IeC {\'o}n y conexi\IeC {\'o}n}{35}{section.5.3}
+\contentsline {part}{IV\hspace {1em}MAEOCS Desktop Application}{37}{part.4}
+\contentsline {section}{\numberline {5.4}Introducci\IeC {\'o}n}{39}{section.5.4}
+\contentsline {section}{\numberline {5.5}Contexto}{39}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Planteamiento del problema}{39}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Marco Te\IeC {\'o}rico}{39}{subsection.5.5.2}
+\contentsline {section}{\numberline {5.6}Requerimientos}{40}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}Descripci\IeC {\'o}n del sistema}{40}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {5.6.2}Visi\IeC {\'o}n y alcance}{41}{subsection.5.6.2}
+\contentsline {subsection}{\numberline {5.6.3}Usuarios}{41}{subsection.5.6.3}
+\contentsline {subsection}{\numberline {5.6.4}Matriz de requerimientos}{42}{subsection.5.6.4}
+\contentsline {section}{\numberline {5.7}An\IeC {\'a}lisis}{43}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Descripci\IeC {\'o}n del subsistema}{43}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {5.7.2}Diagrama de Casos de Uso}{43}{subsection.5.7.2}
+\contentsline {subsection}{\numberline {5.7.3}Diagramas de secuencia}{44}{subsection.5.7.3}
+\contentsline {subsection}{\numberline {5.7.4}Contratos de operaci\IeC {\'o}n}{48}{subsection.5.7.4}
+\contentsline {subsection}{\numberline {5.7.5}Especificaci\IeC {\'o}n de casos de uso}{49}{subsection.5.7.5}
+\contentsline {section}{\numberline {5.8}Dise\IeC {\~n}o}{52}{section.5.8}
+\contentsline {subsection}{\numberline {5.8.1}Diagrama de clases}{52}{subsection.5.8.1}
+\contentsline {subsection}{\numberline {5.8.2}Arquitectura del sistema}{52}{subsection.5.8.2}
+\contentsline {chapter}{Glossary}{53}{section*.2}
